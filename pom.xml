@@ -10,36 +10,42 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jakartaee>10.0.0</jakartaee>
+        <mysql.connector.java>8.0.28</mysql.connector.java>
+        <jsp.jstl.api>3.0.0</jsp.jstl.api>
+        <servlet.api>6.0.0</servlet.api>
+        <servlet.jsp.jstl>3.0.1</servlet.jsp.jstl>
+        <sitemesh>2.4.2</sitemesh>
+        <servlet.jsp.api>3.1.1</servlet.jsp.api>
     </properties>
     
     <dependencies>
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.28</version>
+            <version>${mysql.connector.java}</version>
         </dependency>
         <dependency>
             <groupId>jakarta.servlet.jsp.jstl</groupId>
             <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
-            <version>3.0.0</version>
+            <version>${jsp.jstl.api}</version>
         </dependency>
         <dependency>
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
-            <version>6.0.0</version>
+            <version>${servlet.api}</version>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.glassfish.web</groupId>
             <artifactId>jakarta.servlet.jsp.jstl</artifactId>
-            <version>3.0.1</version>
+            <version>${servlet.jsp.jstl}</version>
         </dependency>
         
         <dependency>
             <groupId>jakarta.servlet.jsp</groupId>
             <artifactId>jakarta.servlet.jsp-api</artifactId>
-            <version>3.1.1</version>
+            <version>${servlet.jsp.api}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -48,6 +54,13 @@
             <version>${jakartaee}</version>
             <scope>provided</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/opensymphony/sitemesh -->
+        <dependency>
+            <groupId>opensymphony</groupId>
+            <artifactId>sitemesh</artifactId>
+            <version>${sitemesh}</version>
+        </dependency>
+
     </dependencies>
     
     <build>
