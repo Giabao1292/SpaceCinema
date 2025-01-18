@@ -14,7 +14,7 @@
         <jsp.jstl.api>3.0.0</jsp.jstl.api>
         <servlet.api>6.0.0</servlet.api>
         <servlet.jsp.jstl>3.0.1</servlet.jsp.jstl>
-        <sitemesh>2.4.2</sitemesh>
+        <sitemesh>2.6.0</sitemesh>
         <servlet.jsp.api>3.1.1</servlet.jsp.api>
     </properties>
     

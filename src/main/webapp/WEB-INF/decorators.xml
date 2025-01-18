@@ -3,10 +3,10 @@
     <excludes>
         <pattern>/api*</pattern>
     </excludes>
-    <decorator name = "admin" page = "admin.jsp">
+    <decorator name = "admin" page = "/decorators/admin.jsp">
         <pattern>/admin*</pattern>
     </decorator>
-     <decorator name = "web" page = "web.jsp">
+     <decorator name = "web" page = "/decorators/web.jsp">
         <pattern>/*</pattern>
     </decorator>
 </decorators>

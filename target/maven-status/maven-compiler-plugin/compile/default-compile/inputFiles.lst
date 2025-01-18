@@ -14,6 +14,7 @@
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Server/impl/MovieServiceImpl.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Repository/impl/MovieRepositoryImpl.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Repository/UserRepository.java
+/Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Controller/Admin/HomeController.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Repository/impl/SeatRepositoryImp.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Repository/impl/SnackRepositoryImpl.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Model/User.java
