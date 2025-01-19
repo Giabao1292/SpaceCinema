@@ -4,16 +4,14 @@
  */
 package com.Repository;
 
+import com.Model.User;
+import java.util.List;
+
 /**
  *
  * @author lebao
  */
 public interface UserRepository {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        // TODO code application logic here
-    }
+    public User findUserByNameAndPassword(String username, String password);
+    
 }

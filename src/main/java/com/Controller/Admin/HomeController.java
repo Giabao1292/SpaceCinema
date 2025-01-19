@@ -16,9 +16,9 @@ import jakarta.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author lebao
+ * @author lebao 
  */
-@WebServlet(name="HomeController", urlPatterns={"/admin/home"})
+@WebServlet(name="HomeAdminController", urlPatterns={"/admin-home"})
 public class HomeController extends HttpServlet {
    
     /** 

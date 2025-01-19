@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  */
 public class GetConnection {
 
-    static final String URL = "jdbc:mysql://localhost:3306/PRJ";
+    static final String URL = "jdbc:mysql://localhost:3306/SpaceCinema";
     static final String USER = "root";
     static final String PASS = "123456";
 

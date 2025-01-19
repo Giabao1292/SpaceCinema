@@ -4,7 +4,7 @@
 <html>
     <head>
         
-        <title><dec:title default="Trang chủ" /></title>
+        <title><dec:title default="Home" /></title>
         <link
             href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css"
             rel="stylesheet"
@@ -24,7 +24,6 @@
         <!--<!-- header -->
         <%@ include file="/common/admin/header.jsp" %>
         <!-- header -->
-
         <div id="layoutSidenav">
             <!-- menu -->
             <%@ include file="/common/admin/menu.jsp" %>

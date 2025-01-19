@@ -4,10 +4,12 @@
  */
 package com.Repository.impl;
 
+import com.Repository.SeatRepository;
+
 /**
  *
  * @author lebao
  */
-public class SeatRepositoryImp {
+public class SeatRepositoryImp implements SeatRepository{
     
 }
