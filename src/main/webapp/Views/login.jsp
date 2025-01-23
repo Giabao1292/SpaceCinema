@@ -39,6 +39,18 @@
                                             />
                                         <label for="inputPassword">Password</label>
                                     </div>
+                                    <c:if test = "${status == 'fail'}">
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                            Login failed! Please check your username and password and try again.
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        </div>
+                                    </c:if>
+                                    <c:if test = "${status == 'login_first'}">
+                                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                            Login before accessing the admin panel
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        </div>
+                                    </c:if>
                                     <div class="form-check mb-3">
                                         <input
                                             class="form-check-input"
@@ -60,7 +72,11 @@
                                         >
                                         <button class="btn btn-primary">Login</button>
                                     </div>
+                                    
+
                                 </form>
+
+
                             </div>
                             <div class="card-footer text-center py-3">
                                 <div class="small">

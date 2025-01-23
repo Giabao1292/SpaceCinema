@@ -27,12 +27,12 @@
         <nav id="navmenu" class="navmenu">
             <ul>
                 <li>
-                    <a href="/home" class="btn btn-primary active"
+                    <a href="/home" class="btn btn-primary active m-lg-2"
                        >Boooking Ticket<br
                             /></a>
                 </li>
                 <li>
-                    <a href="/popcorn-drink" class="btn btn-warning text-dark"
+                    <a href="/popcorn-drink" class="btn btn-warning text-dark  m-lg-2"
                        >Booking Snack</a
                     >
                 </li>

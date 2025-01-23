@@ -7,9 +7,26 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file = "/common/taglib.jsp" %>
 <!DOCTYPE html>
+<c:if test="${status == 'not_permission'}">
+    <div class="container mt-5">
+        <!-- Alert -->
+        <div
+            class="alert show alert-warning alert-dismissible show fade"
+            role="alert"
+            >
+            <strong>Warning!</strong> You are not authorized to access the admin panel."
+            <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"
+                ></button>
+        </div>
+    </div>
+</c:if>
 <main class="main">
     <!-- Hero Section -->
-    <div id="hero" class="hero">
+    <div id="hero" class="hero p-0">
         <div class="container">
             <div class="row justify-content-center">
                 <div
@@ -26,82 +43,96 @@
                             <!-- Dropdown for Cinema -->
                             <div class="dropdown">
                                 <button
-                                    class="btn btn-warning ps-5 pe-5 pt-3 pb-3 dropdown-toggle"
+                                    class="btn btn-warning px-4 py-3 dropdown-toggle"
                                     type="button"
                                     id="cinemaDropdown"
                                     data-bs-toggle="dropdown"
                                     aria-expanded="false"
                                     >
-                                    1. Chọn Rạp
+                                    ${empty cinema ? "1. Chọn Rạp" : cinema}
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="cinemaDropdown">
-                                    <li>
-                                        <a class="dropdown-item" href="#"
-                                           >Cinestar Hai Bà Trưng</a
-                                        >
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#"
-                                           >Cinestar Quang Trung</a
-                                        >
-                                    </li>
+                                    <c:forEach var = "cinema" items="${listCinema}">
+                                        <li>
+                                            <a class="dropdown-item cinema" href = "/home?cinema=${cinema.name}">${cinema.name}
+                                            </a>
+                                        </li>
+                                    </c:forEach>
                                 </ul>
                             </div>
 
                             <!-- Dropdown for Movie -->
-                            <div class="dropdown">
-                                <button
-                                    class="btn btn-warning ps-5 pe-5 pt-3 pb-3 dropdown-toggle"
-                                    type="button"
-                                    id="movieDropdown"
-                                    data-bs-toggle="dropdown"
-                                    aria-expanded="false"
-                                    >
-                                    2. Chọn Phim
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="movieDropdown">
-                                    <li><a class="dropdown-item" href="#">Movie 1</a></li>
-                                    <li><a class="dropdown-item" href="#">Movie 2</a></li>
-                                </ul>
-                            </div>
+                            <c:if test ="${not empty cinema}">
+                                <div class="dropdown ">
+                                    <button
+                                        class="btn btn-warning px-4 py-3 dropdown-toggle "
+                                        type="button"
+                                        id="movieDropdown"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false"
+                                        >
+                                        ${empty movie ? "2. Chọn Phim" : movie}
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="movieDropdown">
+                                        <c:forEach var = "movie" items="${listMovie}">
+                                            <li>
+                                                <a class="dropdown-item movie" href="/home?cinema=${cinema}&movie=${movie}">
+                                                    ${movie}
+                                                </a>
 
-                            <!-- Dropdown for Date -->
-                            <div class="dropdown">
-                                <button
-                                    class="btn btn-warning ps-5 pe-5 pt-3 pb-3 dropdown-toggle"
-                                    type="button"
-                                    id="dateDropdown"
-                                    data-bs-toggle="dropdown"
-                                    aria-expanded="false"
-                                    >
-                                    3. Chọn Ngày
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dateDropdown">
-                                    <li><a class="dropdown-item" href="#">2025-01-20</a></li>
-                                    <li><a class="dropdown-item" href="#">2025-01-21</a></li>
-                                </ul>
-                            </div>
-
-                            <!-- Dropdown for Showtime -->
-                            <div class="dropdown">
-                                <button
-                                    class="btn btn-warning ps-5 pe-5 pt-3 pb-3 dropdown-toggle"
-                                    type="button"
-                                    id="showtimeDropdown"
-                                    data-bs-toggle="dropdown"
-                                    aria-expanded="false"
-                                    >
-                                    4. Chọn Suất
-                                </button>
-                                <ul
-                                    class="dropdown-menu"
-                                    aria-labelledby="showtimeDropdown"
-                                    >
-                                    <li><a class="dropdown-item" href="#">10:00</a></li>
-                                    <li><a class="dropdown-item" href="#">14:00</a></li>
-                                </ul>
-                            </div>
-                            <a class="btn btn-success px-4 py-2">Booking</a>
+                                            </li>
+                                        </c:forEach>
+                                    </ul>
+                                </div>
+                            </c:if>
+                            <c:if test ="${not empty movie}">
+                                <div class="dropdown">
+                                    <button
+                                        class="btn btn-warning px-4 py-3 dropdown-toggle"
+                                        type="button"
+                                        id="dateDropdown"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false"
+                                        >
+                                        ${empty date ? "3. Chọn Ngày" : date}
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dateDropdown">
+                                        <c:forEach var = "date" items="${listDate}">
+                                            <li>
+                                                <a class="dropdown-item movie" href="/home?cinema=${cinema}&movie=${movie}&date=${date}">
+                                                    ${date}
+                                                </a>
+                                            </li>
+                                        </c:forEach>
+                                    </ul>
+                                </div>
+                            </c:if>
+                            <c:if test ="${not empty date}">
+                                <div class="dropdown ">
+                                    <button
+                                        class="btn btn-warning px-4 py-3 dropdown-toggle "
+                                        type="button"
+                                        id="showtimeDropdown"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false"
+                                        >
+                                        ${empty time ? "4. Chọn Suất" : time}
+                                    </button>
+                                    <ul
+                                        class="dropdown-menu"
+                                        aria-labelledby="showtimeDropdown"
+                                        >
+                                        <c:forEach var = "time" items="${listTime}">
+                                            <li>
+                                                <a class="dropdown-item movie" href="/home?cinema=${cinema}&movie=${movie}&date=${date}&time=${time}">
+                                                    ${time}
+                                                </a>
+                                            </li>
+                                        </c:forEach>
+                                    </ul>
+                                </div>
+                            </c:if>
+                            <a class="btn btn-success px-5 py-3" href = "/home?cinema=${cinema}&movie=${movie}&date=${date}&time=${time}">Booking</a>
                         </div>
                     </div>
                 </div>
@@ -310,3 +341,59 @@
     </section>
     <!-- /Gallery Section -->
 </main>
+<!--<script>
+    function getCinema(cinema) {
+//        $.ajax({
+//            url: "/home",
+//            type: "get",
+//            data: {
+//                cinema: encodeURIComponent(cinema),
+//            },
+//            success: function (data) {
+//                document.getElementById("cinemaDropdown").innerText = cinema;
+//                document
+//                        .getElementById("movieDropdown")
+//                        .removeAttribute("disabled");
+//                document
+//                        .getElementById("dateDropdown")
+//                        .setAttribute("disabled", "true");
+//                document
+//                        .getElementById("showtimeDropdown")
+//                        .setAttribute("disabled", "true");
+//            },
+//            error: function (xhr) {
+//                // Xử lý lỗi nếu có
+//            },
+//        });
+        document
+                .getElementById("movieDropdown")
+                .removeAttribute("disabled");
+        document
+                .getElementById("dateDropdown")
+                .setAttribute("disabled", "true");
+        document
+                .getElementById("showtimeDropdown")
+                .setAttribute("disabled", "true");
+    }
+    function getMovie(movie) {
+//        $.ajax({
+//            url: "/home",
+//            type: "get",
+//            data: {
+//                movie: movie,
+//            },
+//            success: function (data) {
+//                
+//            },
+//            error: function (xhr) {
+//                // Xử lý lỗi nếu có
+//            },
+//        });
+        document.getElementById("dateDropdown").removeAttribute("disabled");
+        document
+                .getElementById("showtimeDropdown")
+                .setAttribute("disabled", "true");
+    }
+
+
+</script>-->

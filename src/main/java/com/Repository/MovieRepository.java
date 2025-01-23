@@ -4,10 +4,14 @@
  */
 package com.Repository;
 
+import com.Model.Movie;
+import java.util.List;
+
 /**
  *
  * @author lebao
  */
 public interface MovieRepository {
-    
+    public List<Movie> findAllMovie();
+    public List<String> findMovieByCinema(String cinema);
 }

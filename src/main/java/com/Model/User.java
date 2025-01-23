@@ -22,6 +22,24 @@ public class User {
     public User() {
     }
 
+    public static boolean isAdmin(List<Role> role) {
+        for (Role tmp : role) {
+            if (tmp.getCode().equals("ADMIN")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean isUser(List<Role> role) {
+        for (Role tmp : role) {
+            if (tmp.getCode().equals("USER")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public User(int id, String userName, String fullName, String passWord, int status, List<Role> role) {
         this.id = id;
         this.userName = userName;
@@ -79,5 +97,4 @@ public class User {
         this.role = role;
     }
 
-    
 }

@@ -65,8 +65,7 @@
         <script src="/static/web/assets/vendor/aos/aos.js"></script>
         <script src="/static/web/assets/vendor/glightbox/js/glightbox.min.js"></script>
         <script src="/static/web/assets/vendor/swiper/swiper-bundle.min.js"></script>
-
-        <!-- Main JS File -->
         <script src="/static/web/assets/js/main.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     </body>
 </html>

@@ -4,9 +4,16 @@
  */
 package com.Controller.Web;
 
-import com.Model.Role;
 import com.Model.User;
+import com.Repository.CinemaRepository;
+import com.Repository.DateRepository;
+import com.Repository.MovieRepository;
+import com.Repository.TimeRepository;
 import com.Repository.UserRepository;
+import com.Repository.impl.CinemaRepositoryImpl;
+import com.Repository.impl.DateRepositoryImpl;
+import com.Repository.impl.MovieRepositoryImpl;
+import com.Repository.impl.TimeRepositoryImpl;
 import com.Repository.impl.UserRepositoryImpl;
 import com.Utils.SessionUtils;
 import java.io.IOException;
@@ -16,7 +23,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
 
 /**
  *
@@ -25,7 +31,11 @@ import java.util.List;
 @WebServlet(name = "HomeWebController", urlPatterns = {"/login", "/logout", "/home"})
 public class HomeController extends HttpServlet {
 
+    private CinemaRepository cinemaRepository = new CinemaRepositoryImpl();
+    private MovieRepository movieRepository = new MovieRepositoryImpl();
     private UserRepository userRepository = new UserRepositoryImpl();
+    private DateRepository dateRepository = new DateRepositoryImpl();
+    private TimeRepository timeRepository = new TimeRepositoryImpl();
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -42,10 +52,14 @@ public class HomeController extends HttpServlet {
             out.println("</html>");
         }
     }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("UTF-8");
         String action = request.getParameter("action");
+        request.setAttribute("status", request.getParameter("status"));
         if (action != null) {
             switch (action) {
                 case "login":
@@ -56,37 +70,51 @@ public class HomeController extends HttpServlet {
                     response.sendRedirect("/login?action=login");
                     return;
             }
-        }
-        request.getRequestDispatcher("/views/web/home.jsp").forward(request, response);
-    }
-
-    public boolean isAdmin(List<Role> role) {
-        for (Role tmp : role) {
-            if (tmp.getCode().equals("ADMIN")) {
-                return true;
+        } else {
+            String cinema = request.getParameter("cinema");
+            String movie = request.getParameter("movie");
+            String date = request.getParameter("date");
+            String time = request.getParameter("time");
+            request.setAttribute("listCinema", cinemaRepository.findAll());
+            if (cinema != null) {
+                request.setAttribute("cinema", cinema);
+                request.setAttribute("listMovie", movieRepository.findMovieByCinema(cinema));
             }
+            if(movie != null) {
+                request.setAttribute("movie", movie);
+                request.setAttribute("listDate", dateRepository.findAll(cinema, movie));
+            }
+            if(date != null){
+                request.setAttribute("date", date);
+                request.setAttribute("listTime", timeRepository.findAll(cinema, movie, date));
+            }
+            if(time != null){
+                request.setAttribute("time", time);
+            }
+            request.getRequestDispatcher("/views/web/home.jsp").forward(request, response);
+
         }
-        return false;
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         String action = request.getParameter("action");
         String username = request.getParameter("userName");
         String password = request.getParameter("passWord");
         User user = userRepository.findUserByNameAndPassword(username, password);
-        if (user != null) {
+        if (user.getFullName() != null) {
             SessionUtils.getInstance().remainValue(request, "USER", user);
-            if (isAdmin(user.getRole())) {
+            if (User.isAdmin(user.getRole())) {
                 response.sendRedirect("/admin-home");
                 return;
-            } else {
+            } else if (User.isUser(user.getRole())) {
                 response.sendRedirect("/home");
                 return;
             }
         }
-        response.sendRedirect("/login?action=login");
+        response.sendRedirect("/login?action=login&status=fail");
     }
 
     @Override
