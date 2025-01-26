@@ -4,6 +4,7 @@
  */
 package com.Repository;
 
+import com.DTO.Response.MovieResponse;
 import com.Model.Movie;
 import java.util.List;
 
@@ -12,6 +13,6 @@ import java.util.List;
  * @author lebao
  */
 public interface MovieRepository {
-    public List<Movie> findAllMovie();
+    public List<MovieResponse> findAllMovie();
     public List<String> findMovieByCinema(String cinema);
 }

@@ -132,7 +132,7 @@
                                     </ul>
                                 </div>
                             </c:if>
-                            <a class="btn btn-success px-5 py-3" href = "/home?cinema=${cinema}&movie=${movie}&date=${date}&time=${time}">Booking</a>
+                            <a class="btn btn-success px-5 py-3" href = "/book-ticket?cinema=${cinema}&movie=${movie}&date=${date}&time=${time}">Booking</a>
                         </div>
                     </div>
                 </div>
@@ -145,196 +145,61 @@
     <section id="gallery" class="gallery section">
         <div class="container-fluid" data-aos="fade-up" data-aos-delay="100">
             <div class="row gy-4 justify-content-center">
-                <div class="col-xl-3 col-lg-4 col-md-6">
-                    <div class="gallery-item h-100">
-                        <img
-                            src="assets/img/gallery/gallery-1.jpg"
-                            class="img-fluid"
-                            alt=""
-                            />
-                        <div
-                            class="gallery-links d-flex align-items-center justify-content-center"
-                            >
+                <c:forEach var = "movieitem" items= "${allMovie}">
+                    <div class="col-xl-3 col-lg-4 col-md-6 mb-5">
+                        <div class="gallery-item h-100">
+                            <img
+                                src="${movieitem.header_image}"
+                                class="img-fluid"
+                                alt=""
+                                />
+                            <div
+                                class="gallery-links d-flex flex-column p-3 justify-content-center"
+                                >
+                                <h4>${movieitem.title}</h4>
+                                <ul class="list-unstyled small fs-6">
+                                    <li>
+                                        <i class="fa-solid fa-bullhorn text-warning"></i> ${movieitem.director}
+                                    </li>
+                                    <li><i class="fa-solid fa-tag text-warning"></i> 
+                                        <c:forEach items = "${movieitem.genre}" var = "g" varStatus = "status">
+                                            <span>${g}</span>
+                                            <c:if test="${!status.last}">, </c:if>
+                                        </c:forEach>
+                                        
+                                    </li>
+                                    <li>
+                                        <i class="fa-solid fa-cake-candles text-warning"></i> ${movieitem.age_rating}
+                                    </li>
+                                    <li>
+                                        <i class="fa-regular fa-clock text-warning"></i> ${movieitem.runtime_min}
+                                    </li>
+                                    <li>
+                                        <i class="fa-solid fa-earth-americas text-warning"></i>
+                                        Language
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div>${movieitem.title}</div>
+                        <div class="d-flex justify-content-between">
                             <a
-                                href="assets/img/gallery/gallery-1.jpg"
-                                title="Gallery 1"
-                                class="glightbox preview-link"
-                                ><i class="bi bi-arrows-angle-expand"></i
-                                ></a>
-                            <a href="gallery-single.html" class="details-link"
-                               ><i class="bi bi-link-45deg"></i
-                                ></a>
+                                href="${movieitem.trailer_link}"
+                                class="logo d-flex align-items-center me-auto me-xl-0"
+                                >
+                                <i class="fs-5 fa-regular fa-circle-play"></i>
+                                <h class="ms-1 fs-5 text-white border-bottom border-secondary"
+                                   >Watch trailer</h
+                                >
+                            </a>
+                            <a class="btn btn-warning px-4 py-2" href="#">Booking now</a>
                         </div>
                     </div>
-                </div>
+                </c:forEach>
                 <!-- End Gallery Item -->
 
-                <div class="col-xl-3 col-lg-4 col-md-6">
-                    <div class="gallery-item h-100">
-                        <img
-                            src="assets/img/gallery/gallery-2.jpg"
-                            class="img-fluid"
-                            alt=""
-                            />
-                        <div
-                            class="gallery-links d-flex align-items-center justify-content-center"
-                            >
-                            <a
-                                href="assets/img/gallery/gallery-2.jpg"
-                                title="Gallery 2"
-                                class="glightbox preview-link"
-                                ><i class="bi bi-arrows-angle-expand"></i
-                                ></a>
-                            <a href="gallery-single.html" class="details-link"
-                               ><i class="bi bi-link-45deg"></i
-                                ></a>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Gallery Item -->
 
-                <div class="col-xl-3 col-lg-4 col-md-6">
-                    <div class="gallery-item h-100">
-                        <img
-                            src="assets/img/gallery/gallery-3.jpg"
-                            class="img-fluid"
-                            alt=""
-                            />
-                        <div
-                            class="gallery-links d-flex align-items-center justify-content-center"
-                            >
-                            <a
-                                href="assets/img/gallery/gallery-3.jpg"
-                                title="Gallery 3"
-                                class="glightbox preview-link"
-                                ><i class="bi bi-arrows-angle-expand"></i
-                                ></a>
-                            <a href="gallery-single.html" class="details-link"
-                               ><i class="bi bi-link-45deg"></i
-                                ></a>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Gallery Item -->
-
-                <div class="col-xl-3 col-lg-4 col-md-6">
-                    <div class="gallery-item h-100">
-                        <img
-                            src="assets/img/gallery/gallery-4.jpg"
-                            class="img-fluid"
-                            alt=""
-                            />
-                        <div
-                            class="gallery-links d-flex align-items-center justify-content-center"
-                            >
-                            <a
-                                href="assets/img/gallery/gallery-4.jpg"
-                                title="Gallery 4"
-                                class="glightbox preview-link"
-                                ><i class="bi bi-arrows-angle-expand"></i
-                                ></a>
-                            <a href="gallery-single.html" class="details-link"
-                               ><i class="bi bi-link-45deg"></i
-                                ></a>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Gallery Item -->
-
-                <div class="col-xl-3 col-lg-4 col-md-6">
-                    <div class="gallery-item h-100">
-                        <img
-                            src="assets/img/gallery/gallery-5.jpg"
-                            class="img-fluid"
-                            alt=""
-                            />
-                        <div
-                            class="gallery-links d-flex align-items-center justify-content-center"
-                            >
-                            <a
-                                href="assets/img/gallery/gallery-5.jpg"
-                                title="Gallery 5"
-                                class="glightbox preview-link"
-                                ><i class="bi bi-arrows-angle-expand"></i
-                                ></a>
-                            <a href="gallery-single.html" class="details-link"
-                               ><i class="bi bi-link-45deg"></i
-                                ></a>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Gallery Item -->
-
-                <div class="col-xl-3 col-lg-4 col-md-6">
-                    <div class="gallery-item h-100">
-                        <img
-                            src="assets/img/gallery/gallery-6.jpg"
-                            class="img-fluid"
-                            alt=""
-                            />
-                        <div
-                            class="gallery-links d-flex align-items-center justify-content-center"
-                            >
-                            <a
-                                href="assets/img/gallery/gallery-6.jpg"
-                                title="Gallery 6"
-                                class="glightbox preview-link"
-                                ><i class="bi bi-arrows-angle-expand"></i
-                                ></a>
-                            <a href="gallery-single.html" class="details-link"
-                               ><i class="bi bi-link-45deg"></i
-                                ></a>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Gallery Item -->
-
-                <div class="col-xl-3 col-lg-4 col-md-6">
-                    <div class="gallery-item h-100">
-                        <img
-                            src="assets/img/gallery/gallery-7.jpg"
-                            class="img-fluid"
-                            alt=""
-                            />
-                        <div
-                            class="gallery-links d-flex align-items-center justify-content-center"
-                            >
-                            <a
-                                href="assets/img/gallery/gallery-7.jpg"
-                                title="Gallery 7"
-                                class="glightbox preview-link"
-                                ><i class="bi bi-arrows-angle-expand"></i
-                                ></a>
-                            <a href="gallery-single.html" class="details-link"
-                               ><i class="bi bi-link-45deg"></i
-                                ></a>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Gallery Item -->
-
-                <div class="col-xl-3 col-lg-4 col-md-6">
-                    <div class="gallery-item h-100">
-                        <img
-                            src="assets/img/gallery/gallery-8-2.jpg"
-                            class="img-fluid"
-                            alt=""
-                            />
-                        <div
-                            class="gallery-links d-flex align-items-center justify-content-center"
-                            >
-                            <a
-                                href="assets/img/gallery/gallery-8-2.jpg"
-                                title="Gallery 8"
-                                class="glightbox preview-link"
-                                ><i class="bi bi-arrows-angle-expand"></i
-                                ></a>
-                            <a href="gallery-single.html" class="details-link"
-                               ><i class="bi bi-link-45deg"></i
-                                ></a>
-                        </div>
-                    </div>
-                </div>
                 <!-- End Gallery Item -->
             </div>
         </div>

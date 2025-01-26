@@ -91,8 +91,8 @@ public class HomeController extends HttpServlet {
             if(time != null){
                 request.setAttribute("time", time);
             }
+            request.setAttribute("allMovie", movieRepository.findAllMovie());
             request.getRequestDispatcher("/views/web/home.jsp").forward(request, response);
-
         }
     }
 

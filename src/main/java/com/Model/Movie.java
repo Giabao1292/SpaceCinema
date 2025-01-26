@@ -13,32 +13,32 @@ import java.util.List;
  */
 public class Movie {
 
-    private String title, trailet_link;
+    private String title, trailer_link;
     private String age_rating, header_image, discription, synopsis;
+    private Integer runtime_min;
     private Date release_date;
-    private Director director;
-    private Genre genre;
-    private Cast cast;
-    private MovieStatus status;
-    private List<ShowingTime> showingTimes;
+    private Integer directorId;
+    private Integer genreId;
+    private Integer castId;
+    private String statusId;
 
     public Movie() {
     }
 
-    public Movie(String title, String trailet_link, String age_rating, String header_image, String discription, String synopsis, Date release_date, Director director, Genre genre, Cast cast, MovieStatus status) {
+    public Movie(String title, String trailer_link, String age_rating, String header_image, String discription, String synopsis, Integer runtime_min, Date release_date, Integer directorId, Integer genreId, Integer castId, String statusId) {
         this.title = title;
-        this.trailet_link = trailet_link;
+        this.trailer_link = trailer_link;
         this.age_rating = age_rating;
         this.header_image = header_image;
         this.discription = discription;
         this.synopsis = synopsis;
+        this.runtime_min = runtime_min;
         this.release_date = release_date;
-        this.director = director;
-        this.genre = genre;
-        this.cast = cast;
-        this.status = status;
+        this.directorId = directorId;
+        this.genreId = genreId;
+        this.castId = castId;
+        this.statusId = statusId;
     }
-    
 
     public String getTitle() {
         return title;
@@ -48,12 +48,12 @@ public class Movie {
         this.title = title;
     }
 
-    public String getTrailet_link() {
-        return trailet_link;
+    public String getTrailer_link() {
+        return trailer_link;
     }
 
-    public void setTrailet_link(String trailet_link) {
-        this.trailet_link = trailet_link;
+    public void setTrailer_link(String trailer_link) {
+        this.trailer_link = trailer_link;
     }
 
     public String getAge_rating() {
@@ -88,36 +88,12 @@ public class Movie {
         this.synopsis = synopsis;
     }
 
-    public Director getDirector() {
-        return director;
+    public Integer getRuntime_min() {
+        return runtime_min;
     }
 
-    public void setDirector(Director director) {
-        this.director = director;
-    }
-
-    public Genre getGenre() {
-        return genre;
-    }
-
-    public void setGenre(Genre genre) {
-        this.genre = genre;
-    }
-
-    public Cast getCast() {
-        return cast;
-    }
-
-    public void setCast(Cast cast) {
-        this.cast = cast;
-    }
-
-    public MovieStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(MovieStatus status) {
-        this.status = status;
+    public void setRuntime_min(Integer runtime_min) {
+        this.runtime_min = runtime_min;
     }
 
     public Date getRelease_date() {
@@ -127,5 +103,39 @@ public class Movie {
     public void setRelease_date(Date release_date) {
         this.release_date = release_date;
     }
+
+    public Integer getDirectorId() {
+        return directorId;
+    }
+
+    public void setDirectorId(Integer directorId) {
+        this.directorId = directorId;
+    }
+
+    public Integer getGenreId() {
+        return genreId;
+    }
+
+    public void setGenreId(Integer genreId) {
+        this.genreId = genreId;
+    }
+
+    public Integer getCastId() {
+        return castId;
+    }
+
+    public void setCastId(Integer castId) {
+        this.castId = castId;
+    }
+
+    public String getStatusId() {
+        return statusId;
+    }
+
+    public void setStatusId(String statusId) {
+        this.statusId = statusId;
+    }
+
+    
     
 }
