@@ -12,6 +12,9 @@ import java.util.List;
  * @author lebao
  */
 public interface UserRepository {
+    public boolean checkEmail(String email);
+    public boolean checkUserName(String userName);
+    public boolean checkPhone(String phone);
     public User findUserByNameAndPassword(String username, String password);
-    
+    public String createUser(User user);
 }

@@ -16,9 +16,23 @@ public class User {
     private String userName;
     private String fullName;
     private String passWord;
+    private String email;
+    private String phone;
     private int status;
     private List<Role> role;
-
+    
+    public User(int id, String userName, String fullName, String passWord, String email, String phone, int status, List<Role> role) {
+        this.id = id;
+        this.userName = userName;
+        this.fullName = fullName;
+        this.passWord = passWord;
+        this.email = email;
+        this.phone = phone;
+        this.status = status;
+        this.role = role;
+    }
+    
+    
     public User() {
     }
 
@@ -40,14 +54,23 @@ public class User {
         return false;
     }
 
-    public User(int id, String userName, String fullName, String passWord, int status, List<Role> role) {
-        this.id = id;
-        this.userName = userName;
-        this.fullName = fullName;
-        this.passWord = passWord;
-        this.status = status;
-        this.role = role;
+    public String getEmail() {
+        return email;
     }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+   
 
     public int getId() {
         return id;

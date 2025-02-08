@@ -3,6 +3,7 @@ com/Server/impl/UserServiceImpl.class
 com/Repository/impl/DateRepositoryImpl.class
 com/Repository/TimeRepository.class
 com/Controller/Web/HomeController.class
+com/Controller/Web/RegisterController.class
 com/Model/Time.class
 com/Model/Snack.class
 com/Model/ShowingTime.class

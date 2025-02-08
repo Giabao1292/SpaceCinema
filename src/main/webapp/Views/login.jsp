@@ -67,7 +67,7 @@
                                     <div
                                         class="d-flex align-items-center justify-content-between mt-4 mb-0"
                                         >
-                                        <a class="small" href="password.html"
+                                        <a class="small" href="/change-pass?action=changepassword"
                                            >Forgot Password?</a
                                         >
                                         <button class="btn btn-primary">Login</button>
@@ -80,7 +80,7 @@
                             </div>
                             <div class="card-footer text-center py-3">
                                 <div class="small">
-                                    <a href="register.html">Need an account? Sign up!</a>
+                                    <a href="/register?action=register">Need an account? Sign up!</a>
                                 </div>
                             </div>
                         </div>

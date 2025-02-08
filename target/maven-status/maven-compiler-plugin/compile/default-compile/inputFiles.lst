@@ -21,6 +21,7 @@
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Controller/Web/PromotionController.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Model/Director.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Controller/Web/BookTicketController.java
+/Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Controller/Web/RegisterController.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Repository/DateRepository.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Server/SeatService.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Repository/impl/UserRepositoryImpl.java
