@@ -14,24 +14,31 @@
                 <div class="sb-sidenav-menu-heading">Core</div>
                 <a class="nav-link" href="/admin-home">
                     <div class="sb-nav-link-icon">
-                        <i class="fas fa-tachometer-alt"></i>
+                        <i class="fas fa-house"></i>
                     </div>
                     Trang chủ
                 </a>
                 <div class="sb-sidenav-menu-heading">Interface</div>
                 <a class="nav-link" href="/admin-home/movie">
                     <div class="sb-nav-link-icon">
-                        <i class="fas fa-tachometer-alt"></i>
+                        <i class="fa-solid fa-film"></i>
                     </div>
                     Movie
                 </a>
-                <a class="nav-link" href="/admin-home/user">
+                <a class="nav-link" href="/admin-home/popcorn">
                     <div class="sb-nav-link-icon">
-                        <i class="fas fa-tachometer-alt"></i>
+                        <i class="fa-solid fa-pizza-slice"></i>
                     </div>
-                    User
+                    Popcorn
                 </a>
-
+                <c:if test = "${role == 'admin'}">
+                    <a class="nav-link" href="/admin-home/user">
+                        <div class="sb-nav-link-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        Manager
+                    </a>
+                </c:if>
             </div>
         </div>
     </nav>

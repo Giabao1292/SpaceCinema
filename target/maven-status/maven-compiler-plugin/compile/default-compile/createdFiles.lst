@@ -18,7 +18,6 @@ com/Controller/Web/PopcornController.class
 com/Controller/Admin/MovieController.class
 com/Controller/Admin/UserController.class
 com/Server/MovieService.class
-com/Config/NewClass.class
 com/Utils/SessionUtils.class
 com/Server/SnackService.class
 com/Repository/UserRepository.class
@@ -39,6 +38,7 @@ com/Server/UserService.class
 com/Controller/Web/PromotionController.class
 com/Model/MovieStatus.class
 com/Model/User.class
+com/Controller/Admin/PopcornController.class
 com/Repository/impl/TimeRepositoryImpl.class
 com/Model/Cinema.class
 com/Controller/Admin/HomeController.class

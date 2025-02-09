@@ -18,7 +18,7 @@
         <div class="card mt-4">
             <div class="card-header">
                 <i class="fas fa-table me-1"></i>
-                List Movie
+                List Manager
             </div>
             <div class="card-body">
                 <table id="datatablesSimple">
@@ -46,25 +46,29 @@
                             <td>Something</td>
                             <td>$320,800</td>
                             <td>
-                                <button
-                                    type="submit"
-                                    class="bg-danger border-0 rounded"
-                                    >
-                                    <i class="fa-solid fa-delete-left"></i>
-                                </button>
-                                <button
-                                    type="submit"
-                                    class="bg-primary border-0 rounded"
-                                    >
-                                    <i class="fa-regular fa-pen-to-square"></i>
-                                </button>
+                                <a href = "/admin-home/user?action=delete">
+                                    <button
+                                        type="submit"
+                                        class="bg-danger border-0 rounded"
+                                        >
+                                        <i class="fa-solid fa-delete-left"></i>
+                                    </button>
+                                </a>
+                                <a href = "/admin-home/user?action=update">
+                                    <button
+                                        type="submit"
+                                        class="bg-primary border-0 rounded"
+                                        >
+                                        <i class="fa-regular fa-pen-to-square"></i>
+                                    </button>
+                                </a>
                             </td>
                         </tr>
                     </tbody>
                 </table>
-                <a href="addbuilding.html"
+                <a href="/admin-home/user?action=create"
                    ><button type="submit" class="btn btn-success">
-                        Add Movie
+                        Add User
                     </button></a
                 >
             </div>

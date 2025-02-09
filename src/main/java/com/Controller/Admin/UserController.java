@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author lebao
  */
-@WebServlet(name="UserController", urlPatterns={"/admin-home/user"})
+@WebServlet(name="ManageUser", urlPatterns={"/admin-home/user"})
 public class UserController extends HttpServlet {
    
 

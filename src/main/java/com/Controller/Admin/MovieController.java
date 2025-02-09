@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author lebao
  */
-@WebServlet(name="MovieController", urlPatterns={"/admin-home/movie"})
+@WebServlet(name="ManageMovie", urlPatterns={"/admin-home/movie"})
 public class MovieController extends HttpServlet {
 
     @Override

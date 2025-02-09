@@ -5,6 +5,7 @@
     <head>
         
         <title><dec:title default="Home" /></title>
+        <link href="/static/web/assets/img/logo.png" rel="icon" />
         <link
             href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css"
             rel="stylesheet"

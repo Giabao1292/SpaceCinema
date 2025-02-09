@@ -107,10 +107,17 @@ public class HomeController extends HttpServlet {
         if (user.getFullName() != null) {
             SessionUtils.getInstance().remainValue(request, "USER", user);
             if (User.isAdmin(user.getRole())) {
+                SessionUtils.getInstance().remainValue(request, "role", "admin");
                 response.sendRedirect("/admin-home");
+                
                 return;
             } else if (User.isUser(user.getRole())) {
                 response.sendRedirect("/home");
+                return;
+            }
+            else{
+                response.sendRedirect("/admin-home");
+                SessionUtils.getInstance().remainValue(request, "role", "manager");
                 return;
             }
         }
