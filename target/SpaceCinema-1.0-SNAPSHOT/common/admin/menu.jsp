@@ -21,7 +21,7 @@
                 <div class="sb-sidenav-menu-heading">Interface</div>
                 <a
                     class="nav-link collapsed"
-                    href="#"
+                    href="/admin-home/movie"
                     data-bs-toggle="collapse"
                     data-bs-target="#collapseLayouts"
                     aria-expanded="false"
@@ -30,23 +30,8 @@
                     <div class="sb-nav-link-icon">
                         <i class="fas fa-columns"></i>
                     </div>
-                    Toà nhà
-                    <div class="sb-sidenav-collapse-arrow">
-                        <i class="fas fa-angle-down"></i>
-                    </div>
+                    Movie
                 </a>
-                <div
-                    class="collapse"
-                    id="collapseLayouts"
-                    aria-labelledby="headingOne"
-                    data-bs-parent="#sidenavAccordion"
-                    >
-                    <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" href="building-list.html"
-                           >Quản lý toà nhà</a
-                        >
-                    </nav>
-                </div>
                 <a
                     class="nav-link collapsed"
                     href="#"
