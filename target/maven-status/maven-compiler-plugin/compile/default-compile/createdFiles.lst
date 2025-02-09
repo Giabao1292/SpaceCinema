@@ -29,6 +29,7 @@ com/Repository/impl/TimeRepositoryImpl.class
 com/Repository/MovieRepository.class
 com/Controller/Web/PopcornController.class
 com/Controller/Admin/MovieController.class
+com/Controller/Admin/UserController.class
 com/Server/MovieService.class
 com/Model/Cinema.class
 com/Controller/Admin/HomeController.class
