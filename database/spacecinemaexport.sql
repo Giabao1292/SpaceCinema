@@ -18,8 +18,8 @@
 --
 -- Table structure for table `booking`
 --
-DROP SCHEMA SpaceCinema;
-CREATE SCHEMA SpaceCinema;
+DROP SCHEMA IF EXISTS spacecinema;
+CREATE SCHEMA spacecinema;
 Use SpaceCinema;
 DROP TABLE IF EXISTS `booking`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
