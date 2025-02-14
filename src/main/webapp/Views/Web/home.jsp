@@ -166,7 +166,7 @@
                                             <span>${g}</span>
                                             <c:if test="${!status.last}">, </c:if>
                                         </c:forEach>
-                                        
+
                                     </li>
                                     <li>
                                         <i class="fa-solid fa-cake-candles text-warning"></i> ${movieitem.age_rating}
@@ -206,59 +206,23 @@
     </section>
     <!-- /Gallery Section -->
 </main>
-<!--<script>
-    function getCinema(cinema) {
-//        $.ajax({
-//            url: "/home",
-//            type: "get",
-//            data: {
-//                cinema: encodeURIComponent(cinema),
-//            },
-//            success: function (data) {
-//                document.getElementById("cinemaDropdown").innerText = cinema;
-//                document
-//                        .getElementById("movieDropdown")
-//                        .removeAttribute("disabled");
-//                document
-//                        .getElementById("dateDropdown")
-//                        .setAttribute("disabled", "true");
-//                document
-//                        .getElementById("showtimeDropdown")
-//                        .setAttribute("disabled", "true");
-//            },
-//            error: function (xhr) {
-//                // Xử lý lỗi nếu có
-//            },
-//        });
-        document
-                .getElementById("movieDropdown")
-                .removeAttribute("disabled");
-        document
-                .getElementById("dateDropdown")
-                .setAttribute("disabled", "true");
-        document
-                .getElementById("showtimeDropdown")
-                .setAttribute("disabled", "true");
-    }
-    function getMovie(movie) {
-//        $.ajax({
-//            url: "/home",
-//            type: "get",
-//            data: {
-//                movie: movie,
-//            },
-//            success: function (data) {
-//                
-//            },
-//            error: function (xhr) {
-//                // Xử lý lỗi nếu có
-//            },
-//        });
-        document.getElementById("dateDropdown").removeAttribute("disabled");
-        document
-                .getElementById("showtimeDropdown")
-                .setAttribute("disabled", "true");
-    }
+<script>
+    $(document).ready(function () {
+        $("#submit").click(function () {
+            var inputData = {
+                name: $("#name").val(),
+                email: $("#email").val(),
+                message: $("#message").val()
+            };
 
-
-</script>-->
+            $.ajax({
+                type: "GET",
+                url: "submitForm",
+                data: inputData,
+                success: function (response) {
+                    $("#result").html(response);
+                }
+            });
+        });
+    });
+</script>
