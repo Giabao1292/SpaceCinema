@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-       <title><dec:title default="Home" /></title>
+        <title><dec:title default="Home" /></title>
         <link href="/static/web/assets/img/logo.png" rel="icon" />
 
         <!-- Fonts -->
@@ -37,6 +37,8 @@
 
         <!-- Main CSS File -->
         <link href="/static/web/assets/css/main.css" rel="stylesheet" />
+
+
         <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
@@ -44,6 +46,7 @@
             crossorigin="anonymous"
             referrerpolicy="no-referrer"
             />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
     <body class="index-page">
         <%@include file = "/common/web/header.jsp" %>
@@ -66,6 +69,5 @@
         <script src="/static/web/assets/vendor/glightbox/js/glightbox.min.js"></script>
         <script src="/static/web/assets/vendor/swiper/swiper-bundle.min.js"></script>
         <script src="/static/web/assets/js/main.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     </body>
 </html>

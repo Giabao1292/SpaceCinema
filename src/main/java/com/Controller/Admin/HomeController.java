@@ -30,7 +30,6 @@ public class HomeController extends HttpServlet {
 
         RequestDispatcher ds = request.getRequestDispatcher("/views/admin/home.jsp");
         ds.forward(request, response);
-
     }
 
     @Override

@@ -4,6 +4,7 @@
  */
 package com.Controller.Web;
 
+import com.Model.Movie;
 import com.Model.User;
 import com.Repository.CinemaRepository;
 import com.Repository.DateRepository;
@@ -23,6 +24,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  *
@@ -36,22 +38,6 @@ public class HomeController extends HttpServlet {
     private UserRepository userRepository = new UserRepositoryImpl();
     private DateRepository dateRepository = new DateRepositoryImpl();
     private TimeRepository timeRepository = new TimeRepositoryImpl();
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet HomeController</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet HomeController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -75,21 +61,42 @@ public class HomeController extends HttpServlet {
             String movie = request.getParameter("movie");
             String date = request.getParameter("date");
             String time = request.getParameter("time");
+            PrintWriter out = response.getWriter();
             request.setAttribute("listCinema", cinemaRepository.findAll());
-            if (cinema != null) {
-                request.setAttribute("cinema", cinema);
-                request.setAttribute("listMovie", movieRepository.findMovieByCinema(cinema));
-            }
-            if(movie != null) {
-                request.setAttribute("movie", movie);
-                request.setAttribute("listDate", dateRepository.findAll(cinema, movie));
-            }
-            if(date != null){
-                request.setAttribute("date", date);
-                request.setAttribute("listTime", timeRepository.findAll(cinema, movie, date));
-            }
-            if(time != null){
+            if (time != null && time != "") {
                 request.setAttribute("time", time);
+                return;
+            } else if (date != null && date != "") {
+                request.setAttribute("date", date);
+                for (String timeDetail : timeRepository.findAll(cinema, movie, date)) {
+                    out.println("<li>\n"
+                            + "    <a class=\"dropdown-item\" data-movie=\"" + movie + "\" data-cinema=\"" + cinema + "\" data-time=\"" + timeDetail + "\" data-date=\"" + date + "\">\n"
+                            + "        " + timeDetail + "\n"
+                            + "    </a>\n"
+                            + "</li>");
+                }
+                return;
+            } else if (movie != null && movie != "") {
+                request.setAttribute("movie", movie);
+                for (String dateTime : dateRepository.findAll(cinema, movie)) {
+                    out.println("<li>\n"
+                            + "    <a class=\"dropdown-item\" data-movie=\"" + movie + "\" data-cinema=\"" + cinema + "\" data-time=\"" + time + "\" data-date=\"" + dateTime + "\">\n"
+                            + "        " + dateTime + "\n"
+                            + "    </a>\n"
+                            + "</li>");
+                }
+                return;
+            } else if (cinema != null && cinema != "") {
+                request.setAttribute("cinema", cinema);
+//                request.setAttribute("listMovie", movieRepository.findMovieByCinema(cinema));
+                for (String movieTitle : movieRepository.findMovieByCinema(cinema)) {
+                    out.println("<li>\n"
+                            + "    <a class=\"dropdown-item\" data-movie=\"" + movieTitle + "\" data-cinema=\"" + cinema + "\" data-time=\"" + time + "\" data-date=\"" + date + "\">\n"
+                            + "        " + movieTitle + "\n"
+                            + "    </a>\n"
+                            + "</li>");
+                }
+                return;
             }
             request.setAttribute("allMovie", movieRepository.findAllMovie());
             request.getRequestDispatcher("/views/web/home.jsp").forward(request, response);
@@ -109,13 +116,12 @@ public class HomeController extends HttpServlet {
             if (User.isAdmin(user.getRole())) {
                 SessionUtils.getInstance().remainValue(request, "role", "admin");
                 response.sendRedirect("/admin-home");
-                
+
                 return;
             } else if (User.isUser(user.getRole())) {
                 response.sendRedirect("/home");
                 return;
-            }
-            else{
+            } else {
                 response.sendRedirect("/admin-home");
                 SessionUtils.getInstance().remainValue(request, "role", "manager");
                 return;

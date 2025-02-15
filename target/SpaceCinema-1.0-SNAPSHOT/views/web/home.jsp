@@ -49,90 +49,69 @@
                                     data-bs-toggle="dropdown"
                                     aria-expanded="false"
                                     >
-                                    ${empty cinema ? "1. Chọn Rạp" : cinema}
+                                    1. Chọn Rạp
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="cinemaDropdown">
                                     <c:forEach var = "cinema" items="${listCinema}">
                                         <li>
-                                            <a class="dropdown-item cinema" href = "/home?cinema=${cinema.name}">${cinema.name}
+                                            <a class="dropdown-item" data-cinema="${cinema.name}">${cinema.name}
                                             </a>
                                         </li>
                                     </c:forEach>
                                 </ul>
                             </div>
 
-                            <!-- Dropdown for Movie -->
-                            <c:if test ="${not empty cinema}">
-                                <div class="dropdown ">
-                                    <button
-                                        class="btn btn-warning px-4 py-3 dropdown-toggle "
-                                        type="button"
-                                        id="movieDropdown"
-                                        data-bs-toggle="dropdown"
-                                        aria-expanded="false"
-                                        >
-                                        ${empty movie ? "2. Chọn Phim" : movie}
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="movieDropdown">
-                                        <c:forEach var = "movie" items="${listMovie}">
-                                            <li>
-                                                <a class="dropdown-item movie" href="/home?cinema=${cinema}&movie=${movie}">
-                                                    ${movie}
-                                                </a>
 
-                                            </li>
-                                        </c:forEach>
-                                    </ul>
-                                </div>
-                            </c:if>
-                            <c:if test ="${not empty movie}">
-                                <div class="dropdown">
-                                    <button
-                                        class="btn btn-warning px-4 py-3 dropdown-toggle"
-                                        type="button"
-                                        id="dateDropdown"
-                                        data-bs-toggle="dropdown"
-                                        aria-expanded="false"
-                                        >
-                                        ${empty date ? "3. Chọn Ngày" : date}
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dateDropdown">
-                                        <c:forEach var = "date" items="${listDate}">
-                                            <li>
-                                                <a class="dropdown-item movie" href="/home?cinema=${cinema}&movie=${movie}&date=${date}">
-                                                    ${date}
-                                                </a>
-                                            </li>
-                                        </c:forEach>
-                                    </ul>
-                                </div>
-                            </c:if>
-                            <c:if test ="${not empty date}">
-                                <div class="dropdown ">
-                                    <button
-                                        class="btn btn-warning px-4 py-3 dropdown-toggle "
-                                        type="button"
-                                        id="showtimeDropdown"
-                                        data-bs-toggle="dropdown"
-                                        aria-expanded="false"
-                                        >
-                                        ${empty time ? "4. Chọn Suất" : time}
-                                    </button>
-                                    <ul
-                                        class="dropdown-menu"
-                                        aria-labelledby="showtimeDropdown"
-                                        >
-                                        <c:forEach var = "time" items="${listTime}">
-                                            <li>
-                                                <a class="dropdown-item movie" href="/home?cinema=${cinema}&movie=${movie}&date=${date}&time=${time}">
-                                                    ${time}
-                                                </a>
-                                            </li>
-                                        </c:forEach>
-                                    </ul>
-                                </div>
-                            </c:if>
-                            <a class="btn btn-success px-5 py-3" href = "/book-ticket?cinema=${cinema}&movie=${movie}&date=${date}&time=${time}">Booking</a>
+                            <div class="dropdown ">
+                                <button
+                                    class="btn btn-warning px-4 py-3 dropdown-toggle "
+                                    type="button"
+                                    id="movieDropdown"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false"
+                                    disabled
+                                    >
+                                    2. Chọn Phim
+                                </button>
+                                <ul class="dropdown-menu"id="movie" aria-labelledby="movieDropdown">
+                                </ul>
+                            </div>
+
+                            <div class="dropdown">
+                                <button
+                                    class="btn btn-warning px-4 py-3 dropdown-toggle"
+                                    type="button"
+                                    id="dateDropdown"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false"
+                                    disabled
+                                    >
+                                    3. Chọn Ngày
+                                </button>
+                                <ul class="dropdown-menu "id="date" aria-labelledby="dateDropdown">
+                                </ul>
+                            </div>
+
+
+                            <div class="dropdown ">
+                                <button
+                                    class="btn btn-warning px-4 py-3 dropdown-toggle "
+                                    type="button"
+                                    id="showtimeDropdown"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false"
+                                    disabled
+                                    >
+                                    4. Chọn Suất
+                                </button>
+                                <ul
+                                    class="dropdown-menu "id="time"
+                                    aria-labelledby="showtimeDropdown"
+                                    >
+                                </ul>
+                            </div>
+
+                            <a class="btn btn-success px-5 py-3 booking" >Booking</a>
                         </div>
                     </div>
                 </div>
@@ -193,7 +172,7 @@
                                    >Watch trailer</h
                                 >
                             </a>
-                            <a class="btn btn-warning px-4 py-2" href="#">Booking now</a>
+                            <a class="btn btn-warning px-4 py-2" href="">Booking now</a>
                         </div>
                     </div>
                 </c:forEach>
@@ -208,20 +187,55 @@
 </main>
 <script>
     $(document).ready(function () {
-        $("#submit").click(function () {
-            var inputData = {
-                name: $("#name").val(),
-                email: $("#email").val(),
-                message: $("#message").val()
-            };
-
+        $(document).on("click", ".dropdown-item", function (event) {
+            event.preventDefault();
+            var cinema = $(this).data("cinema");
+            var movie = $(this).data("movie");
+            var date = $(this).data("date");
+            var time = $(this).data("time");
+            console.log(cinema + " " + movie + " " + date + " " + time);
             $.ajax({
+                url: "/home",
                 type: "GET",
-                url: "submitForm",
-                data: inputData,
+                data: {
+                    cinema: cinema,
+                    movie: movie,
+                    date: date,
+                    time: time,
+                },
                 success: function (response) {
-                    $("#result").html(response);
-                }
+                    if (time != null && time != "") {
+                        $("#showtimeDropdown").text(time);
+                        console.log(time);
+                    } else if (date != null && date != "") {
+                        document.getElementById("showtimeDropdown").disabled = false;
+                        $("#dateDropdown").text(date);
+                        $("#showtimeDropdown").text("4. Chọn Suất");
+                        $("#time").html(response);
+                    } else if (movie != null && movie != "") {
+                        document.getElementById("dateDropdown").disabled = false;
+                        document.getElementById("showtimeDropdown").disabled = true;
+                        $("#movieDropdown").text(movie);
+                         $("#dateDropdown").text("3. Chọn Ngày");
+                        $("#showtimeDropdown").text("4. Chọn Suất");
+                        $("#date").html(response);
+                    } else if (cinema != null && cinema != "") {
+                        document.getElementById("movieDropdown").disabled = false;
+                        document.getElementById("dateDropdown").disabled = true;
+                        document.getElementById("showtimeDropdown").disabled = true;
+                        $("#cinemaDropdown").text(cinema);
+                        $("#movieDropdown").text("2. Chọn Phim");
+                        $("#dateDropdown").text("3. Chọn Ngày");
+                        $("#showtimeDropdown").text("4. Chọn Suất");
+                        $("#movie").html(response);
+                    }
+                    $(".booking").attr("href", "/book-ticket?cinema=" +cinema + "&movie=" + movie + "&date=" + date + "&time=" + time);
+
+                },
+                error: function (xhr) {
+                    // Xử lý lỗi
+                    console.error("Error:", xhr);
+                },
             });
         });
     });
