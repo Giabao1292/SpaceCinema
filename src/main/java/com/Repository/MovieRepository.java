@@ -14,5 +14,5 @@ import java.util.List;
  */
 public interface MovieRepository {
     public List<MovieResponse> findAllMovie();
-    public List<String> findMovieByCinema(String cinema);
+    public List<MovieResponse> findMovieByCinema(String cinema);
 }

@@ -4,6 +4,7 @@
  */
 package com.Controller.Web;
 
+import com.DTO.Response.MovieResponse;
 import com.Model.Movie;
 import com.Model.User;
 import com.Repository.CinemaRepository;
@@ -88,11 +89,10 @@ public class HomeController extends HttpServlet {
                 return;
             } else if (cinema != null && cinema != "") {
                 request.setAttribute("cinema", cinema);
-//                request.setAttribute("listMovie", movieRepository.findMovieByCinema(cinema));
-                for (String movieTitle : movieRepository.findMovieByCinema(cinema)) {
+                for (MovieResponse movieTitle : movieRepository.findMovieByCinema(cinema)) {
                     out.println("<li>\n"
-                            + "    <a class=\"dropdown-item\" data-movie=\"" + movieTitle + "\" data-cinema=\"" + cinema + "\" data-time=\"" + time + "\" data-date=\"" + date + "\">\n"
-                            + "        " + movieTitle + "\n"
+                            + "    <a class=\"dropdown-item\" data-movie=\"" + movieTitle.getTitle() + "\" data-cinema=\"" + cinema + "\" data-time=\"" + time + "\" data-date=\"" + date + "\">\n"
+                            + "        " + movieTitle.getTitle() + "\n"
                             + "    </a>\n"
                             + "</li>");
                 }

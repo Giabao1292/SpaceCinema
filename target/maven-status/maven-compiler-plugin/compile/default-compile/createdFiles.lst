@@ -43,6 +43,7 @@ com/Repository/impl/TimeRepositoryImpl.class
 com/Model/Cinema.class
 com/Controller/Admin/HomeController.class
 com/Model/Cast.class
+com/Config/Format.class
 com/Repository/impl/SeatRepositoryImp.class
 com/Repository/SeatRepository.class
 com/Model/Director.class

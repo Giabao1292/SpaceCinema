@@ -8,23 +8,6 @@
 <%@include file = "/common/taglib.jsp" %>
 <% String cinema = (String) request.getAttribute("cinema"); %>
 <!DOCTYPE html>
-<c:if test="${status == 'not_permission'}">
-    <div class="container mt-5">
-        <!-- Alert -->
-        <div
-            class="alert show alert-warning alert-dismissible show fade"
-            role="alert"
-            >
-            <strong>Warning!</strong> You are not authorized to access the admin panel."
-            <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="alert"
-                aria-label="Close"
-                ></button>
-        </div>
-    </div>
-</c:if>
 <main class="main">
     <!-- Gallery Section -->
     <section id="gallery" class="gallery section">
