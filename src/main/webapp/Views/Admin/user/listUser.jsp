@@ -28,6 +28,7 @@
                             <th>FullName</th>
                             <th>Manager name</th>
                             <th>Phone number</th>
+<<<<<<< HEAD
                             <th>Email</th>
                             <th>Console</th>
                         </tr>
@@ -67,6 +68,74 @@
                         </c:forEach>
                     </tbody>
 
+=======
+                            <th>Number of basements</th>
+                            <th>Floor area</th>
+                            <th>Rent area</th>
+                            <td>Edinburgh</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Tiger Nixon</td>
+                            <td>System Architect</td>
+                            <td>2011/04/25</td>
+                            <td>$320,800</td>
+                            <td>Something</td>
+                            <td>$320,800</td>
+                            <td>
+                                <a href = "/admin-home/user?action=delete">
+                                    <button
+                                        type="submit"
+                                        class="bg-danger border-0 rounded"
+                                        >
+                                        <i class="fa-solid fa-delete-left"></i>
+                                    </button>
+                                </a>
+                                <a href = "/admin-home/user?action=update">
+                                    <button
+                                        type="submit"
+                                        class="bg-primary border-0 rounded"
+                                        >
+                                        <i class="fa-regular fa-pen-to-square"></i>
+                                    </button>
+                                </a>
+                            </td>
+                        </tr>
+                        <c:forEach var="u" items="${requestScope.users}">
+                            <tr>
+                            <td>${u.username}</td>
+                            <td>${u.fullname}</td>
+                            <td>${u.phone}</td>
+                            <td>${u.email}</td>
+                            <td>
+                                <c:forEach var="r" items="u.role">
+                                    ${r.name}
+                                </c:forEach>
+                            </td>
+                            <td>
+                                <a href = "/admin-home/user?action=delete">
+                                    <button
+                                        type="submit"
+                                        class="bg-danger border-0 rounded"
+                                        >
+                                        <i class="fa-solid fa-delete-left"></i>
+                                    </button>
+                                </a>
+                                <a href = "/admin-home/user?action=update">
+                                    <button
+                                        type="submit"
+                                        class="bg-primary border-0 rounded"
+                                        >
+                                        <i class="fa-regular fa-pen-to-square"></i>
+                                    </button>
+                                </a>
+                            </td>
+                        </tr>
+                        </c:forEach>
+                    </tbody>
+                    
+>>>>>>> d7a8ef0 (debug giup toi)
                 </table>
                 <a href="/admin-home/user?action=create"
                    ><button type="submit" class="btn btn-success">

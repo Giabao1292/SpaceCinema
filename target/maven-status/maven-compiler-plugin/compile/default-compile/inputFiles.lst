@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Server/impl/UserServiceImpl.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Model/ShowingTime.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Controller/Web/PopcornController.java
@@ -47,3 +48,54 @@
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Model/Cinema.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Repository/impl/SeatRepositoryImp.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Repository/impl/SnackRepositoryImpl.java
+=======
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Server\impl\MovieServiceImpl.java
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\impl\CinemaRepositoryImpl.java
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\impl\SnackRepositoryImpl.java
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\TimeRepository.java
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\DateRepository.java
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Controller\Web\PopcornController.java
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Server\impl\SeatServiceImpl.java
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\impl\SeatRepositoryImp.java
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\DTO\Response\MovieResponse.java
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\impl\DateRepositoryImpl.java
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Server\SnackService.java
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Server\impl\SnackServiceImpl.java
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Controller\Web\BookTicketController.java
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\impl\MovieRepositoryImpl.java
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Controller\Web\PromotionController.java
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Controller\Admin\PopcornController.java
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Model\Time.java
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Utils\SessionUtils.java
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\CinemaRepository.java
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Controller\Web\NewsController.java
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Server\UserService.java
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Model\Genre.java
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Controller\Web\HomeController.java
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\impl\UserRepositoryImpl.java
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Model\Cast.java
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Model\Snack.java
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Controller\Admin\UserController.java
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Controller\Admin\HomeController.java
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Controller\Web\RegisterController.java
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Config\Format.java
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Model\Cinema.java
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\MovieRepository.java
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Model\MovieStatus.java
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Model\Director.java
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\UserRepository.java
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Server\impl\UserServiceImpl.java
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Config\GetConnection.java
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Server\SeatService.java
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Model\ShowingTime.java
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\SeatRepository.java
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\SnackRepository.java
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Model\User.java
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Controller\Admin\MovieController.java
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\impl\TimeRepositoryImpl.java
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Model\Movie.java
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Server\MovieService.java
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Model\Role.java
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Config\AuthorizationFilter.java
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Model\Seat.java
+>>>>>>> d7a8ef0 (debug giup toi)
