@@ -32,7 +32,7 @@ public class AuthorizationFilter implements Filter {
         if(URL.startsWith("/admin")){
             User user = (User)SessionUtils.getInstance().getValue(request, "USER");
             if(user != null){
-                if(User.isAdmin(user.getRole())){
+                if(User.isAdmin(user.getRole()) || User.isManager(user.getRole())){
                     chain.doFilter(requestServlet, responseServlet);
                     return;
                 }

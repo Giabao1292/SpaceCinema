@@ -116,7 +116,6 @@ public class HomeController extends HttpServlet {
             if (User.isAdmin(user.getRole())) {
                 SessionUtils.getInstance().remainValue(request, "role", "admin");
                 response.sendRedirect("/admin-home");
-
                 return;
             } else if (User.isUser(user.getRole())) {
                 response.sendRedirect("/home");

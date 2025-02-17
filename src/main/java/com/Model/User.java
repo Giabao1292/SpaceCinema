@@ -53,6 +53,15 @@ public class User {
         }
         return false;
     }
+    
+    public static boolean isManager(List<Role> role) {
+        for (Role tmp : role) {
+            if (tmp.getCode().equals("MANAGER")) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public String getEmail() {
         return email;

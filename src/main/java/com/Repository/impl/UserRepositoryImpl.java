@@ -145,16 +145,10 @@ public class UserRepositoryImpl implements UserRepository {
 
     public List<User> showInfoUsers() {
         List<User> users = new ArrayList<>();
-        String sql = "SELECT \n"
-                + " u.user_id, \n"
-                + "    u.username, \n"
-                + "    u.fullname, \n"
-                + "    u.phone, \n"
-                + "    u.email, \n"
-                + "    r.code AS role\n"
+        String sql = "SELECT u.* " 
                 + "FROM user u\n"
                 + "JOIN user_role ur ON u.user_id = ur.user_id\n"
-                + "JOIN role r ON ur.role_id = r.role_id GROUP BY u.user_id, u.username, u.fullname, u.phone, u.email, r.code;";
+                + "JOIN role r ON ur.role_id = r.role_id GROUP BY u.*";
         try (Connection con = GetConnection.getConnection(); PreparedStatement st = con.prepareStatement(sql)) {
             try (ResultSet rs = st.executeQuery(sql)) {
                 while (rs.next()) {
