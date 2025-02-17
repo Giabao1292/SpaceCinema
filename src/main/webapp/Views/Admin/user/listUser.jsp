@@ -24,47 +24,49 @@
                 <table id="datatablesSimple">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Address</th>
+                            <th>UserName</th>
+                            <th>FullName</th>
                             <th>Manager name</th>
                             <th>Phone number</th>
-                            <th>Number of basements</th>
-                            <th>Floor area</th>
-                            <th>Rent area</th>
-                            <th>Commission($)</th>
+                            <th>Email</th>
                             <th>Console</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Tiger Nixon</td>
-                            <td>System Architect</td>
-                            <td>Edinburgh</td>
-                            <td>61</td>
-                            <td>2011/04/25</td>
-                            <td>$320,800</td>
-                            <td>Something</td>
-                            <td>$320,800</td>
-                            <td>
-                                <a href = "/admin-home/user?action=delete">
-                                    <button
-                                        type="submit"
-                                        class="bg-danger border-0 rounded"
-                                        >
-                                        <i class="fa-solid fa-delete-left"></i>
-                                    </button>
-                                </a>
-                                <a href = "/admin-home/user?action=update">
-                                    <button
-                                        type="submit"
-                                        class="bg-primary border-0 rounded"
-                                        >
-                                        <i class="fa-regular fa-pen-to-square"></i>
-                                    </button>
-                                </a>
-                            </td>
-                        </tr>
+                        <c:forEach var="u" items="${users}">
+                            <tr>
+                                <td>${u.userName}</td>
+                                <td>${u.fullName}</td>
+                                <td>${u.phone}</td>
+                                <td>${u.email}</td>
+                                <td>
+                                    <c:forEach var="r" items="${u.role}" varStatus = "status">
+                                        ${r.name}
+                                        <c:if test = "${!status.last}">, </c:if>
+                                    </c:forEach>
+                                </td>
+                                <td>
+                                    <a href = "/admin-home/user?action=delete">
+                                        <button
+                                            type="submit"
+                                            class="bg-danger border-0 rounded"
+                                            >
+                                            <i class="fa-solid fa-delete-left"></i>
+                                        </button>
+                                    </a>
+                                    <a href = "/admin-home/user?action=update">
+                                        <button
+                                            type="submit"
+                                            class="bg-primary border-0 rounded"
+                                            >
+                                            <i class="fa-regular fa-pen-to-square"></i>
+                                        </button>
+                                    </a>
+                                </td>
+                            </tr>
+                        </c:forEach>
                     </tbody>
+
                 </table>
                 <a href="/admin-home/user?action=create"
                    ><button type="submit" class="btn btn-success">

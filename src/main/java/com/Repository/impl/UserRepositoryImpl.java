@@ -23,18 +23,18 @@ import java.util.logging.Logger;
  * @author lebao
  */
 public class UserRepositoryImpl implements UserRepository {
-    
+
     public void joinTable(StringBuilder sql) {
         sql.append("SELECT u.*, r.code as code FROM user u ");
         sql.append("JOIN user_role ur ON u.user_id = ur.user_id ");
         sql.append("JOIN role r on r.role_id = ur.role_id ");
     }
-    
+
     public void queryNormal(StringBuilder sql, String username, String password) {
         sql.append("WHERE u.status = 1 AND username = '" + username + "'");
         sql.append(" AND password = '" + password + "'");
     }
-    
+
     @Override
     public User findUserByNameAndPassword(String username, String password) {
         StringBuilder sql = new StringBuilder("");
@@ -65,7 +65,7 @@ public class UserRepositoryImpl implements UserRepository {
         }
         return userRes;
     }
-    
+
     @Override
     public boolean checkEmail(String email) {
         String sql = "Select u.email from user u where u.email = '" + email + "'";
@@ -81,7 +81,7 @@ public class UserRepositoryImpl implements UserRepository {
         }
         return false;
     }
-    
+
     @Override
     public boolean checkPhone(String phone) {
         String sql = "Select u.phone from user u where u.phone = '" + phone + "'";
@@ -97,7 +97,7 @@ public class UserRepositoryImpl implements UserRepository {
         }
         return false;
     }
-    
+
     @Override
     public boolean checkUserName(String userName) {
         String sql = "Select u.username from user u where u.username = '" + userName + "'";
@@ -113,14 +113,14 @@ public class UserRepositoryImpl implements UserRepository {
         }
         return false;
     }
-    
+
     @Override
     public String createUser(User user) {
         StringBuilder sql = new StringBuilder("INSERT INTO user (userName, fullName, passWord, email, phone, status) \n"
                 + " VALUES (?, ?, ?, ?, ?, ?)");
         try (Connection con = GetConnection.getConnection(); PreparedStatement st = con.prepareStatement(sql.toString(), PreparedStatement.RETURN_GENERATED_KEYS)) {
             st.setString(1, user.getUserName());
-            st.setString(2, user.getFullName());  
+            st.setString(2, user.getFullName());
             st.setString(3, user.getPassWord());
             st.setString(4, user.getEmail());
             st.setString(5, user.getPhone());
@@ -141,5 +141,38 @@ public class UserRepositoryImpl implements UserRepository {
             System.out.println("Error in createUser");
         }
         return "Đăng ký thành công!";
+    }
+
+    public List<User> showInfoUsers() {
+        List<User> users = new ArrayList<>();
+        String sql = "SELECT u.* " 
+                + "FROM user u\n"
+                + "JOIN user_role ur ON u.user_id = ur.user_id\n"
+                + "JOIN role r ON ur.role_id = r.role_id GROUP BY u.*";
+        try (Connection con = GetConnection.getConnection(); PreparedStatement st = con.prepareStatement(sql)) {
+            try (ResultSet rs = st.executeQuery(sql)) {
+                while (rs.next()) {
+                    User user = new User();
+                    user.setFullName(rs.getString("fullname"));
+                    user.setUserName(rs.getString("username"));
+                    user.setPhone(rs.getString("phone"));
+                    user.setEmail(rs.getString("email"));
+                    String sqlRole = "Select * from role r JOIN user_role ur ON ur.role_id = r.role_id WHERE ur.user_id = " + rs.getInt("user_id");
+                    Statement stRole = con.createStatement();
+                    List<Role> roles = new ArrayList<>();
+                    ResultSet rsRoles = stRole.executeQuery(sqlRole);
+                    while(rsRoles.next()){
+                        Role roleTmp = new Role();
+                        roleTmp.setName(rsRoles.getString("name"));
+                        roles.add(roleTmp);
+                    }
+                    user.setRole(roles);
+                    users.add(user);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return users;
     }
 }

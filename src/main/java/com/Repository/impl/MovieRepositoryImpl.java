@@ -11,10 +11,12 @@ import com.Model.Movie;
 import com.Repository.MovieRepository;
 import jakarta.ws.rs.client.RxInvoker;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
@@ -131,4 +133,25 @@ public class MovieRepositoryImpl implements MovieRepository {
         }
         return movies;
     }
+
+    @Override
+    public Movie findMovieById(int id) {
+        String sql = "select * from movie where movie_id = ?";
+        try (Connection connection = GetConnection.getConnection()) {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery(sql);
+            if (rs.next()) {
+                return new Movie(rs.getString("title"), rs.getString("trailer_link"), rs.getString("age_rating"), rs.getString("header_image"), rs.getString("discription"), rs.getString("synopsis"), rs.getInt("runtime_min"), rs.getDate("release_date"), rs.getInt("directorId"), rs.getInt("genreId"), rs.getInt("castId"), rs.getString("statusId"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+//     public Movie(String title, String trailer_link, String age_rating, String header_image, String discription, String synopsis, Integer runtime_min, Date release_date, Integer directorId, Integer genreId, Integer castId, String statusId) {
+
+
+    
+
 }
