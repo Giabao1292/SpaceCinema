@@ -25,9 +25,7 @@ import java.util.logging.Logger;
 public class UserRepositoryImpl implements UserRepository {
 
     public void joinTable(StringBuilder sql) {
-        sql.append("SELECT u.*, r.code as code FROM user u ");
-        sql.append("JOIN user_role ur ON u.user_id = ur.user_id ");
-        sql.append("JOIN role r on r.role_id = ur.role_id ");
+        sql.append("SELECT u.* FROM user u ");
     }
 
     public void queryNormal(StringBuilder sql, String username, String password) {
@@ -40,30 +38,29 @@ public class UserRepositoryImpl implements UserRepository {
         StringBuilder sql = new StringBuilder("");
         joinTable(sql);
         queryNormal(sql, username, password);
-        User userRes = new User();
+        User user = new User();
         try (Connection connection = GetConnection.getConnection()) {
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(sql.toString());
             while (rs.next()) {
-                User user = new User();
                 user.setFullName(rs.getString("fullname"));
                 user.setUserName(rs.getString("username"));
                 user.setPassWord(rs.getString("password"));
+                String sqlRole = "Select * from role r JOIN user_role ur ON ur.role_id = r.role_id WHERE ur.user_id = " + rs.getInt("user_id");
+                Statement stRole = connection.createStatement();
                 List<Role> roles = new ArrayList<>();
-                Role tmp = new Role();
-                tmp.setCode(rs.getString("code"));
-                roles.add(tmp);
-                while (rs.next()) {
-                    tmp.setCode(rs.getString("code"));
-                    roles.add(tmp);
+                ResultSet rsRoles = stRole.executeQuery(sqlRole);
+                while (rsRoles.next()) {
+                    Role roleTmp = new Role();
+                    roleTmp.setCode(rsRoles.getString("code"));
+                    roles.add(roleTmp);
                 }
                 user.setRole(roles);
-                userRes = user;
             }
         } catch (Exception e) {
             System.out.println("Error find user");
         }
-        return userRes;
+        return user;
     }
 
     @Override
@@ -145,10 +142,8 @@ public class UserRepositoryImpl implements UserRepository {
 
     public List<User> showInfoUsers() {
         List<User> users = new ArrayList<>();
-        String sql = "SELECT u.* " 
-                + "FROM user u\n"
-                + "JOIN user_role ur ON u.user_id = ur.user_id\n"
-                + "JOIN role r ON ur.role_id = r.role_id GROUP BY u.*";
+        String sql = "SELECT u.* "
+                + "FROM user u\n";
         try (Connection con = GetConnection.getConnection(); PreparedStatement st = con.prepareStatement(sql)) {
             try (ResultSet rs = st.executeQuery(sql)) {
                 while (rs.next()) {
@@ -161,7 +156,7 @@ public class UserRepositoryImpl implements UserRepository {
                     Statement stRole = con.createStatement();
                     List<Role> roles = new ArrayList<>();
                     ResultSet rsRoles = stRole.executeQuery(sqlRole);
-                    while(rsRoles.next()){
+                    while (rsRoles.next()) {
                         Role roleTmp = new Role();
                         roleTmp.setName(rsRoles.getString("name"));
                         roles.add(roleTmp);
