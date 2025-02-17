@@ -25,7 +25,7 @@ import java.util.logging.Logger;
 public class UserRepositoryImpl implements UserRepository {
     
     public void joinTable(StringBuilder sql) {
-        sql.append("SELECT u.fullname as fullname, u.username as username, u.password as password, r.code as code FROM user u ");
+        sql.append("SELECT u.*, r.code as code FROM user u ");
         sql.append("JOIN user_role ur ON u.user_id = ur.user_id ");
         sql.append("JOIN role r on r.role_id = ur.role_id ");
     }
