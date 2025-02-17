@@ -31,16 +31,13 @@
                             <th>Number of basements</th>
                             <th>Floor area</th>
                             <th>Rent area</th>
-                            <th>Commission($)</th>
-                            <th>Console</th>
+                            <td>Edinburgh</td>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>Tiger Nixon</td>
                             <td>System Architect</td>
-                            <td>Edinburgh</td>
-                            <td>61</td>
                             <td>2011/04/25</td>
                             <td>$320,800</td>
                             <td>Something</td>
@@ -64,7 +61,39 @@
                                 </a>
                             </td>
                         </tr>
+                        <c:forEach var="u" items="${requestScope.users}">
+                            <tr>
+                            <td>${u.username}</td>
+                            <td>${u.fullname}</td>
+                            <td>${u.phone}</td>
+                            <td>${u.email}</td>
+                            <td>
+                                <c:forEach var="r" items="u.role">
+                                    ${r.name}
+                                </c:forEach>
+                            </td>
+                            <td>
+                                <a href = "/admin-home/user?action=delete">
+                                    <button
+                                        type="submit"
+                                        class="bg-danger border-0 rounded"
+                                        >
+                                        <i class="fa-solid fa-delete-left"></i>
+                                    </button>
+                                </a>
+                                <a href = "/admin-home/user?action=update">
+                                    <button
+                                        type="submit"
+                                        class="bg-primary border-0 rounded"
+                                        >
+                                        <i class="fa-regular fa-pen-to-square"></i>
+                                    </button>
+                                </a>
+                            </td>
+                        </tr>
+                        </c:forEach>
                     </tbody>
+                    
                 </table>
                 <a href="/admin-home/user?action=create"
                    ><button type="submit" class="btn btn-success">
