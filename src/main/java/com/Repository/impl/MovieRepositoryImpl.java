@@ -153,5 +153,45 @@ public class MovieRepositoryImpl implements MovieRepository {
 
 
     
+    @Override
+    public MovieResponse findMovieByName(String name) {
+        MovieResponse movie = new MovieResponse();
+        try (Connection connection = GetConnection.getConnection()) {
+            String sql = "SELECT * FROM movie m JOIN director d ON d.director_id = m.director_id JOIN movie_status s ON s.status_id = m.status_id WHERE m.name = '" + name + "'";
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(sql.toString());
+            while (rs.next()) {
+                movie.setTitle(rs.getString("title"));
+                movie.setTrailer_link(rs.getString("trailer_link"));
+                movie.setRuntime_min(rs.getInt("runtime_min"));
+                movie.setHeader_image(rs.getString("header_image"));
+                movie.setAge_rating(rs.getString("age_rating"));
+                movie.setDescription(rs.getString("description"));
+                movie.setDirector(rs.getString("director_name"));
+                movie.setStatus(rs.getString("status_name"));
+                movie.setRelease_date(rs.getString("release_date"));
+                movie.setSynopsis(rs.getString("synopsis"));
+                Statement stgenre = connection.createStatement();
+                ResultSet rsgenre = stgenre.executeQuery("Select * from genre g JOIN "
+                        + "movie_genre mg ON mg.genre_id = g.genre_id WHERE movie_id = " + rs.getString("movie_id"));
+                List<String> genres = new ArrayList<String>();
+                while (rsgenre.next()) {
+                    genres.add(rsgenre.getString("genre_name"));
+                }
+                Statement stcast = connection.createStatement();
+                ResultSet rscast = stgenre.executeQuery("Select * from cast_member c JOIN "
+                        + "movie_cast mc ON mc.cast_id = c.cast_id WHERE movie_id = " + rs.getString("movie_id"));
+                List<String> casts = new ArrayList<String>();
+                while (rscast.next()) {
+                    casts.add(rscast.getString("cast_name"));
+                }
+                movie.setCast(casts);
+                movie.setGenre(genres);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return movie;
+    }
 
 }

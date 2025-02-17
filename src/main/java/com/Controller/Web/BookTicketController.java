@@ -4,15 +4,16 @@
  */
 package com.Controller.Web;
 
+import com.DTO.Response.MovieResponse;
 import com.Repository.MovieRepository;
 import com.Repository.impl.MovieRepositoryImpl;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  *
@@ -30,10 +31,12 @@ public class BookTicketController extends HttpServlet {
         String movie = request.getParameter("movie");
         String date = request.getParameter("date");
         String time = request.getParameter("time");
-        if (movie == null || movie == "") {
-            
+        if (movie == null || movie == "" || movie.equalsIgnoreCase("undefined")) {
+            List<MovieResponse> movies = movieRepository.findMovieByCinema(cinema);
+            request.setAttribute("movieCinema", movies);
         } else {
-
+            MovieResponse movieResponse = movieRepository.findMovieByName(movie);
+            request.setAttribute("movieCinema", movie);
         }
         request.getRequestDispatcher("/views/web/ticket.jsp").forward(request, response);
     }
