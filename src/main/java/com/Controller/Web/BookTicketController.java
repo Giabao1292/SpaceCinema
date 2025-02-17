@@ -36,7 +36,9 @@ public class BookTicketController extends HttpServlet {
             request.setAttribute("movieCinema", movies);
         } else {
             MovieResponse movieResponse = movieRepository.findMovieByName(movie);
-            request.setAttribute("movieCinema", movie);
+            request.setAttribute("movie", movieResponse);
+            request.getRequestDispatcher("/views/web/booking.jsp").forward(request, response);
+            return;
         }
         request.getRequestDispatcher("/views/web/ticket.jsp").forward(request, response);
     }
