@@ -46,7 +46,7 @@
                                     </c:forEach>
                                 </td>
                                 <td>
-                                    <a href = "/admin-home/user?action=delete">
+                                    <a href = "/admin-home/user?action=delete" class = "text-decoration-none">
                                         <button
                                             type="submit"
                                             class="bg-danger border-0 rounded"
@@ -54,7 +54,7 @@
                                             <i class="fa-solid fa-delete-left"></i>
                                         </button>
                                     </a>
-                                    <a href = "/admin-home/user?action=update">
+                                    <a href = "/admin-home/user?action=update" class = "text-decoration-none">
                                         <button
                                             type="submit"
                                             class="bg-primary border-0 rounded"
