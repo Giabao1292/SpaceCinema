@@ -157,7 +157,7 @@ public class MovieRepositoryImpl implements MovieRepository {
     public MovieResponse findMovieByName(String name) {
         MovieResponse movie = new MovieResponse();
         try (Connection connection = GetConnection.getConnection()) {
-            String sql = "SELECT * FROM movie m JOIN director d ON d.director_id = m.director_id JOIN movie_status s ON s.status_id = m.status_id WHERE m.name = '" + name + "'";
+            String sql = "SELECT * FROM movie m JOIN director d ON d.director_id = m.director_id JOIN movie_status s ON s.status_id = m.status_id WHERE m.title = '" + name + "'";
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(sql.toString());
             while (rs.next()) {

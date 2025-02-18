@@ -7,10 +7,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file = "/common/taglib.jsp" %>
 <!DOCTYPE html>
-<main>
-    <!-- Gallery Section -->
+<main class="main">
     <section id="gallery" class="gallery section">
-        <div class="container-fluid" data-aos="fade-up" data-aos-delay="100">
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
             <div class="row gy-4 justify-content-center">
                 <div class="col-xl-5" style="margin-bottom: 4rem">
                     <div class="gallery-item h-100">
@@ -22,7 +21,7 @@
                     </div>
                 </div>
                 <div class="col-xl-7 fs-5" style="margin-bottom: 4rem">
-                    <h4>${movie.title}</h4>
+                    <h1>${movie.title}</h1>
                     <div class="d-flex">
                         <div>
                             <i class="fa-solid fa-tag text-warning"></i>
@@ -53,11 +52,16 @@
                     <div class="me-3 mt-2">
                         <h3>Description</h3>
                         <div>${movie.description}</div>
-                        <div>${movie.release_date}</div>
+                        <div>Release Date : ${movie.release_date}</div>
+                        <span>Actor :</span>
+                        <c:forEach items = "${movie.cast}" var = "c" varStatus = "statusCast">
+                            <span>${c}</span>
+                            <c:if test = "${!statusCast.last}">, </c:if>
+                        </c:forEach>
                     </div>
                     <div class="me-3 mt-2">
                         <h3>Content</h3>
-                        <div>${movie.synopsis}</div>
+                        <div>${movie.synopsis}${movie.synopsis}${movie.synopsis}${movie.synopsis}${movie.synopsis}${movie.synopsis}${movie.synopsis}</div>
                     </div>
                     <div class="d-flex justify-content-between">
                         <a
