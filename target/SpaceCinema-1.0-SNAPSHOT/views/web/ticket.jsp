@@ -58,11 +58,6 @@
                         <i class="fa-solid fa-bullhorn text-warning"></i> ${movie.director}
                     </div>
                 </div>
-
-                <!-- End Gallery Item -->
-
-
-                <!-- End Gallery Item -->
             </div>
         </div>
     </section>
