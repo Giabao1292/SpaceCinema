@@ -16,7 +16,7 @@
         class="container position-relative d-flex align-items-center justify-content-between"
         >
         <a
-            href="index.html"
+            href="/home"
             class="logo d-flex align-items-center me-auto me-xl-0"
             >
             <!-- Uncomment the line below if you also wish to use an image logo -->

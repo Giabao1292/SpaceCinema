@@ -63,18 +63,24 @@
                         <h3>Content</h3>
                         <div>${movie.synopsis}${movie.synopsis}${movie.synopsis}${movie.synopsis}${movie.synopsis}${movie.synopsis}${movie.synopsis}</div>
                     </div>
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-between h1">
                         <a
                             href="${movie.trailer_link}"
                             class="logo d-flex glightbox align-items-center me-auto me-xl-0"
                             >
-                            <i class="fs-5 fa-regular fa-circle-play"></i>
-                            <h class="ms-1 fs-5 text-white border-bottom border-secondary"
-                               >Watch trailer</h
+                            <i class="fs-2 fa-regular fa-circle-play"></i>
+                            <h2 class="ms-1 text-white border-bottom border-secondary"
+                                >Watch trailer</h2
                             >
                         </a>
                     </div>
                 </div>
+            </div>
+            <div class="row gy-4 justify-content-center text-center">
+                <h1>Showing time</h1>
+                <c:forEach>
+                    <button></button>
+                </c:forEach>
             </div>
         </div>
     </section>

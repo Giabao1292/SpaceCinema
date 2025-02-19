@@ -8,7 +8,7 @@
 <%@include file = "/common/taglib.jsp" %>
 <!DOCTYPE html>
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-    <a class="navbar-brand ps-3" href="index.html">Space Cinema</a>
+    <a class="navbar-brand ps-3 fs-3" href="/home"> <i class="fa-solid fa-film"></i>Space Cinema</a>
 
     <button
         class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0"
@@ -40,7 +40,7 @@
                 <li><a class="dropdown-item" href="#!">Settings</a></li>
                 <li><a class="dropdown-item" href="#!">Activity Log</a></li>
                 <li><hr class="dropdown-divider" /></li>
-                <li><a class="dropdown-item" href="#!">Logout</a></li>
+                <li><a class="dropdown-item" href="/logout?action=logout">Logout</a></li>
             </ul>
         </li>
     </ul>
