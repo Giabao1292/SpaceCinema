@@ -37,17 +37,17 @@
                     >
                 </li>
                 <li class="dropdown">
-                    <a href="gallery.html"
+                    <a href ="#"
                        ><span>Cinema</span>
                         <i class="bi bi-chevron-down toggle-dropdown"></i>
                     </a>
                     <ul>
-                        <li><a href="gallery.html">Nature</a></li>
-                        <li><a href="gallery.html">People</a></li>
-                        <li><a href="gallery.html">Architecture</a></li>
-                        <li><a href="gallery.html">Animals</a></li>
-                        <li><a href="gallery.html">Sports</a></li>
-                        <li><a href="gallery.html">Travel</a></li>
+                        <c:forEach var = "cinema" items="${listCinema}">
+                            <li>
+                                <a class="dropdown-item pe-auto" href ="/book-ticket?cinema=${cinema.name}" data-cinema="${cinema.name}"><i class="bi bi-geo-alt-fill"></i> ${cinema.name}
+                                </a>
+                            </li>
+                        </c:forEach>
                     </ul>
                 </li>
                 <li><a href="/news">News</a></li>

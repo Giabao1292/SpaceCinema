@@ -63,7 +63,6 @@ public class HomeController extends HttpServlet {
             String date = request.getParameter("date");
             String time = request.getParameter("time");
             PrintWriter out = response.getWriter();
-            request.setAttribute("listCinema", cinemaRepository.findAll());
             if (time != null && time != "") {
                 request.setAttribute("time", time);
                 return;

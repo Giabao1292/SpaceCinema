@@ -151,8 +151,6 @@ public class MovieRepositoryImpl implements MovieRepository {
     }
 //     public Movie(String title, String trailer_link, String age_rating, String header_image, String discription, String synopsis, Integer runtime_min, Date release_date, Integer directorId, Integer genreId, Integer castId, String statusId) {
 
-
-    
     @Override
     public MovieResponse findMovieByName(String name) {
         MovieResponse movie = new MovieResponse();
@@ -185,8 +183,21 @@ public class MovieRepositoryImpl implements MovieRepository {
                 while (rscast.next()) {
                     casts.add(rscast.getString("cast_name"));
                 }
+                HashMap<String, List<String>> times = new HashMap<>();
+                Statement stTime = connection.createStatement();
+                ResultSet rsTime = stTime.executeQuery("SELECT t.*, st.showing_datetime as datetime FROM time_detail t JOIN showing_time st ON st.time_id = t.showing_time_id WHERE st.movie_id = " + rs.getInt("movie_id"));
+                while (rsTime.next()) {
+                    String date = Format.Date(rsTime.getDate("datetime"));
+                    if (times.get(date) == null) {
+                        times.put(date, new ArrayList<>());
+                        times.get(date).add(rsTime.getString("timedetail"));
+                    } else {
+                        times.get(date).add(rsTime.getString("timedetail"));
+                    }
+                }
                 movie.setCast(casts);
                 movie.setGenre(genres);
+                movie.setTimes(times);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();

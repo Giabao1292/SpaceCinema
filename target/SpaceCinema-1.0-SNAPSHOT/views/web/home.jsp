@@ -188,7 +188,6 @@
 <script>
     $(document).ready(function () {
         $(document).on("click", ".dropdown-item", function (event) {
-            event.preventDefault();
             var cinema = $(this).data("cinema");
             var movie = $(this).data("movie");
             var date = $(this).data("date");
@@ -206,7 +205,6 @@
                 success: function (response) {
                     if (time != null && time != "") {
                         $("#showtimeDropdown").text(time);
-                        console.log(time);
                     } else if (date != null && date != "") {
                         document.getElementById("showtimeDropdown").disabled = false;
                         $("#dateDropdown").text(date);
@@ -216,7 +214,7 @@
                         document.getElementById("dateDropdown").disabled = false;
                         document.getElementById("showtimeDropdown").disabled = true;
                         $("#movieDropdown").text(movie);
-                         $("#dateDropdown").text("3. Chọn Ngày");
+                        $("#dateDropdown").text("3. Chọn Ngày");
                         $("#showtimeDropdown").text("4. Chọn Suất");
                         $("#date").html(response);
                     } else if (cinema != null && cinema != "") {
@@ -229,7 +227,7 @@
                         $("#showtimeDropdown").text("4. Chọn Suất");
                         $("#movie").html(response);
                     }
-                    $(".booking").attr("href", "/book-ticket?cinema=" +cinema + "&movie=" + movie + "&date=" + date + "&time=" + time);
+                    $(".booking").attr("href", "/book-ticket?cinema=" + cinema + "&movie=" + movie + "&date=" + date + "&time=" + time);
 
                 },
                 error: function (xhr) {
