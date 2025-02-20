@@ -826,11 +826,11 @@ section,
 }
 
 
-.
+.btn-transparent
 {
     width:80%;
-    background-color: transparent;  Nút trong suốt 
-    color: #ffffff;;  Màu chữ của nút 
+    background-color: transparent;
+    color: #ffffff;
     transition: background-color 0.3s, color 0.3s;
 }
 

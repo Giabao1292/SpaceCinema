@@ -16,7 +16,7 @@
                     <div class="sb-nav-link-icon">
                         <i class="fas fa-house"></i>
                     </div>
-                    Trang chủ
+                    Home
                 </a>
                 <div class="sb-sidenav-menu-heading">Interface</div>
                 <a class="nav-link" href="/admin-home/movie">
@@ -36,7 +36,7 @@
                         <div class="sb-nav-link-icon">
                             <i class="fas fa-user"></i>
                         </div>
-                        Manager
+                        User
                     </a>
                 </c:if>
             </div>
