@@ -13,6 +13,7 @@
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Repository/UserRepository.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Controller/Web/PromotionController.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Config/Format.java
+/Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Utils/CinemaContextListener.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Controller/Web/BookTicketController.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Controller/Admin/UserController.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Controller/Web/RegisterController.java
