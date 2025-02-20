@@ -52,14 +52,14 @@
 
                         <div class = "fs-4">${movieitem.title}</div>
                         <div class="d-flex justify-content-between">
-                            <a
+                            <a 
                                 href="${movieitem.trailer_link}"
                                 class="logo d-flex glightbox align-items-center me-auto me-xl-0"
                                 >
                                 <i class="fs-5 fa-regular fa-circle-play"></i>
                                 <h class="ms-1 fs-5 text-white border-bottom border-secondary"
                                    >Watch trailer</h
-                                >
+                                >                                        
                             </a>
                             <a class="btn btn-warning px-4 py-2" href="#">Booking now</a>
                         </div>

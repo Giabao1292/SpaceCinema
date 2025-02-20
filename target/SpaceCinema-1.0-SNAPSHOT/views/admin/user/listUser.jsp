@@ -26,9 +26,9 @@
                         <tr>
                             <th>UserName</th>
                             <th>FullName</th>
-                            <th>Manager name</th>
-                            <th>Phone number</th>
+                            <th>Phone</th>
                             <th>Email</th>
+                            <th>Role</th>
                             <th>Console</th>
                         </tr>
                     </thead>

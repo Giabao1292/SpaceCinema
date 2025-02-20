@@ -33,7 +33,7 @@ public class UserController extends HttpServlet {
         }
         switch (action) {
             case "create":
-                response.sendRedirect("views/admin/user/listUser.jsp");
+                request.getRequestDispatcher("/views/admin/user/createUser.jsp").forward(request, response);
                 break;
             case "update":
                 goUpdateUser(request, response);

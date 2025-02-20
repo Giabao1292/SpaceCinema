@@ -170,4 +170,8 @@ public class UserRepositoryImpl implements UserRepository {
         }
         return users;
     }
+    
+    public void deleteUser(int id) {
+        String sql = "";
+    }
 }
