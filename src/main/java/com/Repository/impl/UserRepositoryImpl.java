@@ -148,10 +148,12 @@ public class UserRepositoryImpl implements UserRepository {
             try (ResultSet rs = st.executeQuery(sql)) {
                 while (rs.next()) {
                     User user = new User();
+                    user.setId(rs.getInt("user_id"));
                     user.setFullName(rs.getString("fullname"));
                     user.setUserName(rs.getString("username"));
                     user.setPhone(rs.getString("phone"));
                     user.setEmail(rs.getString("email"));
+                    user.setStatus(rs.getInt("status"));
                     String sqlRole = "Select * from role r JOIN user_role ur ON ur.role_id = r.role_id WHERE ur.user_id = " + rs.getInt("user_id");
                     Statement stRole = con.createStatement();
                     List<Role> roles = new ArrayList<>();
@@ -170,8 +172,43 @@ public class UserRepositoryImpl implements UserRepository {
         }
         return users;
     }
-    
+
     public void deleteUser(int id) {
         String sql = "";
+    }
+
+    public void insertRoleManagerByUserId(int id) {
+        String sql = "INSERT INTO user_role (role_id, user_id)\n"
+                + "VALUES (3, ?);";
+        try (Connection con = GetConnection.getConnection(); PreparedStatement st = con.prepareStatement(sql)) {
+            st.setInt(1, id);
+            st.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteRoleManagerByUserId(int id) {
+        String sql = "DELETE FROM user_role WHERE role_id = 3 AND user_id = ?";
+        try (Connection con = GetConnection.getConnection(); PreparedStatement st = con.prepareStatement(sql)) {
+            st.setInt(1, id);
+            st.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void updateStatusByUserId(int id, int status) {
+        String sql = "UPDATE user SET status = ? WHERE user_id = ?";
+        try (Connection con = GetConnection.getConnection(); PreparedStatement st = con.prepareStatement(sql)) {
+            st.setInt(1, status);
+            st.setInt(2, id);
+            st.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
     }
 }

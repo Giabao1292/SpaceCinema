@@ -41,7 +41,7 @@ public class MovieController extends HttpServlet {
 //                goListMovie(request, response);
         }
         //Action
-
+        request.getRequestDispatcher("/views/admin/movie/listMovie.jsp").forward(request, response);
     }
 
     @Override
