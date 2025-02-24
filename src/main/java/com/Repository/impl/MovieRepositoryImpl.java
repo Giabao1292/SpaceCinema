@@ -112,7 +112,7 @@ public class MovieRepositoryImpl implements MovieRepository {
                     }
                     HashMap<String, List<String>> times = new HashMap<>();
                     Statement stTime = connection.createStatement();
-                    ResultSet rsTime = stTime.executeQuery("SELECT t.*, st.showing_datetime as datetime FROM time_detail t JOIN showing_time st ON st.time_id = t.showing_time_id WHERE st.movie_id = " + rs.getInt("movie_id"));
+                    ResultSet rsTime = stTime.executeQuery("SELECT t.*, st.showing_datetime as datetime FROM time_detail t JOIN showing_time st ON st.time_id = t.showing_time_id WHERE st.movie_id = " + rs.getInt("movie_id") + " ORDER BY st.showing_datetime ASC, t.timedetail ASC");
                     while (rsTime.next()) {
                         String date = Format.Date(rsTime.getDate("datetime"));
                         if (times.get(date) == null) {
@@ -185,7 +185,7 @@ public class MovieRepositoryImpl implements MovieRepository {
                 }
                 HashMap<String, List<String>> times = new HashMap<>();
                 Statement stTime = connection.createStatement();
-                ResultSet rsTime = stTime.executeQuery("SELECT t.*, st.showing_datetime as datetime FROM time_detail t JOIN showing_time st ON st.time_id = t.showing_time_id WHERE st.movie_id = " + rs.getInt("movie_id"));
+                ResultSet rsTime = stTime.executeQuery("SELECT t.*, st.showing_datetime as datetime FROM time_detail t JOIN showing_time st ON st.time_id = t.showing_time_id WHERE st.movie_id = " + rs.getInt("movie_id") + " ORDER BY st.showing_datetime ASC, t.timedetail ASC");
                 while (rsTime.next()) {
                     String date = Format.Date(rsTime.getDate("datetime"));
                     if (times.get(date) == null) {

@@ -35,7 +35,8 @@ public class BookTicketController extends HttpServlet {
         if (movie == null || movie == "" || movie.equalsIgnoreCase("undefined")) {
             List<MovieResponse> movies = movieRepository.findMovieByCinema(cinema);
             request.setAttribute("movieCinema", movies);
-        } else {
+        }
+        else {
             MovieResponse movieResponse = movieRepository.findMovieByName(movie);
             request.setAttribute("movie", movieResponse);
             request.getRequestDispatcher("/views/web/booking.jsp").forward(request, response);
@@ -47,6 +48,7 @@ public class BookTicketController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
     }
 
 }

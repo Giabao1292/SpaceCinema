@@ -127,10 +127,4 @@ public class HomeController extends HttpServlet {
         }
         response.sendRedirect("/login?action=login&status=fail");
     }
-
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }
