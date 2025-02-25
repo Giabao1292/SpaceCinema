@@ -46,7 +46,7 @@
                             <td>Something</td>
                             <td>$320,800</td>
                             <td>
-                                <a href = "/admin-home/popcorn?action=delete">
+                                <a href = "/admin-home/popcorn?action=delete" class = "text-decoration-none">
                                     <button
                                         type="submit"
                                         class="bg-danger border-0 rounded"
@@ -54,7 +54,7 @@
                                         <i class="fa-solid fa-delete-left"></i>
                                     </button>
                                 </a>
-                                <a href = "/admin-home/popcorn?action=update">
+                                <a href = "/admin-home/popcorn?action=update" class = "text-decoration-none">
                                     <button
                                         type="submit"
                                         class="bg-primary border-0 rounded"
