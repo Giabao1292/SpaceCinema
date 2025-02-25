@@ -4,6 +4,7 @@
  */
 package com.Controller.Web;
 
+import com.Config.Format;
 import com.DTO.Response.MovieResponse;
 import com.Repository.MovieRepository;
 import com.Repository.impl.MovieRepositoryImpl;
@@ -13,6 +14,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,13 +36,24 @@ public class BookTicketController extends HttpServlet {
         String movie = request.getParameter("movie");
         String date = request.getParameter("date");
         String time = request.getParameter("time");
+        System.out.println(date);
         request.setAttribute("cinema", cinema);
-        if (movie == null || movie == "" || movie.equalsIgnoreCase("undefined")) {
+        if (movie.equals("null") || movie == "" || movie.equalsIgnoreCase("undefined")) {
             List<MovieResponse> movies = movieRepository.findMovieByCinema(cinema);
             request.setAttribute("movieCinema", movies);
         }
         else {
             MovieResponse movieResponse = movieRepository.findMovieByName(movie);
+            if(date.equals("null") || date == "" || date.equalsIgnoreCase("undefined")) {
+                request.setAttribute("date", movieResponse.getTimes().entrySet().iterator().next().getKey());
+            }
+            else{
+                try {
+                    request.setAttribute("date", Format.Date(Format.fm2.parse(date)));
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
+            }
             request.setAttribute("movie", movieResponse);
             request.getRequestDispatcher("/views/web/booking.jsp").forward(request, response);
             return;
@@ -50,5 +66,4 @@ public class BookTicketController extends HttpServlet {
             throws ServletException, IOException {
 
     }
-
 }

@@ -17,7 +17,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -110,7 +110,7 @@ public class MovieRepositoryImpl implements MovieRepository {
                     while (rscast.next()) {
                         casts.add(rscast.getString("cast_name"));
                     }
-                    HashMap<String, List<String>> times = new HashMap<>();
+                    LinkedHashMap<String, List<String>> times = new LinkedHashMap<>();
                     Statement stTime = connection.createStatement();
                     ResultSet rsTime = stTime.executeQuery("SELECT t.*, st.showing_datetime as datetime FROM time_detail t JOIN showing_time st ON st.time_id = t.showing_time_id WHERE st.movie_id = " + rs.getInt("movie_id") + " ORDER BY st.showing_datetime ASC, t.timedetail ASC");
                     while (rsTime.next()) {
@@ -183,7 +183,7 @@ public class MovieRepositoryImpl implements MovieRepository {
                 while (rscast.next()) {
                     casts.add(rscast.getString("cast_name"));
                 }
-                HashMap<String, List<String>> times = new HashMap<>();
+                LinkedHashMap<String, List<String>> times = new LinkedHashMap<>();
                 Statement stTime = connection.createStatement();
                 ResultSet rsTime = stTime.executeQuery("SELECT t.*, st.showing_datetime as datetime FROM time_detail t JOIN showing_time st ON st.time_id = t.showing_time_id WHERE st.movie_id = " + rs.getInt("movie_id") + " ORDER BY st.showing_datetime ASC, t.timedetail ASC");
                 while (rsTime.next()) {

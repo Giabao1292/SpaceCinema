@@ -4,7 +4,7 @@
  */
 package com.DTO.Response;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
@@ -20,13 +20,13 @@ public class MovieResponse {
     private String director;
     private List<String> genre;
     private List<String> cast;
-    private HashMap<String, List<String>> times;
+    private LinkedHashMap<String, List<String>> times;
     private String status;
 
     public MovieResponse() {
     }
 
-    public MovieResponse(String title, String trailer_link, String age_rating, String header_image, String description, String synopsis, Integer runtime_min, String release_date, String director, List<String> genre, List<String> cast, HashMap<String, List<String>> times, String status) {
+    public MovieResponse(String title, String trailer_link, String age_rating, String header_image, String description, String synopsis, Integer runtime_min, String release_date, String director, List<String> genre, List<String> cast, LinkedHashMap<String, List<String>> times, String status) {
         this.title = title;
         this.trailer_link = trailer_link;
         this.age_rating = age_rating;
@@ -130,11 +130,11 @@ public class MovieResponse {
         this.cast = cast;
     }
 
-    public HashMap<String, List<String>> getTimes() {
+    public LinkedHashMap<String, List<String>> getTimes() {
         return times;
     }
 
-    public void setTimes(HashMap<String, List<String>> times) {
+    public void setTimes(LinkedHashMap<String, List<String>> times) {
         this.times = times;
     }
 

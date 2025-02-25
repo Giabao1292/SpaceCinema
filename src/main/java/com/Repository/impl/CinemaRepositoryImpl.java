@@ -33,7 +33,7 @@ public class CinemaRepositoryImpl implements CinemaRepository{
         }
         catch(SQLException e){
             e.printStackTrace();
-            System.out.println("Cinema errror");
+            System.out.println("Cinema error");
         }
         return cinemas;
     }
