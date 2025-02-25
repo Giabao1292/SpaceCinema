@@ -9,14 +9,23 @@
 <!DOCTYPE html>
 
 <head>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8574984 (Add tag table)
     <title>JSP Page</title>
 </head>
 
 <main>
     <div class="container-fluid px-4">
         <div class="container mt-4">
+<<<<<<< HEAD
             <h2>Create Movie</h2>
             <form action="/admin-home/movie" method="post">
+=======
+            <h2 class="mb-4 font-monospace">Search Building</h2>
+            <form action = "/admin-home/movie?action=create" method="GET">
+>>>>>>> 8574984 (Add tag table)
                 <div class="row g-3">
                     <!-- Movie Name -->
                     <div class="col-md-4">
@@ -24,6 +33,7 @@
                         <input
                             type="text"
                             class="form-control"
+<<<<<<< HEAD
                             id="title"  
                             name="title"
                             placeholder="Enter movie name"
@@ -58,13 +68,145 @@
                     <!-- Director -->
                     <div class="col-md-4">
                         <label for="director" class="form-label">Director</label>
+=======
+                            id="title"
+                            name="title"
+                            placeholder="Enter movie name"
+                            />
+                    </div>
+
+                    <!-- Director ID -->
+                    <div class="col-md-4">
+                        <label for="director_id" class="form-label">Director</label>
+>>>>>>> 8574984 (Add tag table)
                         <input
                             type="text"
                             class="form-control"
                             id="director"
                             name="director"
                             placeholder="Enter director"
+<<<<<<< HEAD
                             required
+=======
+                            />
+                    </div>
+
+                    <!-- Status ID -->
+                    <div class="col-md-4">
+                        <label for="Status" class="form-label">Status</label>
+                        <select class="form-select" id="Status" name="statusName">
+                            <option value="">Select status</option>
+                            <option value="1">Staff 1</option>
+                            <option value="2">Staff 2</option>
+                            <option value="3">Staff 3</option>
+                        </select>
+                    </div>
+
+                    <!-- Age Rating -->
+                    <div class="col-md-4">
+                        <label for="age_rating" class="form-label"
+                               >Age Rating</label
+                        >
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="age_rating"
+                            name="age_rating"
+                            placeholder="Enter age rating"
+                            />
+                    </div>
+
+                    <!-- Runtime -->
+                    <div class="col-md-4">
+                        <label for="runtime_min" class="form-label">Runtime</label>
+                        <input
+                            type="number"
+                            class="form-control"
+                            id="runtime_min"
+                            name="runtime_min"
+                            placeholder="Enter runtime in minutes"
+                            />
+                    </div>
+
+                    <!-- Release Date -->
+                    <div class="col-md-4">
+                        <label for="release_date" class="form-label"
+                               >Release Date</label
+                        >
+                        <input
+                            type="date"
+                            class="form-control"
+                            id="release_date"
+                            name="release_date"
+                            />
+                    </div>
+
+                    <!-- Trailer Link -->
+                    <div class="col-md-4">
+                        <label for="trailer_link" class="form-label"
+                               >Trailer Link</label
+                        >
+                        <input
+                            type="url"
+                            class="form-control"
+                            id="trailer_link"
+                            name="trailer_link"
+                            placeholder="Enter trailer link"
+                            />
+                    </div>
+
+                    <!-- Banner Text -->
+                    <div class="col-md-4">
+                        <label for="banner_text" class="form-label"
+                               >Banner Text</label
+                        >
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="banner_text"
+                            name="banner_text"
+                            placeholder="Enter banner text"
+                            />
+                    </div>
+
+                    <!-- Header Image -->
+                    <div class="col-md-4">
+                        <label for="header_image" class="form-label"
+                               >Header Image URL</label
+                        >
+                        <input
+                            type="url"
+                            class="form-control"
+                            id="header_image"
+                            name="header_image"
+                            placeholder="Enter header image URL"
+                            />
+                    </div>
+
+                    <!-- Poster Image -->
+                    <div class="col-md-4">
+                        <label for="poster_image" class="form-label"
+                               >Poster Image URL</label
+                        >
+                        <input
+                            type="url"
+                            class="form-control"
+                            id="poster_image"
+                            name="poster_image"
+                            placeholder="Enter poster image URL"
+                            />
+                    </div>
+
+                    <!-- Cinema -->
+                    <div class="col-md-4">
+                        <label for="cinema" class="form-label">Cinema</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="cinema"
+                            name="cinema"
+                            placeholder="Enter cinema"
+>>>>>>> 8574984 (Add tag table)
                             />
                     </div>
 
@@ -76,8 +218,12 @@
                             class="form-control"
                             id="cast"
                             name="cast"
+<<<<<<< HEAD
                             placeholder="Enter cast"
                             required
+=======
+                            placeholder="Enter cast from cast1,cast2,..."
+>>>>>>> 8574984 (Add tag table)
                             />
                     </div>
 
@@ -89,6 +235,7 @@
                             class="form-control"
                             id="genre"
                             name="genre"
+<<<<<<< HEAD
                             placeholder="Enter genre"
                             required
                             />
@@ -99,6 +246,52 @@
                     <div class="col-md-12 mb-3">
                         <label class="form-label">Available Time Slots</label>
                         <div class="gap-4 form-check d-flex flex-wrap">
+=======
+                            placeholder="Enter genre form genre1,genre2,..."
+                            />
+                    </div>
+
+                    <!-- Runtime -->
+                    <div class="col-md-4">
+                        <label for="runtime" class="form-label">Runtime</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="runtime"
+                            name="runtime"
+                            placeholder="Enter runtime in minutes"
+                            />
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="description" class="form-label"
+                               >Description</label
+                        >
+                        <textarea
+                            class="form-control"
+                            id="description"
+                            name="description"
+                            rows="3"
+                            placeholder="Enter description"
+                            ></textarea>
+                    </div>
+
+                    <!-- Synopsis -->
+                    <div class="col-md-4">
+                        <label for="synopsis" class="form-label">Synopsis</label>
+                        <textarea
+                            class="form-control"
+                            id="synopsis"
+                            name="synopsis"
+                            rows="5"
+                            placeholder="Enter synopsis"
+                            ></textarea>
+                    </div>
+                    <!-- Time Slots (checkboxes) -->
+                    <div class="col-md-12">
+                        <label class="form-label">Available Time Slots</label>
+                        <div class="form-check d-flex flex-wrap gy-4">
+>>>>>>> 8574984 (Add tag table)
                             <!-- Generate checkboxes for every 30 minutes from 7:00 AM to 11:00 PM -->
                             <div class="form-check">
                                 <input
@@ -499,6 +692,7 @@
                         </div>
                     </div>
                 </div>
+<<<<<<< HEAD
                 <div class="row g-3">
 
 
@@ -649,6 +843,13 @@
                 <!-- Submit Button -->
                 <div class="mt-2">
                     <button type="submit" class="btn btn-primary">Create Movie</button>
+=======
+                <!-- Submit Button -->
+                <div class="mt-2">
+                    <button type="submit" class="btn btn-primary">
+                        Create Movie
+                    </button>
+>>>>>>> 8574984 (Add tag table)
                     <button type="reset" class="btn btn-secondary">Reset</button>
                 </div>
             </form>
