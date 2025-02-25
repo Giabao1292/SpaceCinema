@@ -27,19 +27,19 @@ public class MovieController extends HttpServlet {
         if (action == null) {
             action = "";
         }
-        switch (action) {
-            case "create":
-                response.sendRedirect("views/admin/movie/createMovie.jsp");
-                break;
-            case "update":
-                goUpdateMovie(request, response);
-                break;
-            case "delete":
-//                deleteMovie(request, response);
-                break;
-            default:
-//                goListMovie(request, response);
-        }
+//        switch (action) {
+//            case "create":
+//                response.sendRedirect("views/admin/movie/createMovie.jsp");
+//                break;
+//            case "update":
+//                goUpdateMovie(request, response);
+//                break;
+//            case "delete":
+////                deleteMovie(request, response);
+//                break;
+//            default:
+////                goListMovie(request, response);
+//        }
         //Action
         request.getRequestDispatcher("/views/admin/movie/listMovie.jsp").forward(request, response);
     }
