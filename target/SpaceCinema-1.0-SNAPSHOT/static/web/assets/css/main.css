@@ -14,7 +14,8 @@
 :root {
     --default-font: "Roboto", system-ui, -apple-system, "Segoe UI", Roboto,
         "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif,
-        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+        "Noto Color Emoji";
     --heading-font: "Cardo", sans-serif;
     --nav-font: "Inter", sans-serif;
 }
@@ -36,7 +37,7 @@
         255,
         255,
         0.5
-        ); /* The default color of the main navmenu links */
+    ); /* The default color of the main navmenu links */
     --nav-hover-color: #ffffff; /* Applied to main navmenu links when they are hovered over or active */
     --nav-mobile-background-color: #1a1a1a; /* Used as the background color for mobile navigation menu */
     --nav-dropdown-background-color: #1a1a1a; /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
@@ -45,7 +46,7 @@
         255,
         255,
         0.5
-        ); /* Used for navigation links of the dropdown items in the navigation menu. */
+    ); /* Used for navigation links of the dropdown items in the navigation menu. */
     --nav-dropdown-hover-color: #ffffff; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
 }
 
@@ -398,7 +399,11 @@ h6 {
         justify-content: center;
         border-radius: 50%;
         transition: 0.3s;
-        background-color: color-mix(in srgb, var(--accent-color), transparent 90%);
+        background-color: color-mix(
+            in srgb,
+            var(--accent-color),
+            transparent 90%
+        );
     }
 
     .navmenu a i:hover,
@@ -427,7 +432,8 @@ h6 {
         padding: 10px 0;
         margin: 10px 20px;
         background-color: var(--nav-dropdown-background-color);
-        border: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+        border: 1px solid
+            color-mix(in srgb, var(--default-color), transparent 90%);
         box-shadow: none;
         transition: all 0.5s ease-in-out;
     }
@@ -472,7 +478,11 @@ h6 {
 # Global Footer
 --------------------------------------------------------------*/
 .footer {
-    --background-color: color-mix(in srgb, var(--default-color), transparent 95%);
+    --background-color: color-mix(
+        in srgb,
+        var(--default-color),
+        transparent 95%
+    );
     border-top: 1px solid
         color-mix(in srgb, var(--default-color), transparent 90%);
     color: var(--default-color);
@@ -825,10 +835,8 @@ section,
     font-size: 18px;
 }
 
-
-.btn-transparent
-{
-    width:80%;
+.btn-transparent {
+    width: 80%;
     background-color: transparent;
     color: #ffffff;
     transition: background-color 0.3s, color 0.3s;
@@ -1415,3 +1423,7 @@ section,
 .starter-section {
     /* Add your styles here */
 }
+
+/*--------------------------------------------------------------
+# News Section Section
+--------------------------------------------------------------*/
