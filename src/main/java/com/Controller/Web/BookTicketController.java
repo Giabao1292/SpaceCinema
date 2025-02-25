@@ -41,7 +41,6 @@ public class BookTicketController extends HttpServlet {
         request.setAttribute("movie", movie);
         request.setAttribute("date", date);
         request.setAttribute("time", time);
-        request.setAttribute("cinema", cinema);
         if (movie.equals("null") || movie == "" || movie.equalsIgnoreCase("undefined")) {
             List<MovieResponse> movies = movieRepository.findMovieByCinema(cinema);
             request.setAttribute("movieCinema", movies);
