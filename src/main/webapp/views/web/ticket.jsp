@@ -8,7 +8,6 @@
 <%@include file = "/common/taglib.jsp" %>
 <!DOCTYPE html>
 <main class="main">
-    <!-- Gallery Section -->
     <section id="gallery" class="gallery section">
         <div class="container-fluid" data-aos="fade-up" data-aos-delay="100">
             <div class="row gy-4 justify-content-center">
@@ -79,10 +78,6 @@
                         </div>
                     </div>
                 </c:forEach>
-                <!-- End Gallery Item -->
-
-
-                <!-- End Gallery Item -->
             </div>
         </div>
     </section>
