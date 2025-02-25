@@ -19,44 +19,34 @@ import jakarta.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "ManageMovie", urlPatterns = {"/admin-home/movie"})
 public class MovieController extends HttpServlet {
+
     private final MovieRepositoryImpl movieRes = new MovieRepositoryImpl();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
         if (action == null) {
             action = "";
+        } else {
+            switch (action) {
+                case "create":
+                    request.getRequestDispatcher("/views/admin/movie/createMovie.jsp").forward(request, response);
+                    break;
+                case "update":
+                    request.getRequestDispatcher("/views/admin/movie/createMovie.jsp").forward(request, response);
+                    break;
+                case "delete":
+                    request.getRequestDispatcher("/views/admin/movie/createMovie.jsp").forward(request, response);
+                    break;
+            }
         }
-//        switch (action) {
-//            case "create":
-//                response.sendRedirect("views/admin/movie/createMovie.jsp");
-//                break;
-//            case "update":
-//                goUpdateMovie(request, response);
-//                break;
-//            case "delete":
-////                deleteMovie(request, response);
-//                break;
-//            default:
-////                goListMovie(request, response);
-//        }
-        //Action
         request.getRequestDispatcher("/views/admin/movie/listMovie.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    }
-
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
-    private void goUpdateMovie(HttpServletRequest request, HttpServletResponse response) {
-        String id = request.getParameter("id");
         
     }
-
 }

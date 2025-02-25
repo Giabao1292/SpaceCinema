@@ -15,8 +15,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -163,6 +162,9 @@ public class UserRepositoryImpl implements UserRepository {
                         roleTmp.setName(rsRoles.getString("name"));
                         roles.add(roleTmp);
                     }
+                    if (roles.stream().map(it -> it.getName()).collect(Collectors.toList()).contains("Admin")) {
+                        continue;
+                    }
                     user.setRole(roles);
                     users.add(user);
                 }
@@ -197,7 +199,7 @@ public class UserRepositoryImpl implements UserRepository {
             e.printStackTrace();
         }
     }
-    
+
     public void updateStatusByUserId(int id, int status) {
         String sql = "UPDATE user SET status = ? WHERE user_id = ?";
         try (Connection con = GetConnection.getConnection(); PreparedStatement st = con.prepareStatement(sql)) {
