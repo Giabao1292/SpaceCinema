@@ -18,6 +18,9 @@
     --heading-font: "Cardo", sans-serif;
     --nav-font: "Inter", sans-serif;
 }
+a, .btn, button {
+    cursor: pointer;
+}
 
 /* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
 :root {

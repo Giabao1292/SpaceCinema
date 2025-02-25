@@ -80,7 +80,7 @@
                 <h1>Showing date</h1>
                 <c:forEach items="${movie.times.keySet()}" var="dateItem">
                     <div class="col-sm-2 p-0 m-0">
-                        <button class="date btn btn-warning text-black pt-3 pb-3 m-0 ${dateItem eq date ? 'active' : ''}">${dateItem}</button>
+                        <button class="dateBtn btn btn-warning text-black pt-3 pb-3 m-0 ${dateItem eq date ? 'active' : ''}" data-date = "${dateItem}">${dateItem}</button>
                     </div>
                 </c:forEach>
             </div>
@@ -94,12 +94,12 @@
                             data-bs-toggle="dropdown"
                             aria-expanded="false"
                     >
-                        <i class="bi bi-geo-alt-fill"></i> ${cinema}
+                        <i class="bi bi-geo-alt-fill"></i> <span id = "displayCinema">${cinema}</span>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="cinemaDropdown">
                         <c:forEach var="cinema" items="${listCinema}">
                             <li>
-                                <a class="dropdown-item cinema" data-cinema="${cinema.name}"><i
+                                <a class="dropdown-item cinemaBtn" data-cinema="${cinema.name}"><i
                                         class="bi bi-geo-alt-fill"></i> ${cinema.name}
                                 </a>
                             </li>
@@ -131,7 +131,30 @@
         $(".btn-transparent").click(function () {
             $("#content").slideToggle();
         });
-        $(document).on("click", ".date", function (event) {
+        $(document).on("click", ".dateBtn", function (event){
+            var cinema = $(this).data("cinema");
+            var movie = $(this).data("movie");
+            var date = $(this).data("date");
+            console.log(cinema + " " + movie + " " + date);
+            $.ajax({
+                url: "/book-ticket",
+                type: "POST",
+                data: {
+                    action: "dateBtn",
+                    cinema: cinema,
+                    movie: movie,
+                    date: date,
+                },
+                success: function(response){
+                    $(".dateBtn").removeClass("active");
+                    $(this).addClass("active");
+                },
+                error: function (xhr) {
+                    console.error("Error:", xhr);
+                },
+            });
+        });
+        $(document).on("click", ".dateBtn", function (event) {
             var cinema = $(this).data("cinema");
             var movie = $(this).data("movie");
             var date = $(this).data("date");
