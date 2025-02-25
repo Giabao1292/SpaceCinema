@@ -52,6 +52,17 @@ public class UserController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String action = request.getParameter("action");
+        switch (action) {
+            case "updateManager":
+                updateManager(request, response);
+                break;
+            case "updateStatus":
+                updateStatus(request, response);
+                break;
+            default:
+                throw new AssertionError();
+        }
 
     }
 
@@ -61,7 +72,7 @@ public class UserController extends HttpServlet {
     }// </editor-fold>
 
     private void goUpdateUser(HttpServletRequest request, HttpServletResponse response) {
-        
+
     }
 
     private void deleteUser(HttpServletRequest request, HttpServletResponse response) {
@@ -73,6 +84,26 @@ public class UserController extends HttpServlet {
         List<User> users = dao.showInfoUsers();
         request.setAttribute("users", users);
         request.getRequestDispatcher("/views/admin/user/listUser.jsp").forward(request, response);
+    }
+
+    private void updateManager(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("user_id"));
+        String role = request.getParameter("role");
+        UserRepositoryImpl dao = new UserRepositoryImpl();
+        if (role.equalsIgnoreCase("Manager")) {
+            dao.insertRoleManagerByUserId(id);
+        } else if (role.equalsIgnoreCase("No")) {
+            dao.deleteRoleManagerByUserId(id);
+        }
+        showListUser(request, response);
+    }
+
+    private void updateStatus(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("user_id"));
+        int status = Integer.parseInt(request.getParameter("status"));
+        UserRepositoryImpl dao = new UserRepositoryImpl();
+        dao.updateStatusByUserId(id, status);
+        showListUser(request, response);
     }
 
 }

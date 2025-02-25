@@ -29,39 +29,64 @@
                             <th>Phone</th>
                             <th>Email</th>
                             <th>Role</th>
-                            <th>Console</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
                         <c:forEach var="u" items="${users}">
                             <tr>
-                                <td>${u.userName}</td>
+                                <td>${u.userName}</td> 
                                 <td>${u.fullName}</td>
                                 <td>${u.phone}</td>
                                 <td>${u.email}</td>
                                 <td>
-                                    <c:forEach var="r" items="${u.role}" varStatus = "status">
-                                        ${r.name}
-                                        <c:if test = "${!status.last}">, </c:if>
-                                    </c:forEach>
+                                    <form action="/admin-home/user" method="post">
+                                        <input type="hidden" name="action" value="updateManager"/>
+                                        <input type="hidden" name="user_id" value="${u.id}"/>
+                                        <c:set var="isManager" value="false" />
+                                        <c:forEach var="r" items="${u.role}">
+                                            <c:if test="${r.name eq 'Manager'}">
+                                                <c:set var="isManager" value="true" />
+                                            </c:if>
+                                        </c:forEach>
+
+                                        <input type="hidden" name="role" value="${isManager ? 'No' : 'Manager'}"  />
+
+                                        <button type="submit" class="btn ${isManager ? 'btn-danger' : 'btn-success'}">
+                                            ${isManager ? 'Hủy quyền' : 'Phân quyền'}
+                                        </button>
+                                    </form>
                                 </td>
-                                <td>
-                                    <a href = "/admin-home/user?action=delete" class = "text-decoration-none">
-                                        <button
-                                            type="submit"
-                                            class="bg-danger border-0 rounded"
-                                            >
-                                            <i class="fa-solid fa-delete-left"></i>
-                                        </button>
-                                    </a>
-                                    <a href = "/admin-home/user?action=update" class = "text-decoration-none">
-                                        <button
-                                            type="submit"
-                                            class="bg-primary border-0 rounded"
-                                            >
-                                            <i class="fa-regular fa-pen-to-square"></i>
-                                        </button>
-                                    </a>
+                                <!--                                <td>
+                                <c:set var="s" value="${u.status}" />
+                                <c:choose>
+                                    <c:when test="${s == 1}">
+                                        Active
+                                        <form action="/admin-home/user" method="post" >
+                                            <input type="hidden" name="action" value="updateStatus" >
+                                            <input type="hidden" name="user_id" value="${u.id}" >
+                                            <input type="hidden" name="status" value="inactive" >
+                                            <input type="submit" value="Inactive" >
+                                        </form>
+                                    </c:when>
+                                    <c:otherwise>
+                                        Inactive
+                                        <form action="/admin-home/user" method="post" >
+                                            <input type="hidden" name="action" value="updateStatus" >
+                                            <input type="hidden" name="user_id" value="${u.id}" >
+                                            <input type="hidden" name="status" value="active" >
+                                            <input type="submit" value="Acitve" >
+                                        </form>
+                                    </c:otherwise>
+                                </c:choose>
+                            </td>-->
+                                <td>${u.status == 1 ? "Active" : "Inactive"}
+                                    <form action="/admin-home/user" method="post">
+                                        <input type="hidden" name="action" value="updateStatus">
+                                        <input type="hidden" name="user_id" value="${u.id}">
+                                        <input type="hidden" name="status" value="${u.status == 1 ? 0 : 1}">
+                                        <input type="submit" value="${u.status == 1 ? 'Inactive' : 'Active'}">
+                                    </form>
                                 </td>
                             </tr>
                         </c:forEach>
