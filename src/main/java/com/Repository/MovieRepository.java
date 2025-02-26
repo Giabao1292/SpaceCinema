@@ -13,7 +13,7 @@ import java.util.List;
  * @author lebao
  */
 public interface MovieRepository {
-    public List<MovieResponse> findAllMovie();
+    public List<MovieResponse> findAllMovie(String status);
     public Movie findMovieById(int id);
     public List<MovieResponse> findMovieByCinema(String cinema);
     public MovieResponse findMovieByNameAndCinema(String name, String cinema);

@@ -29,10 +29,10 @@ import java.util.logging.Logger;
 public class MovieRepositoryImpl implements MovieRepository {
 
     @Override
-    public List<MovieResponse> findAllMovie() {
+    public List<MovieResponse> findAllMovie(String status) {
         List<MovieResponse> movies = new ArrayList<>();
         try (Connection connection = GetConnection.getConnection()) {
-            String sql = "SELECT * FROM movie m JOIN director d ON d.director_id = m.director_id JOIN movie_status s ON s.status_id = m.status_id";
+            String sql = "SELECT * FROM movie m JOIN director d ON d.director_id = m.director_id JOIN movie_status s ON s.status_id = m.status_id WHERE s.status_name = '" + status + "'";
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(sql.toString());
             while (rs.next()) {
@@ -47,6 +47,7 @@ public class MovieRepositoryImpl implements MovieRepository {
                 movie.setStatus(rs.getString("status_name"));
                 movie.setRelease_date(rs.getString("release_date"));
                 movie.setSynopsis(rs.getString("synopsis"));
+                movie.setPoster_image(rs.getString("poster_image"));
                 Statement stgenre = connection.createStatement();
                 ResultSet rsgenre = stgenre.executeQuery("Select * from genre g JOIN "
                         + "movie_genre mg ON mg.genre_id = g.genre_id WHERE movie_id = " + rs.getString("movie_id"));

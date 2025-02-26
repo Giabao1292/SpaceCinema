@@ -15,6 +15,7 @@ public class MovieResponse {
 
     private String title, trailer_link;
     private String age_rating, header_image, description, synopsis;
+    private String poster_image;
     private Integer runtime_min;
     private String release_date;
     private String director;
@@ -26,13 +27,14 @@ public class MovieResponse {
     public MovieResponse() {
     }
 
-    public MovieResponse(String title, String trailer_link, String age_rating, String header_image, String description, String synopsis, Integer runtime_min, String release_date, String director, List<String> genre, List<String> cast, LinkedHashMap<String, List<String>> times, String status) {
+    public MovieResponse(String title, String trailer_link, String age_rating, String header_image, String description, String synopsis, String poster_image, Integer runtime_min, String release_date, String director, List<String> genre, List<String> cast, LinkedHashMap<String, List<String>> times, String status) {
         this.title = title;
         this.trailer_link = trailer_link;
         this.age_rating = age_rating;
         this.header_image = header_image;
         this.description = description;
         this.synopsis = synopsis;
+        this.poster_image = poster_image;
         this.runtime_min = runtime_min;
         this.release_date = release_date;
         this.director = director;
@@ -41,6 +43,16 @@ public class MovieResponse {
         this.times = times;
         this.status = status;
     }
+
+    public String getPoster_image() {
+        return poster_image;
+    }
+
+    public void setPoster_image(String poster_image) {
+        this.poster_image = poster_image;
+    }
+
+    
 
     public String getTitle() {
         return title;
