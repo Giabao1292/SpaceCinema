@@ -14,10 +14,10 @@
                 <div class="col-xl-5" style="margin-bottom: 4rem">
                     <div class="gallery-item h-100">
                         <img
-                                src="${movie.header_image}"
-                                class="img-fluid"
-                                alt=""
-                        />
+                            src="${movie.header_image}"
+                            class="img-fluid"
+                            alt=""
+                            />
                     </div>
                 </div>
                 <div class="col-xl-7 fs-5" style="margin-bottom: 4rem">
@@ -65,42 +65,42 @@
                     </div>
                     <div class="d-flex justify-content-between h1">
                         <a
-                                href="${movie.trailer_link}"
-                                class="logo d-flex glightbox align-items-center me-auto me-xl-0"
-                        >
+                            href="${movie.trailer_link}"
+                            class="logo d-flex glightbox align-items-center me-auto me-xl-0"
+                            >
                             <i class="fs-2 fa-regular fa-circle-play"></i>
                             <h2 class="ms-1 text-white border-bottom border-secondary"
-                            >Watch trailer</h2
+                                >Watch trailer</h2
                             >
                         </a>
                     </div>
                 </div>
             </div>
-            <div class="row gy-4 justify-content-center text-center">
-                <h1>Showing date</h1>
-                <c:forEach items="${movie.times.keySet()}" var="dateItem">
-                    <div class="col-sm-2 p-0 m-0">
-                        <button class="dateBtn btn btn-warning text-black pt-3 pb-3 m-0 ${dateItem eq date ? 'active' : ''}" data-date = "${dateItem}">${dateItem}</button>
-                    </div>
-                </c:forEach>
+            <h1 class="text-center">Showing date</h1>
+            <div class="row gy-4 justify-content-center text-center mt-4" id ="dateBtn">
+                    <c:forEach items="${movie.times.keySet()}" var="dateItem">
+                        <div class="col-sm-2 p-0 m-0">
+                            <button class="dateBtn btn btn-warning text-black pt-3 pb-3 m-0 ${dateItem eq date ? 'active' : ''}" data-movie ="${movie.title}" data-date = "${dateItem}" data-cinema = "${cinema}">${dateItem}</button>
+                        </div>
+                    </c:forEach>
             </div>
             <div class="row gy-4 justify-content-between d-flex text-center">
                 <h1 class = "col-md-6">Showing time</h1>
                 <div class="dropdown col-md-6">
                     <button
-                            class="btn border border-warning text-warning mt-1 dropdown-toggle"
-                            type="button"
-                            id="cinemaDropdown"
-                            data-bs-toggle="dropdown"
-                            aria-expanded="false"
-                    >
+                        class="btn border border-warning text-warning mt-1 dropdown-toggle"
+                        type="button"
+                        id="cinemaDropdown"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                        >
                         <i class="bi bi-geo-alt-fill"></i> <span id = "displayCinema">${cinema}</span>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="cinemaDropdown">
                         <c:forEach var="cinema" items="${listCinema}">
                             <li>
-                                <a class="dropdown-item cinemaBtn" data-cinema="${cinema.name}"><i
-                                        class="bi bi-geo-alt-fill"></i> ${cinema.name}
+                                <a class="dropdown-item cinemaBtn" data-movie ="${movie.title}" data-cinema = "${cinema.name}"><i
+                                        class="bi bi-geo-alt-fill"></i> <span>${cinema.name}</span>
                                 </a>
                             </li>
                         </c:forEach>
@@ -131,71 +131,49 @@
         $(".btn-transparent").click(function () {
             $("#content").slideToggle();
         });
-        $(document).on("click", ".dateBtn", function (event){
+        $(document).on("click", ".dateBtn", function (event) {
+            var self = $(this);
             var cinema = $(this).data("cinema");
             var movie = $(this).data("movie");
             var date = $(this).data("date");
-            console.log(cinema + " " + movie + " " + date);
             $.ajax({
                 url: "/book-ticket",
                 type: "POST",
+                dataType: "json",
                 data: {
                     action: "dateBtn",
                     cinema: cinema,
                     movie: movie,
                     date: date,
                 },
-                success: function(response){
+                success: function (response) {
                     $(".dateBtn").removeClass("active");
-                    $(this).addClass("active");
+                    self.addClass("active");
+                    $("#content").html(response.showTime);
                 },
                 error: function (xhr) {
                     console.error("Error:", xhr);
                 },
             });
         });
-        $(document).on("click", ".dateBtn", function (event) {
+        $(document).on("click", ".cinemaBtn", function (event) {
             var cinema = $(this).data("cinema");
             var movie = $(this).data("movie");
-            var date = $(this).data("date");
-            var time = $(this).data("time");
-            console.log(cinema + " " + movie + " " + date + " " + time);
+            console.log(cinema + " " + movie);
             $.ajax({
-                url: "/home",
-                type: "GET",
+                url: "/book-ticket",
+                type: "POST",
+                dataType: "json",
                 data: {
+                    action: "cinemaBtn",
                     cinema: cinema,
                     movie: movie,
-                    date: date,
-                    time: time,
                 },
                 success: function (response) {
-                    if (time != null && time != "") {
-                        $("#showtimeDropdown").text(time);
-                    } else if (date != null && date != "") {
-                        document.getElementById("showtimeDropdown").disabled = false;
-                        $("#dateDropdown").text(date);
-                        $("#showtimeDropdown").text("4. Chọn Suất");
-                        $("#time").html(response);
-                    } else if (movie != null && movie != "") {
-                        document.getElementById("dateDropdown").disabled = false;
-                        document.getElementById("showtimeDropdown").disabled = true;
-                        $("#movieDropdown").text(movie);
-                        $("#dateDropdown").text("3. Chọn Ngày");
-                        $("#showtimeDropdown").text("4. Chọn Suất");
-                        $("#date").html(response);
-                    } else if (cinema != null && cinema != "") {
-                        document.getElementById("movieDropdown").disabled = false;
-                        document.getElementById("dateDropdown").disabled = true;
-                        document.getElementById("showtimeDropdown").disabled = true;
-                        $("#cinemaDropdown").text(cinema);
-                        $("#movieDropdown").text("2. Chọn Phim");
-                        $("#dateDropdown").text("3. Chọn Ngày");
-                        $("#showtimeDropdown").text("4. Chọn Suất");
-                        $("#movie").html(response);
-                    }
-                    $(".booking").attr("href", "/book-ticket?cinema=" + cinema + "&movie=" + movie + "&date=" + date + "&time=" + time);
-
+                    console.log("Success!");
+                    $("#displayCinema").html(cinema);
+                    $("#content").html(response.showTime);
+                    $("#dateBtn").html(response.dateBtn);
                 },
                 error: function (xhr) {
                     console.error("Error:", xhr);

@@ -47,10 +47,4 @@ com/Config/Format.class
 com/Repository/impl/SeatRepositoryImp.class
 com/Repository/SeatRepository.class
 com/Model/Director.class
-<<<<<<< HEAD
-<<<<<<< HEAD
 com/Services/SnackService.class
-=======
->>>>>>> b3891284eb3ef0a3ac915add8ba8ed40cf9aec0c
-=======
->>>>>>> 194c31e (Booking button)

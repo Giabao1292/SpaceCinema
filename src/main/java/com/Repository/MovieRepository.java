@@ -16,5 +16,5 @@ public interface MovieRepository {
     public List<MovieResponse> findAllMovie();
     public Movie findMovieById(int id);
     public List<MovieResponse> findMovieByCinema(String cinema);
-    public MovieResponse findMovieByName(String name);
+    public MovieResponse findMovieByNameAndCinema(String name, String cinema);
 }
