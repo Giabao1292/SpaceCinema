@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 9c41c4d (finish movie list admin)
 E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\impl\CinemaRepositoryImpl.java
 E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\impl\SnackRepositoryImpl.java
 E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\TimeRepository.java
@@ -49,6 +52,7 @@ E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Model\Role.java
 E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Config\AuthorizationFilter.java
 E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Services\impl\UserServiceImpl.java
 E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Model\Seat.java
+<<<<<<< HEAD
 =======
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Model/ShowingTime.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Controller/Web/PopcornController.java
@@ -101,3 +105,5 @@ E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Model\Seat.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Repository/impl/SnackRepositoryImpl.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Services/impl/SeatServiceImpl.java
 >>>>>>> 8574984 (Add tag table)
+=======
+>>>>>>> 9c41c4d (finish movie list admin)
