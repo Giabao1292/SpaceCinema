@@ -14,6 +14,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
 
 import java.text.ParseException;
 import java.time.LocalDate;
@@ -36,18 +37,18 @@ public class BookTicketController extends HttpServlet {
         String movie = request.getParameter("movie");
         String date = request.getParameter("date");
         String time = request.getParameter("time");
-        System.out.println(date);
         request.setAttribute("cinema", cinema);
-        if (movie.equals("null") || movie == "" || movie.equalsIgnoreCase("undefined")) {
+        request.setAttribute("movie", movie);
+        request.setAttribute("date", date);
+        request.setAttribute("time", time);
+        if (movie == null || movie.equals("null") || movie == "" || movie.equalsIgnoreCase("undefined")) {
             List<MovieResponse> movies = movieRepository.findMovieByCinema(cinema);
             request.setAttribute("movieCinema", movies);
-        }
-        else {
-            MovieResponse movieResponse = movieRepository.findMovieByName(movie);
-            if(date.equals("null") || date == "" || date.equalsIgnoreCase("undefined")) {
+        } else {
+            MovieResponse movieResponse = movieRepository.findMovieByNameAndCinema(movie, cinema);
+            if (date == null || date.equals("null") || date == "" || date.equalsIgnoreCase("undefined")) {
                 request.setAttribute("date", movieResponse.getTimes().entrySet().iterator().next().getKey());
-            }
-            else{
+            } else {
                 try {
                     request.setAttribute("date", Format.Date(Format.fm2.parse(date)));
                 } catch (ParseException e) {
@@ -64,6 +65,58 @@ public class BookTicketController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
 
+        String cinema = request.getParameter("cinema");
+        String movie = request.getParameter("movie");
+        String date = request.getParameter("date");
+        String action = request.getParameter("action");
+
+        StringBuilder sbTime = new StringBuilder();
+        StringBuilder dateBtn = new StringBuilder();
+
+        MovieResponse movieResponse = movieRepository.findMovieByNameAndCinema(movie, cinema);
+        boolean isFirst = true;
+        if ("cinemaBtn".equalsIgnoreCase(action)) {
+            for (String dateRes : movieResponse.getTimes().keySet()) {
+                dateBtn.append("<div class=\"col-sm-2 p-0 m-0\">\n")
+                        .append("<button class=\"dateBtn btn btn-warning text-black pt-3 pb-3 m-0 ")
+                        .append(isFirst ? "active" : "")
+                        .append("\" data-movie=\"").append(movieResponse.getTitle())
+                        .append("\" data-date=\"").append(dateRes)
+                        .append("\" data-cinema=\"").append(cinema)
+                        .append("\">").append(dateRes)
+                        .append("</button>\n")
+                        .append("</div>");
+                if (isFirst) {
+                    isFirst = false;
+                    date = dateRes;
+                }
+            }
+        }
+        
+        for (String timeRes : movieResponse.getTimes().get(date)) {
+            sbTime.append("<a class='btn text-warning border border-warning' ")
+                    .append("data-time='").append(timeRes).append("' ")
+                    .append("data-cinema='").append(cinema).append("' ")
+                    .append("data-movie='").append(movie).append("' ")
+                    .append("data-date='").append(date).append("'>")
+                    .append(timeRes).append("</a>");
+        }
+
+        String jsonResponse = "{"
+                + "\"showTime\": \"" + escapeJson(sbTime.toString()) + "\","
+                + "\"dateBtn\": \"" + escapeJson(dateBtn.toString()) + "\""
+                + "}";
+
+        PrintWriter out = response.getWriter();
+        out.print(jsonResponse);
+    }
+
+    private String escapeJson(String value) {
+        return value.replace("\"", "\\\"")
+                .replace("\n", "\\n")
+                .replace("\r", "\\r");
     }
 }

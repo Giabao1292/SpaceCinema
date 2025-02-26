@@ -1,5 +1,6 @@
 com/Model/Role.class
 com/Repository/impl/DateRepositoryImpl.class
+com/Services/impl/UserServiceImpl.class
 com/Model/Snack.class
 com/Repository/impl/UserRepositoryImpl.class
 com/Repository/DateRepository.class
@@ -20,6 +21,7 @@ com/Repository/UserRepository.class
 com/Config/GetConnection.class
 com/Repository/impl/CinemaRepositoryImpl.class
 com/Repository/impl/MovieRepositoryImpl.class
+com/Services/impl/MovieServiceImpl.class
 com/Model/Genre.class
 com/Repository/TimeRepository.class
 com/Controller/Web/HomeController.class
@@ -29,14 +31,20 @@ com/Model/ShowingTime.class
 com/Repository/SnackRepository.class
 com/Controller/Web/PromotionController.class
 com/Model/MovieStatus.class
+com/Services/MovieService.class
+com/Services/UserService.class
 com/Model/User.class
 com/Controller/Admin/PopcornController.class
 com/Repository/impl/TimeRepositoryImpl.class
 com/Model/Cinema.class
+com/Services/SeatService.class
 com/Controller/Admin/HomeController.class
+com/Services/impl/SnackServiceImpl.class
 com/Utils/CinemaContextListener.class
 com/Model/Cast.class
+com/Services/impl/SeatServiceImpl.class
 com/Config/Format.class
 com/Repository/impl/SeatRepositoryImp.class
 com/Repository/SeatRepository.class
 com/Model/Director.class
+com/Services/SnackService.class

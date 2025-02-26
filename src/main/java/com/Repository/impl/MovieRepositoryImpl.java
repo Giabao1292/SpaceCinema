@@ -112,7 +112,13 @@ public class MovieRepositoryImpl implements MovieRepository {
                     }
                     LinkedHashMap<String, List<String>> times = new LinkedHashMap<>();
                     Statement stTime = connection.createStatement();
-                    ResultSet rsTime = stTime.executeQuery("SELECT t.*, st.showing_datetime as datetime FROM time_detail t JOIN showing_time st ON st.time_id = t.showing_time_id WHERE st.movie_id = " + rs.getInt("movie_id") + " ORDER BY st.showing_datetime ASC, t.timedetail ASC");
+                    String sqlRsTime = "SELECT t.*, st.showing_datetime as datetime "
+                            + "FROM time_detail t "
+                            + "JOIN showing_time st ON st.time_id = t.showing_time_id "
+                            + "JOIN theatre th ON th.theatre_id = st.theatre_id "
+                            + "JOIN cinema c ON c.cinema_id = th.cinema_id "
+                            + "WHERE st.movie_id = " + rs.getInt("movie_id") + " AND c.cinema_name = '" + cinema + "' ORDER BY st.showing_datetime ASC, t.timedetail ASC";
+                    ResultSet rsTime = stTime.executeQuery(sqlRsTime);
                     while (rsTime.next()) {
                         String date = Format.Date(rsTime.getDate("datetime"));
                         if (times.get(date) == null) {
@@ -122,6 +128,7 @@ public class MovieRepositoryImpl implements MovieRepository {
                             times.get(date).add(rsTime.getString("timedetail"));
                         }
                     }
+
                     movie.setCast(casts);
                     movie.setGenre(genres);
                     movie.setTimes(times);
@@ -149,13 +156,20 @@ public class MovieRepositoryImpl implements MovieRepository {
         }
         return null;
     }
-//     public Movie(String title, String trailer_link, String age_rating, String header_image, String discription, String synopsis, Integer runtime_min, Date release_date, Integer directorId, Integer genreId, Integer castId, String statusId) {
 
     @Override
-    public MovieResponse findMovieByName(String name) {
+    public MovieResponse findMovieByNameAndCinema(String name, String cinema) {
         MovieResponse movie = new MovieResponse();
         try (Connection connection = GetConnection.getConnection()) {
-            String sql = "SELECT * FROM movie m JOIN director d ON d.director_id = m.director_id JOIN movie_status s ON s.status_id = m.status_id WHERE m.title = '" + name + "'";
+            String sql = "SELECT m.*, d.director_name, ms.status_name FROM movie m "
+                    + "JOIN movie_status ms ON m.status_id = ms.status_id "
+                    + "JOIN director d ON d.director_id = m.director_id "
+                    + "JOIN showing_time st ON st.movie_id = m.movie_id "
+                    + "JOIN theatre t ON t.theatre_id = st.theatre_id "
+                    + "JOIN cinema c on c.cinema_id = t.cinema_id "
+                    + "WHERE c.cinema_name = '" + cinema
+                    + "' AND m.title = '" + name
+                    + "' GROUP BY m.movie_id";
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(sql.toString());
             while (rs.next()) {
@@ -185,7 +199,13 @@ public class MovieRepositoryImpl implements MovieRepository {
                 }
                 LinkedHashMap<String, List<String>> times = new LinkedHashMap<>();
                 Statement stTime = connection.createStatement();
-                ResultSet rsTime = stTime.executeQuery("SELECT t.*, st.showing_datetime as datetime FROM time_detail t JOIN showing_time st ON st.time_id = t.showing_time_id WHERE st.movie_id = " + rs.getInt("movie_id") + " ORDER BY st.showing_datetime ASC, t.timedetail ASC");
+                String sqlRsTime = "SELECT t.*, st.showing_datetime as datetime "
+                        + "FROM time_detail t "
+                        + "JOIN showing_time st ON st.time_id = t.showing_time_id "
+                        + "JOIN theatre th ON th.theatre_id = st.theatre_id "
+                        + "JOIN cinema c ON c.cinema_id = th.cinema_id "
+                        + "WHERE st.movie_id = " + rs.getInt("movie_id") + " AND c.cinema_name = '" + cinema + "' ORDER BY st.showing_datetime ASC, t.timedetail ASC";
+                ResultSet rsTime = stTime.executeQuery(sqlRsTime);
                 while (rsTime.next()) {
                     String date = Format.Date(rsTime.getDate("datetime"));
                     if (times.get(date) == null) {
