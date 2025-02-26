@@ -7,6 +7,7 @@ package com.Repository.impl;
 import com.Config.Format;
 import com.Config.GetConnection;
 import com.DTO.Response.MovieResponse;
+import com.Model.Cinema;
 import com.Model.Movie;
 import com.Repository.MovieRepository;
 import jakarta.ws.rs.client.RxInvoker;
@@ -61,8 +62,35 @@ public class MovieRepositoryImpl implements MovieRepository {
                 while (rscast.next()) {
                     casts.add(rscast.getString("cast_name"));
                 }
+                String sqlCinema = "SELECT DISTINCT\n"
+                        + "    m.movie_id, \n"
+                        + "    c.cinema_name\n"
+                        + "FROM \n"
+                        + "    movie AS m\n"
+                        + "JOIN \n"
+                        + "    movie_status AS ms ON m.status_id = ms.status_id\n"
+                        + "JOIN \n"
+                        + "    director AS d ON d.director_id = m.director_id\n"
+                        + "JOIN \n"
+                        + "    showing_time AS st ON st.movie_id = m.movie_id\n"
+                        + "JOIN \n"
+                        + "    theatre AS t ON t.theatre_id = st.theatre_id\n"
+                        + "JOIN \n"
+                        + "    cinema AS c ON c.cinema_id = t.cinema_id\n"
+                        + "WHERE m.movie_id = ?";
+                PreparedStatement stCinema = connection.prepareStatement(sqlCinema);
+                stCinema.setInt(1, rs.getInt("movie_id"));
+                ResultSet rsCinema = stCinema.executeQuery();
+
+                List<Cinema> cinemas = new ArrayList<>();
+                while (rsCinema.next()) {
+                    Cinema ctemp = new Cinema();
+                    ctemp.setName(rsCinema.getString("cinema_name"));
+                    cinemas.add(ctemp);
+                }
                 movie.setCast(casts);
                 movie.setGenre(genres);
+                movie.setCinema(cinemas);
                 movies.add(movie);
             }
         } catch (SQLException ex) {

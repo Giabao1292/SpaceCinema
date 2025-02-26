@@ -37,35 +37,52 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Movie name</td>
-                            <td>System Architect</td>
-                            <td>Edinburgh</td>
-                            <td>61</td>
-                            <td>2011/04/25</td>
-                            <td>$320,800</td>
-                            <td>Something</td>
-                            <td>$320,800</td>
-                            <td>Something</td>
-                            <td>
-                                <a href = "/admin-home/movie?action=delete" class = "text-decoration-none">
-                                    <button
-                                        type="submit"
-                                        class="bg-danger border-0 rounded"
-                                        >
-                                        <i class="fa-solid fa-delete-left"></i>
-                                    </button>
-                                </a>
-                                <a href = "/admin-home/movie?action=update" class = "text-decoration-none">
-                                    <button
-                                        type="submit"
-                                        class="bg-primary border-0 rounded"
-                                        >
-                                        <i class="fa-regular fa-pen-to-square"></i>
-                                    </button>
-                                </a>
-                            </td>
-                        </tr>
+                        <c:forEach var="m" items="${movies}">
+                            <tr>
+                                <td>${m.title}</td>
+                                <td>
+                                    <c:forEach var="c" items="${m.cinema}" varStatus="status" >
+                                        ${c.name}
+                                        <c:if test="${!status.last}">, </c:if>
+                                    </c:forEach>
+                                </td>
+                                <td>${m.director}</td>
+                                <td>
+                                    <c:forEach var="c" items="${m.cast}" varStatus="status" >
+                                        ${c}
+                                        <c:if test="${!status.last}">, </c:if>
+                                    </c:forEach>
+                                </td>
+                                <td>
+                                    <c:forEach var="g" items="${m.genre}" varStatus="status" >
+                                        ${g}
+                                        <c:if test="${!status.last}">, </c:if>
+                                    </c:forEach>
+                                </td>   
+                                <td>${m.runtime_min}</td>
+                                <td>${m.age_rating}</td>
+                                <td>${m.release_date}</td>
+                                <td>${m.status}</td>
+                                <td>
+                                    <a href = "/admin-home/movie?action=delete" class = "text-decoration-none">
+                                        <button
+                                            type="submit"
+                                            class="bg-danger border-0 rounded"
+                                            >
+                                            <i class="fa-solid fa-delete-left"></i>
+                                        </button>
+                                    </a>
+                                    <a href = "/admin-home/movie?action=update" class = "text-decoration-none">
+                                        <button
+                                            type="submit"
+                                            class="bg-primary border-0 rounded"
+                                            >
+                                            <i class="fa-regular fa-pen-to-square"></i>
+                                        </button>
+                                    </a>
+                                </td>
+                            </tr>
+                        </c:forEach>
                     </tbody>
                 </table>
                 <a href="/admin-home/movie?action=create"
