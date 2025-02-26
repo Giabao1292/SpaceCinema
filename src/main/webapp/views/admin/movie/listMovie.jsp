@@ -88,8 +88,8 @@
                 <a href="/admin-home/movie?action=create"
                    ><button type="submit" class="btn btn-success">
                         Add Movie
-                    </button></a
-                >
+                    </button>
+                </a>
             </div>
         </div>
     </div>
