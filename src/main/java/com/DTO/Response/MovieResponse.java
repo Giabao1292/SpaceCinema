@@ -4,6 +4,7 @@
  */
 package com.DTO.Response;
 
+import com.Model.Cinema;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class MovieResponse {
     private List<String> cast;
     private LinkedHashMap<String, List<String>> times;
     private String status;
+    private List<Cinema> cinema;
 
     public MovieResponse() {
     }
@@ -158,4 +160,13 @@ public class MovieResponse {
         this.status = status;
     }
 
+    public List<Cinema> getCinema() {
+        return cinema;
+    }
+
+    public void setCinema(List<Cinema> cinema) {
+        this.cinema = cinema;
+    }
+    
+    
 }
