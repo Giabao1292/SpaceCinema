@@ -67,6 +67,7 @@ public class MovieController extends HttpServlet {
 
     private void showListMovie(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<MovieResponse> movies = movieRes.findAllMovie("now showing");
+        movies.addAll(movieRes.findAllMovie("coming soon"));
         request.setAttribute("movies", movies);
         request.getRequestDispatcher("/views/admin/movie/listMovie.jsp").forward(request, response);
     }

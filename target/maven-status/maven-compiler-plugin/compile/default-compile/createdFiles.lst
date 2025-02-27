@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
 com/Model/Role.class
 com/Repository/impl/DateRepositoryImpl.class
 com/Services/impl/UserServiceImpl.class
@@ -51,59 +48,3 @@ com/Repository/impl/SeatRepositoryImp.class
 com/Repository/SeatRepository.class
 com/Model/Director.class
 com/Services/SnackService.class
-=======
->>>>>>> 9c41c4d (finish movie list admin)
-com\Repository\impl\CinemaRepositoryImpl.class
-com\Model\ShowingTime.class
-com\Model\Cast.class
-com\Model\Cinema.class
-com\Controller\Web\RegisterController.class
-com\Model\Role.class
-com\Model\MovieStatus.class
-com\Controller\Web\PromotionController.class
-com\Repository\DateRepository.class
-com\Config\AuthorizationFilter.class
-com\Repository\impl\TimeRepositoryImpl.class
-com\Controller\Admin\HomeController.class
-com\Services\SeatService.class
-com\DTO\Response\MovieResponse.class
-com\Repository\impl\SeatRepositoryImp.class
-com\Services\UserService.class
-com\Services\SnackService.class
-com\Controller\Admin\PopcornController.class
-com\Model\Seat.class
-com\Repository\impl\DateRepositoryImpl.class
-com\Model\Genre.class
-com\Repository\MovieRepository.class
-com\Repository\SeatRepository.class
-com\Utils\CinemaContextListener.class
-com\Utils\SessionUtils.class
-com\Services\impl\SnackServiceImpl.class
-com\Controller\Admin\MovieController.class
-com\Repository\TimeRepository.class
-com\Model\Snack.class
-com\Model\Director.class
-com\Model\Movie.class
-com\Services\MovieService.class
-com\Config\Format.class
-com\Controller\Web\BookTicketController.class
-com\Controller\Web\NewsController.class
-com\Controller\Web\PopcornController.class
-com\Model\User.class
-com\Repository\impl\SnackRepositoryImpl.class
-com\Config\GetConnection.class
-com\Repository\impl\UserRepositoryImpl.class
-com\Repository\UserRepository.class
-com\Repository\SnackRepository.class
-com\Controller\Web\HomeController.class
-com\Repository\CinemaRepository.class
-com\Services\impl\MovieServiceImpl.class
-com\Services\impl\UserServiceImpl.class
-com\Controller\Admin\UserController.class
-com\Model\Time.class
-com\Services\impl\SeatServiceImpl.class
-com\Repository\impl\MovieRepositoryImpl.class
-<<<<<<< HEAD
-=======
->>>>>>> 9f1ad68 (finish movie list admin)
->>>>>>> 9c41c4d (finish movie list admin)
