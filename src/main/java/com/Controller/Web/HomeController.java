@@ -97,7 +97,8 @@ public class HomeController extends HttpServlet {
                 }
                 return;
             }
-            request.setAttribute("allMovie", movieRepository.findAllMovie());
+            request.setAttribute("allMovie", movieRepository.findAllMovie("now showing"));
+            request.setAttribute("comingSoonMovie", movieRepository.findAllMovie("coming soon"));
             request.getRequestDispatcher("/views/web/home.jsp").forward(request, response);
         }
     }

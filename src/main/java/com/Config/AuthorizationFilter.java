@@ -26,13 +26,13 @@ public class AuthorizationFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest requestServlet, ServletResponse responseServlet, FilterChain chain) throws IOException, ServletException {
-        HttpServletRequest request = (HttpServletRequest)requestServlet;
-        HttpServletResponse response = (HttpServletResponse)responseServlet;
+        HttpServletRequest request = (HttpServletRequest) requestServlet;
+        HttpServletResponse response = (HttpServletResponse) responseServlet;
         String URL = request.getRequestURI();
-        if(URL.startsWith("/admin")){
-            User user = (User)SessionUtils.getInstance().getValue(request, "USER");
-            if(user != null){
-                if(User.isAdmin(user.getRole()) || User.isManager(user.getRole())){
+        if (URL.startsWith("/admin")) {
+            User user = (User) SessionUtils.getInstance().getValue(request, "USER");
+            if (user != null) {
+                if (User.isAdmin(user.getRole()) || User.isManager(user.getRole())) {
                     chain.doFilter(requestServlet, responseServlet);
                     return;
                 }
@@ -41,8 +41,19 @@ public class AuthorizationFilter implements Filter {
             }
             response.sendRedirect("/login?action=login&status=login_first");
             return;
-        }
-        else{
+        } else if (URL.startsWith("/login")) {
+            User user = (User) SessionUtils.getInstance().getValue(request, "USER");
+            if (user != null) {
+                if (User.isAdmin(user.getRole()) || User.isManager(user.getRole())) {
+                    response.sendRedirect("/admin-home");
+                    return;
+                } else {
+                    response.sendRedirect("/home");
+                    return;
+                }
+            }
+            chain.doFilter(requestServlet, responseServlet);
+        } else {
             chain.doFilter(requestServlet, responseServlet);
         }
     }

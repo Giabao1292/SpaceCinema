@@ -25,4 +25,5 @@ public class CinemaContextListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
         sce.getServletContext().setAttribute("listCinema", cinemaRepository.findAll());
     }
+    
 }
