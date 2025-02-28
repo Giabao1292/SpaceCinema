@@ -18,60 +18,53 @@
         <div class="card mt-4">
             <div class="card-header">
                 <i class="fas fa-table me-1"></i>
-                List Popcorn
+                List Snack
             </div>
             <div class="card-body">
                 <table id="datatablesSimple">
                     <thead>
                         <tr>
+                            <th>Type</th>
                             <th>Name</th>
-                            <th>Address</th>
-                            <th>Manager name</th>
-                            <th>Phone number</th>
-                            <th>Number of basements</th>
-                            <th>Floor area</th>
-                            <th>Rent area</th>
-                            <th>Commission($)</th>
+                            <th>Price</th>
                             <th>Console</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Tiger Nixon</td>
-                            <td>System Architect</td>
-                            <td>Edinburgh</td>
-                            <td>61</td>
-                            <td>2011/04/25</td>
-                            <td>$320,800</td>
-                            <td>Something</td>
-                            <td>$320,800</td>
-                            <td>
-                                <a href = "/admin-home/popcorn?action=delete" class = "text-decoration-none">
-                                    <button
-                                        type="submit"
-                                        class="bg-danger border-0 rounded"
-                                        >
-                                        <i class="fa-solid fa-delete-left"></i>
-                                    </button>
-                                </a>
-                                <a href = "/admin-home/popcorn?action=update" class = "text-decoration-none">
-                                    <button
-                                        type="submit"
-                                        class="bg-primary border-0 rounded"
-                                        >
-                                        <i class="fa-regular fa-pen-to-square"></i>
-                                    </button>
-                                </a>
-                            </td>
-                        </tr>
+                        <c:forEach var="s" items="${snacks}" >
+                            <tr>
+                                <td>${s.type}</td>
+                                <td>${s.name}</td>
+                                <td>${s.price}$</td>
+                                <td>
+                                    <a href = "/admin-home/popcorn?action=delete&id=${s.id}" class = "text-decoration-none">
+                                        <button
+                                            type="submit"
+                                            class="bg-danger border-0 rounded"
+                                            >
+                                            <i class="fa-solid fa-delete-left"></i>
+                                        </button>
+                                    </a>
+                                    <a href = "/admin-home/popcorn?action=update&id=${s.id}" class = "text-decoration-none">
+                                        <button
+                                            type="submit"
+                                            class="bg-primary border-0 rounded"
+                                            >
+                                            <i class="fa-regular fa-pen-to-square"></i>
+                                        </button>
+                                    </a>
+                                </td>
+                            </tr>
+                        </c:forEach>
                     </tbody>
                 </table>
                 <a href="/admin-home/popcorn?action=create"
                    ><button type="submit" class="btn btn-success">
-                        Add Popcorn
+                        Add Snack
                     </button></a
                 >
             </div>
         </div>
     </div>
+
 </main>

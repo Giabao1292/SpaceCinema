@@ -1,11 +1,6 @@
-<%-- 
-    Document   : listMovie.jsp
-    Created on : 9 thg 2, 2025, 15:27:52
-    Author     : lebao
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@include file = "/common/taglib.jsp"%>
+<%-- Document : listMovie.jsp Created on : 9 thg 2, 2025, 15:27:52 Author :
+lebao --%> <%@page contentType="text/html" pageEncoding="UTF-8"%> <%@include
+file = "/common/taglib.jsp"%>
 <!DOCTYPE html>
 
 <head>
@@ -14,7 +9,6 @@
 
 <main>
     <div class="container-fluid px-4">
-
         <div class="card mt-4">
             <div class="card-header">
                 <i class="fas fa-table me-1"></i>
@@ -41,43 +35,65 @@
                             <tr>
                                 <td>${m.title}</td>
                                 <td>
-                                    <c:forEach var="c" items="${m.cinema}" varStatus="status" >
+                                    <c:forEach
+                                        var="c"
+                                        items="${m.cinema}"
+                                        varStatus="status"
+                                    >
                                         ${c.name}
                                         <c:if test="${!status.last}">, </c:if>
                                     </c:forEach>
                                 </td>
                                 <td>${m.director}</td>
                                 <td>
-                                    <c:forEach var="c" items="${m.cast}" varStatus="status" >
+                                    <c:forEach
+                                        var="c"
+                                        items="${m.cast}"
+                                        varStatus="status"
+                                    >
                                         ${c}
                                         <c:if test="${!status.last}">, </c:if>
                                     </c:forEach>
                                 </td>
                                 <td>
-                                    <c:forEach var="g" items="${m.genre}" varStatus="status" >
+                                    <c:forEach
+                                        var="g"
+                                        items="${m.genre}"
+                                        varStatus="status"
+                                    >
                                         ${g}
                                         <c:if test="${!status.last}">, </c:if>
                                     </c:forEach>
-                                </td>   
+                                </td>
                                 <td>${m.runtime_min}</td>
                                 <td>${m.age_rating}</td>
                                 <td>${m.release_date}</td>
                                 <td>${m.status}</td>
                                 <td>
-                                    <a href = "/admin-home/movie?action=delete" class = "text-decoration-none">
+                                    <a
+                                        href="/admin-home/movie?action=delete"
+                                        class="text-decoration-none"
+                                    >
                                         <button
                                             type="submit"
                                             class="bg-danger border-0 rounded"
-                                            >
-                                            <i class="fa-solid fa-delete-left"></i>
+                                        >
+                                            <i
+                                                class="fa-solid fa-delete-left"
+                                            ></i>
                                         </button>
                                     </a>
-                                    <a href = "/admin-home/movie?action=update" class = "text-decoration-none">
+                                    <a
+                                        href="/admin-home/movie?action=update"
+                                        class="text-decoration-none"
+                                    >
                                         <button
                                             type="submit"
                                             class="bg-primary border-0 rounded"
-                                            >
-                                            <i class="fa-regular fa-pen-to-square"></i>
+                                        >
+                                            <i
+                                                class="fa-regular fa-pen-to-square"
+                                            ></i>
                                         </button>
                                     </a>
                                 </td>
@@ -86,7 +102,7 @@
                     </tbody>
                 </table>
                 <a href="/admin-home/movie?action=create"
-                   ><button type="submit" class="btn btn-success">
+                    ><button type="submit" class="btn btn-success">
                         Add Movie
                     </button>
                 </a>

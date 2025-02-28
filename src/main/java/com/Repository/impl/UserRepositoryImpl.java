@@ -210,7 +210,4 @@ public class UserRepositoryImpl implements UserRepository {
             e.printStackTrace();
         }
     }
-
-    public static void main(String[] args) {
-    }
 }
