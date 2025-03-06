@@ -29,9 +29,9 @@ public class FacebookOAuth2Servlet extends HttpServlet {
             response.sendRedirect("/login?action=login&status=fail");
             return;
         }
-        String clientId = "1339556850512912";
-        String clientSecret = "c4a92ce83aaf9c56c29aaf732044121a";
-        String redirectUri = "http://localhost:8080/facebookoAuth2";
+        String clientId = getServletContext().getInitParameter("facebook.clientId");
+        String clientSecret = getServletContext().getInitParameter("facebook.clientSecret");
+        String redirectUri = getServletContext().getInitParameter("facebook.redirectUri");
         String tokenUrl = "https://graph.facebook.com/v12.0/oauth/access_token";
         String params = "client_id=" + clientId
                 + "&redirect_uri=" + redirectUri

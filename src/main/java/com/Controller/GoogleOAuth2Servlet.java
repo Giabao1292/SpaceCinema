@@ -28,6 +28,7 @@ import org.json.JSONObject;
 public class GoogleOAuth2Servlet extends HttpServlet {
 
     private UserRepository userRepository = new UserRepositoryImpl();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -36,9 +37,9 @@ public class GoogleOAuth2Servlet extends HttpServlet {
             response.sendRedirect("/login?action=login&status=fail");
             return;
         }
-        String clientId = "254823530383-c223k6kn1b925vj0fkiai0rplo4d34sh.apps.googleusercontent.com";
-        String clientSecret = "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";
-        String redirectUri = "http://localhost:8080/googleoAuth2";
+        String clientId = getServletContext().getInitParameter("google.clientId");
+        String clientSecret = getServletContext().getInitParameter("google.clientSecret");
+        String redirectUri = getServletContext().getInitParameter("google.redirectUri");
         String tokenUrl = "https://oauth2.googleapis.com/token";
         String params = "code=" + code
                 + "&client_id=" + clientId
