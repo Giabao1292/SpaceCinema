@@ -45,8 +45,6 @@ public class UserController extends HttpServlet {
                 showListUser(request, response);
                 break;
         }
-
-//        request.getRequestDispatcher("/views/admin/user/listUser.jsp").forward(request, response);
     }
 
     @Override

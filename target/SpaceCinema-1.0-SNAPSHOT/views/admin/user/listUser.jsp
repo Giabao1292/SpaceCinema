@@ -92,11 +92,6 @@
                         </c:forEach>
                     </tbody>
                 </table>
-                <a href="/admin-home/user?action=create"
-                   ><button type="submit" class="btn btn-success">
-                        Add User
-                    </button></a
-                >
             </div>
         </div>
     </div>

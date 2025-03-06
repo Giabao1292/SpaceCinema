@@ -6,7 +6,9 @@ package com.Controller.Web;
 
 import com.Config.Format;
 import com.DTO.Response.MovieResponse;
+import com.Repository.CinemaRepository;
 import com.Repository.MovieRepository;
+import com.Repository.impl.CinemaRepositoryImpl;
 import com.Repository.impl.MovieRepositoryImpl;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -29,6 +31,7 @@ import java.util.List;
 public class BookTicketController extends HttpServlet {
 
     private MovieRepository movieRepository = new MovieRepositoryImpl();
+    private CinemaRepository cinemaRepository = new CinemaRepositoryImpl();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -37,6 +40,9 @@ public class BookTicketController extends HttpServlet {
         String movie = request.getParameter("movie");
         String date = request.getParameter("date");
         String time = request.getParameter("time");
+        if (cinema == null) {
+            cinema = cinemaRepository.findCinemaByMovie(movie).getFirst().getName();
+        }
         request.setAttribute("cinema", cinema);
         request.setAttribute("movie", movie);
         request.setAttribute("date", date);
@@ -95,7 +101,7 @@ public class BookTicketController extends HttpServlet {
                 }
             }
         }
-        
+
         for (String timeRes : movieResponse.getTimes().get(date)) {
             sbTime.append("<a class='btn text-warning border border-warning' ")
                     .append("data-time='").append(timeRes).append("' ")

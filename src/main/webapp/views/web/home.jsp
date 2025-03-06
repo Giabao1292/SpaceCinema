@@ -230,7 +230,7 @@
                                    >Watch trailer</h
                                 >
                             </a>
-                            <a class="btn btn-warning px-4 py-2" href="">Booking now</a>
+                            <a class="btn btn-warning px-4 py-2" href="/book-ticket?movie=${movieitem.title}">Booking now</a>
                         </div>
                     </div>
                 </c:forEach>

@@ -7,6 +7,7 @@ package com.Controller.Web;
 import com.Model.User;
 import com.Repository.UserRepository;
 import com.Repository.impl.UserRepositoryImpl;
+import com.Utils.PasswordUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -60,7 +61,6 @@ public class RegisterController extends HttpServlet {
         if (phone.matches(PHONE_COUNTRY) || phone.matches(PHONE_STRING)) {
             if (phone.charAt(0) == '(') {
                 phone = "0" + phone.substring(5);
-
             }
             return phone;
         }
@@ -99,7 +99,7 @@ public class RegisterController extends HttpServlet {
                 response.sendRedirect("/register?action=register&passWord=notsimilar");
                 return;
             }
-            User user = new User(0, userName, fullName, passWord, email, phone, status, null);
+            User user = new User(0, userName, fullName, PasswordUtil.hashPassword(passWord), email, phone, status, null);
             userRepository.createUser(user);
             response.sendRedirect("/register?action=register&status=Register Successful!");
         } else {

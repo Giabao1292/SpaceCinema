@@ -176,7 +176,7 @@
                     $("#dateBtn").html(response.dateBtn);
                 },
                 error: function (xhr) {
-                    console.error("Error:", xhr);
+                    alert("Showtimes have not been updated yet");
                 },
             });
         });

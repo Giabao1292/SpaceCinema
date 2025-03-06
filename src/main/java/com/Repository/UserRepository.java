@@ -17,4 +17,5 @@ public interface UserRepository {
     public boolean checkPhone(String phone);
     public User findUserByNameAndPassword(String username, String password);
     public String createUser(User user);
+    public User findUserByEmail(String email);
 }

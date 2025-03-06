@@ -8,7 +8,7 @@
 <%@include file = "/common/taglib.jsp" %>
 <!DOCTYPE html>
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-    <a class="navbar-brand ps-3 fs-3" href="/home"> <i class="fa-solid fa-film"></i>Space Cinema</a>
+    <a class="navbar-brand ps-3 fs-3" href="/home"> <i class="fa-solid text-success fa-film"></i>Space Cinema</a>
 
     <button
         class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0"

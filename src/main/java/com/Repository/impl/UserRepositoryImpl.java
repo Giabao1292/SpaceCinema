@@ -8,6 +8,7 @@ import com.Config.GetConnection;
 import com.Model.Role;
 import com.Model.User;
 import com.Repository.UserRepository;
+import com.Utils.PasswordUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -29,7 +30,36 @@ public class UserRepositoryImpl implements UserRepository {
 
     public void queryNormal(StringBuilder sql, String username, String password) {
         sql.append("WHERE u.status = 1 AND username = '" + username + "'");
-        sql.append(" AND password = '" + password + "'");
+    }
+
+    @Override
+    public User findUserByEmail(String email) {
+        String sql = "SELECT * FROM USER u WHERE u.email = ?";
+        User user = new User();
+        try (Connection con = GetConnection.getConnection(); PreparedStatement st = con.prepareStatement(sql)) {
+            st.setString(1, email);
+            try (ResultSet rs = st.executeQuery()) {
+                if (rs.next()) {
+                    user.setFullName(rs.getString("fullname"));
+                    user.setUserName(rs.getString("username"));
+                    user.setPassWord(rs.getString("password"));
+                    user.setStatus(rs.getInt("status"));
+                    String sqlRole = "Select * from role r JOIN user_role ur ON ur.role_id = r.role_id WHERE ur.user_id = " + rs.getInt("user_id");
+                    Statement stRole = con.createStatement();
+                    List<Role> roles = new ArrayList<>();
+                    ResultSet rsRoles = stRole.executeQuery(sqlRole);
+                    while (rsRoles.next()) {
+                        Role roleTmp = new Role();
+                        roleTmp.setCode(rsRoles.getString("code"));
+                        roles.add(roleTmp);
+                    }
+                    user.setRole(roles);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
     }
 
     @Override
@@ -41,7 +71,10 @@ public class UserRepositoryImpl implements UserRepository {
         try (Connection connection = GetConnection.getConnection()) {
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(sql.toString());
-            while (rs.next()) {
+            if (rs.next()) {
+                if (!PasswordUtil.checkPassword(password, rs.getString("password"))) {
+                    return null;
+                }
                 user.setFullName(rs.getString("fullname"));
                 user.setUserName(rs.getString("username"));
                 user.setPassWord(rs.getString("password"));
@@ -114,23 +147,27 @@ public class UserRepositoryImpl implements UserRepository {
     public String createUser(User user) {
         StringBuilder sql = new StringBuilder("INSERT INTO user (userName, fullName, passWord, email, phone, status) \n"
                 + " VALUES (?, ?, ?, ?, ?, ?)");
-        try (Connection con = GetConnection.getConnection(); PreparedStatement st = con.prepareStatement(sql.toString(), PreparedStatement.RETURN_GENERATED_KEYS)) {
-            st.setString(1, user.getUserName());
-            st.setString(2, user.getFullName());
-            st.setString(3, user.getPassWord());
-            st.setString(4, user.getEmail());
-            st.setString(5, user.getPhone());
-            st.setInt(6, user.getStatus());
-            st.executeUpdate();
-            try (ResultSet rs = st.getGeneratedKeys()) {
-                if (rs.next()) {
-                    StringBuilder addUser_role = new StringBuilder("Insert into user_role (role_id, user_id) values (?, ?)");
-                    try (PreparedStatement stRole = con.prepareStatement(addUser_role.toString())) {
-                        stRole.setInt(1, 2);
-                        stRole.setInt(2, rs.getInt(1));
-                        stRole.executeUpdate();
+        try (Connection con = GetConnection.getConnection()) {
+            con.setAutoCommit(false);
+            try (PreparedStatement st = con.prepareStatement(sql.toString(), PreparedStatement.RETURN_GENERATED_KEYS)) {
+                st.setString(1, user.getUserName());
+                st.setString(2, user.getFullName());
+                st.setString(3, user.getPassWord());
+                st.setString(4, user.getEmail());
+                st.setString(5, user.getPhone());
+                st.setInt(6, user.getStatus());
+                st.executeUpdate();
+                try (ResultSet rs = st.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        StringBuilder addUser_role = new StringBuilder("Insert into user_role (role_id, user_id) values (?, ?)");
+                        try (PreparedStatement stRole = con.prepareStatement(addUser_role.toString())) {
+                            stRole.setInt(1, 2);
+                            stRole.setInt(2, rs.getInt(1));
+                            stRole.executeUpdate();
+                        }
                     }
                 }
+                con.commit();
             }
         } catch (SQLException ex) {
             ex.printStackTrace();

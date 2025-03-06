@@ -5,7 +5,6 @@
 package com.Controller.Web;
 
 import com.DTO.Response.MovieResponse;
-import com.Model.Movie;
 import com.Model.User;
 import com.Repository.CinemaRepository;
 import com.Repository.DateRepository;
@@ -22,10 +21,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
 
 /**
  *
@@ -39,6 +38,7 @@ public class HomeController extends HttpServlet {
     private UserRepository userRepository = new UserRepositoryImpl();
     private DateRepository dateRepository = new DateRepositoryImpl();
     private TimeRepository timeRepository = new TimeRepositoryImpl();
+    private static final int COOKIE_MAX_AGE = 60 * 60 * 24 * 30;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -50,6 +50,17 @@ public class HomeController extends HttpServlet {
         if (action != null) {
             switch (action) {
                 case "login":
+                    Cookie[] cookies = request.getCookies();
+                    if(cookies != null){
+                        for(Cookie cookie : cookies){
+                            if("username".equals(cookie.getName())){
+                                request.setAttribute("username", cookie.getValue());
+                            }
+                            else if("password".equals(cookie.getName())){
+                               request.setAttribute("password", cookie.getValue());
+                            }
+                        }
+                    }
                     request.getRequestDispatcher("/views/login.jsp").forward(request, response);
                     return;
                 case "logout":
@@ -110,9 +121,18 @@ public class HomeController extends HttpServlet {
         String action = request.getParameter("action");
         String username = request.getParameter("userName");
         String password = request.getParameter("passWord");
+        String rememberMe = request.getParameter("rememberMe");
         User user = userRepository.findUserByNameAndPassword(username, password);
-        if (user.getFullName() != null) {
+        if (user != null && user.getFullName() != null) {
             SessionUtils.getInstance().remainValue(request, "USER", user);
+            if(rememberMe != null && rememberMe.equalsIgnoreCase("on")){
+                Cookie uCookie = new Cookie("username", username);
+                Cookie pCookie = new Cookie("password", password);
+                uCookie.setMaxAge(COOKIE_MAX_AGE);
+                pCookie.setMaxAge(COOKIE_MAX_AGE);
+                response.addCookie(pCookie);
+                response.addCookie(uCookie);
+            }
             if (User.isAdmin(user.getRole())) {
                 SessionUtils.getInstance().remainValue(request, "role", "admin");
                 response.sendRedirect("/admin-home");

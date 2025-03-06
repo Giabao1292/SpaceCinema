@@ -24,5 +24,32 @@
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
+    <context-param>
+        <param-name>google.clientId</param-name>
+        <param-value>254823530383-c223k6kn1b925vj0fkiai0rplo4d34sh.apps.googleusercontent.com</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>google.clientSecret</param-name>
+        <param-value>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</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>google.redirectUri</param-name>
+        <param-value>http://localhost:8080/googleoAuth2</param-value>
+    </context-param>
+    <context-param>
+        <param-name>facebook.clientId</param-name>
+         <param-value>1339556850512912</param-value>
+    </context-param>
+    <context-param>
+        <param-name>facebook.clientSecret</param-name>
+        <param-value>c4a92ce83aaf9c56c29aaf732044121a</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>facebook.redirectUri</param-name>
+        <param-value>http://localhost:8080/facebookoAuth2</param-value>
+    </context-param>
 </web-app>
  

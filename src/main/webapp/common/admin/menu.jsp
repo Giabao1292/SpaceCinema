@@ -31,7 +31,7 @@
                     </div>
                     Popcorn
                 </a>
-                <c:if test = "${role == 'admin'}">
+                <c:if test = "${role eq 'admin'}">
                     <a class="nav-link" href="/admin-home/user">
                         <div class="sb-nav-link-icon">
                             <i class="fas fa-user"></i>

@@ -13,7 +13,7 @@ import java.util.List;
  * @author lebao
  */
 public class MovieResponse {
-
+    private String id;
     private String title, trailer_link;
     private String age_rating, header_image, description, synopsis;
     private String poster_image;
@@ -52,6 +52,14 @@ public class MovieResponse {
 
     public void setPoster_image(String poster_image) {
         this.poster_image = poster_image;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     
