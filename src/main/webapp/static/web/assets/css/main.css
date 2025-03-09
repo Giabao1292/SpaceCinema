@@ -484,7 +484,30 @@ h6 {
     padding: 40px 0;
     position: relative;
 }
+.snack-card {
+    max-width: 400px;
+    margin: auto;
+    text-align: center;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
 
+.snack-card:hover {
+    transform: scale(1.05);
+}
+
+.snack-img {
+    height: 300px; /* Hình ảnh lớn hơn */
+    width: 100%;
+    object-fit: cover; /* Cắt ảnh nhưng vẫn giữ tỷ lệ */
+    object-position: center; /* Focus hình ảnh vào trung tâm */
+    border-bottom: 3px solid #ff9800;
+}
+.btn-outline-danger,
+.btn-outline-success {
+    width: 40px;
+}
 .footer .copyright p {
     margin-bottom: 0;
 }

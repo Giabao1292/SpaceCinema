@@ -63,32 +63,39 @@
                                 <td>${m.age_rating}</td>
                                 <td>${m.release_date}</td>
                                 <td>${m.status}</td>
-                                <td>
-                                    <button type="button" class="bg-danger border-0 rounded" data-bs-toggle="modal" data-bs-target="#deleteModal${m.id}">
-                                        <i class="fa-solid fa-delete-left"></i>
-                                    </button>
-                                    <div class="modal fade" id="deleteModal${m.id}" tabindex="-1" aria-labelledby="deleteModalLabel${m.id}" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="deleteModalLabel${m.id}">Delete</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    Are you sure you want to delete the movie <strong>${m.title}</strong>?
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                                    <a href="/admin-home/movie?action=delete&movie_id=${m.id}" class="btn btn-danger">Delete</a>
+                                <td >
+                                    <div class = "d-flex justify-content-between">
+                                        <button type="button" class="bg-danger border-0 rounded" data-bs-toggle="modal" data-bs-target="#deleteModal${m.id}">
+                                            <i class="fa-solid fa-delete-left"></i>
+                                        </button>
+                                        <div class="modal fade" id="deleteModal${m.id}" tabindex="-1" aria-labelledby="deleteModalLabel${m.id}" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="deleteModalLabel${m.id}">Delete</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Are you sure you want to delete the movie <strong>${m.title}</strong>?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                        <a href="/admin-home/movie?action=delete&movie_id=${m.id}" class="btn btn-danger">Delete</a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        <a href="/admin-home/movie?action=update&movie_id=${m.id}" class="text-decoration-none">
+                                            <button type="button" class="bg-primary border-0 rounded">
+                                                <i class="fa-regular fa-pen-to-square"></i>
+                                            </button>
+                                        </a>
+                                        <a href="/admin-home/movie?action=settime&movie_id=${m.id}" class="text-decoration-none">
+                                            <button type="button" class="bg-warning border-0 rounded">
+                                                <i class="fa-regular fa-clock"></i>
+                                            </button>
+                                        </a>
                                     </div>
-                                    <a href="/admin-home/movie?action=update&movie_id=${m.id}" class="text-decoration-none">
-                                        <button type="button" class="bg-primary border-0 rounded">
-                                            <i class="fa-regular fa-pen-to-square"></i>
-                                        </button>
-                                    </a>
                                 </td>
                             </tr>
                         </c:forEach>

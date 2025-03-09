@@ -40,7 +40,7 @@
     </context-param>
     <context-param>
         <param-name>facebook.clientId</param-name>
-         <param-value>1339556850512912</param-value>
+        <param-value>1339556850512912</param-value>
     </context-param>
     <context-param>
         <param-name>facebook.clientSecret</param-name>

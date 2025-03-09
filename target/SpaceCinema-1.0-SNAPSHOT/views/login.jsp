@@ -53,6 +53,15 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                         </div>
                                     </c:if>
+                                    <c:if test="${status == 'resetPassword'}">
+                                        <div class="container mt-5">
+                                            <!-- Alert -->
+                                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                                <strong>Reset password successfull!!</strong> 
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                            </div>
+                                        </div>
+                                    </c:if>
                                     <div class="form-check mb-3">
                                         <input
                                             class="form-check-input"
@@ -70,7 +79,7 @@
                                     <div
                                         class="d-flex align-items-center justify-content-between mt-4 mb-0"
                                         >
-                                        <a class="small" href="/change-pass?action=changepassword"
+                                        <a class="small" href="/forgot-password?action=forgotPassword"
                                            >Forgot Password?</a
                                         >
                                         <button class="btn btn-primary px-5 py-2">Login</button>

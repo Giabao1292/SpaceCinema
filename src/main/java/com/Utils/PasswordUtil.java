@@ -20,10 +20,4 @@ public class PasswordUtil {
         return BCrypt.checkpw(plainPassword, hashedPassword);
     }
 
-    public static void main(String[] args) {
-        for (int i = 0; i < 6; i++) {
-            String hashedPassword = hashPassword("123456");
-            System.out.println(hashedPassword);
-        }
-    }
 }

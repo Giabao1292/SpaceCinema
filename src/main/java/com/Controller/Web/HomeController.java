@@ -67,6 +67,9 @@ public class HomeController extends HttpServlet {
                     SessionUtils.getInstance().removeValue(request, "USER");
                     response.sendRedirect("/login?action=login");
                     return;
+                default:
+                    request.getRequestDispatcher("/views/web/home.jsp").forward(request, response);
+                    break;
             }
         } else {
             String cinema = request.getParameter("cinema");

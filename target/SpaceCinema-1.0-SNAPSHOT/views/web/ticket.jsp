@@ -32,7 +32,7 @@
                                    >Watch trailer</h
                                 >
                             </a>
-                            <a class="btn btn-warning px-4 py-2" href="#">Booking now</a>
+                            <a class="btn btn-warning px-4 py-2" href="/book-ticket?movie=${movieitem.title}">Booking now</a>
                         </div>
                     </div>
                     <div class="col-xl-3 col-md-6" style = "margin-bottom: 4rem">
@@ -63,17 +63,17 @@
                         </div>
                         <div class = "text-white">
                             <c:forEach var = "date" items = "${movieitem.times.keySet()}" varStatus="statusDate">
-                                <button id="toggleButton" class="btn btn-transparent border border-white text-white w-75 mt-1" data-idmain = "${status.index}" data-id="${statusDate.index}">
-                                    <div class = "d-flex justify-content-between">
+                                <div class="btn btn-transparent border border-warning text-white w-75 mt-1" data-idmain = "${status.index}" data-id="${statusDate.index}">
+                                    <div class = "toggleButton d-flex justify-content-between">
                                         <span>${date}</span>
                                         <span><i class="bi bi-arrow-down"></i></span>
                                     </div>
                                     <div id="content-${status.index}-${statusDate.index}" class="hidden text-start">
                                         <c:forEach var = "time" items = "${movieitem.times[date]}">
-                                            <a class = "btn text-white border border-white mt-1">${time}</a>
+                                            <a class = "btn btn-warning text-black mt-1" href = "book-ticket?cinema=${cinema}&movie=${movieitem.title}&date=${date}&time=${time}">${time}</a>
                                         </c:forEach>
                                     </div>
-                                </button>
+                                </div>
                             </c:forEach>
                         </div>
                     </div>
@@ -83,10 +83,14 @@
     </section>
     <script>
         $(document).ready(function () {
-            $(".btn-transparent").click(function () {
-                let id = $(this).data("id");
-                let idmain = $(this).data("idmain");
-                $("#content-" + idmain + "-" + id).slideToggle();
+            $(document).ready(function () {
+                $(".toggleButton").click(function () {
+                    let parent = $(this).closest(".btn-transparent");
+                    let id = parent.data("id");
+                    let idmain = parent.data("idmain");
+                    console.log(id + " " + idmain);
+                    $("#content-" + idmain + "-" + id).slideToggle();
+                });
             });
         });
     </script>

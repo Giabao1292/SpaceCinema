@@ -5,23 +5,22 @@
 package com.Controller.Admin;
 
 import com.Config.Format;
-import com.Config.GetConnection;
 import com.DTO.Request.MovieRequestDto;
 import com.DTO.Response.MovieResponse;
+import com.Model.Theatre;
 import com.Repository.GenreRepository;
 import com.Repository.StatusRepository;
+import com.Repository.TheatreRepository;
 import com.Repository.impl.GenreRepositoryImpl;
 import com.Repository.impl.MovieRepositoryImpl;
 import com.Repository.impl.StatusRepositoryImpl;
+import com.Repository.impl.TheatreRepositoryImpl;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -39,7 +38,7 @@ public class MovieController extends HttpServlet {
     private final MovieRepositoryImpl movieRes = new MovieRepositoryImpl();
     private StatusRepository statusRepository = new StatusRepositoryImpl();
     private GenreRepository genreRepository = new GenreRepositoryImpl();
-
+    private TheatreRepository theareRepository = new TheatreRepositoryImpl();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -66,6 +65,11 @@ public class MovieController extends HttpServlet {
                 id = request.getParameter("movie_id");
                 movieRes.deleteMovieById(id);
                 response.sendRedirect("/admin-home/movie");
+                break;
+            case "settime":
+                List<Theatre> theatreList = theareRepository.getTheatreType();
+                request.setAttribute("theatreList", theatreList);
+                request.getRequestDispatcher("/views/admin/movie/addShowTime.jsp").forward(request, response);
                 break;
             default:
                 showListMovie(request, response);

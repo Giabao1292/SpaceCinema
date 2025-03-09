@@ -13,7 +13,7 @@
 </head>
 <main>
     <div class="container-fluid px-4">
-        <h1 class="mt-4">Quản lý toà nhà</h1>
+        <h1 class="mt-4">Revenue Report</h1>
         <div class="row">
             <div class="col-xl-6 col-md-12">
                 <div class="card bg-danger text-white mb-4">
@@ -39,23 +39,17 @@
         <div class="row">
             <div class="col-xl-6">
                 <div class="card mb-4">
-                    <div class="card-header">
-                        <i class="fas fa-chart-area me-1"></i>
-                        Thu nhập hoa hồng
-                    </div>
-                    <div class="card-body">
-                        <canvas id="myAreaChart" width="100%" height="40"></canvas>
+                    <div class="card-header fs-5">
+                        <i class="fa-solid fa-coins"></i>
+                        Profit : 109403.7$
                     </div>
                 </div>
             </div>
             <div class="col-xl-6">
                 <div class="card mb-4">
-                    <div class="card-header">
-                        <i class="fas fa-chart-bar me-1"></i>
-                        Số lượng người dùng
-                    </div>
-                    <div class="card-body">
-                        <canvas id="myBarChart" width="100%" height="40"></canvas>
+                    <div class="card-header  fs-5">
+                        <i class="fa-regular fa-user"></i>
+                        Active Users : ${activeUser}
                     </div>
                 </div>
             </div>
@@ -63,18 +57,17 @@
         <div class="card mb-4">
             <div class="card-header">
                 <i class="fas fa-table me-1"></i>
-                Danh sách người dùng
+                List Users
             </div>
             <div class="card-body">
                 <table id="datatablesSimple">
                     <thead>
                         <tr>
+                            <th>Rank</th>
                             <th>Name</th>
-                            <th>Position</th>
-                            <th>Office</th>
-                            <th>Age</th>
-                            <th>Start date</th>
-                            <th>Salary</th>
+                            <th>Email</th>
+                            <th>Order Count</th>
+                            <th>Total spent</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -84,7 +77,6 @@
                             <td>Edinburgh</td>
                             <td>51</td>
                             <td>2008/11/13</td>
-                            <td>$183,000</td>
                         </tr>
                         <tr>
                             <td>Michael Bruce</td>
@@ -92,7 +84,6 @@
                             <td>Singapore</td>
                             <td>29</td>
                             <td>2011/06/27</td>
-                            <td>$183,000</td>
                         </tr>
                         <tr>
                             <td>Donna Snider</td>
@@ -100,7 +91,6 @@
                             <td>New York</td>
                             <td>27</td>
                             <td>2011/01/25</td>
-                            <td>$112,000</td>
                         </tr>
                     </tbody>
                 </table>

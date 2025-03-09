@@ -18,4 +18,7 @@ public interface UserRepository {
     public User findUserByNameAndPassword(String username, String password);
     public String createUser(User user);
     public User findUserByEmail(String email);
+    public boolean changePassWord(String email, String password);
+        
+    
 }

@@ -22,6 +22,8 @@ import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -58,7 +60,11 @@ public class BookTicketController extends HttpServlet {
                 try {
                     request.setAttribute("date", Format.Date(Format.fm2.parse(date)));
                 } catch (ParseException e) {
-                    throw new RuntimeException(e);
+                    try {
+                        request.setAttribute("date", Format.Date(Format.fm.parse(date)));
+                    } catch (ParseException ex) {
+                        Logger.getLogger(BookTicketController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
             request.setAttribute("movie", movieResponse);
@@ -103,7 +109,7 @@ public class BookTicketController extends HttpServlet {
         }
 
         for (String timeRes : movieResponse.getTimes().get(date)) {
-            sbTime.append("<a class='btn text-warning border border-warning' ")
+            sbTime.append("<a class='btn btn-warning text-black' ")
                     .append("data-time='").append(timeRes).append("' ")
                     .append("data-cinema='").append(cinema).append("' ")
                     .append("data-movie='").append(movie).append("' ")

@@ -24,6 +24,11 @@ public class FacebookOAuth2Servlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String error = request.getParameter("error");
+        if ("access_denied".equals(error)) {
+            response.sendRedirect("/login?action=login&status=denied");
+            return;
+        }
         String code = request.getParameter("code");
         if (code == null) {
             response.sendRedirect("/login?action=login&status=fail");

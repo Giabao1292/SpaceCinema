@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        
+
         <title><dec:title default="Home" /></title>
         <link href="/static/web/assets/img/logo.png" rel="icon" />
         <link
@@ -37,6 +37,7 @@
                 <!-- footer -->
             </div>
         </div>
+
         <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
             crossorigin="anonymous"

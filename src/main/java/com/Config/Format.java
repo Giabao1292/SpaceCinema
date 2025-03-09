@@ -4,6 +4,7 @@
  */
 package com.Config;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -17,5 +18,9 @@ public class Format {
     public static SimpleDateFormat fm2 = new SimpleDateFormat("yyyy-MM-dd");
     public static String Date(Date date){
         return fm.format(date);
+    }
+    public static void main(String[] args) throws ParseException{
+        String date = "Tuesday, 25/02/2025";
+        System.out.println(Format.Date(Format.fm.parse(date)));
     }
 }

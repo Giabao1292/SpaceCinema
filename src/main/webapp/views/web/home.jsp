@@ -72,7 +72,7 @@
                                 src="${banner.poster_image}"
                                 alt=""
                                 />
-                            <button class="booking-btn btn btn-warning px-5 py-3 ">Booking Now</button>
+                            <a href="/book-ticket?movie=${banner.title}" class="booking-btn btn btn-warning px-5 py-3 ">Booking Now</a>
                         </div>
                     </c:forEach>
                 </div>
@@ -294,7 +294,7 @@
                                    >Watch trailer</h
                                 >
                             </a>
-                            <a class="btn btn-warning px-4 py-2" href="">Booking now</a>
+                            <a class="btn btn-warning px-4 py-2" href="/book-ticket?movie=${movieUpcoming.title}">Booking now</a>
                         </div>
                     </div>
                 </c:forEach>

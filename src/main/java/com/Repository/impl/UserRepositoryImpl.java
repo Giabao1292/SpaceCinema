@@ -63,6 +63,21 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    public boolean changePassWord(String email, String password) {
+        User user = findUserByEmail(email);
+        String sql = "UPDATE user SET password = ? WHERE email = ?";
+        try (Connection conn = GetConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, password); 
+            stmt.setString(2, email); 
+            int rowsUpdated = stmt.executeUpdate();
+            return rowsUpdated > 0; 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
     public User findUserByNameAndPassword(String username, String password) {
         StringBuilder sql = new StringBuilder("");
         joinTable(sql);

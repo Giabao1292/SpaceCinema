@@ -1,4 +1,5 @@
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Model/ShowingTime.java
+/Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Repository/impl/TheatreRepositoryImpl.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Controller/Web/PopcornController.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Repository/DirectorRepository.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Config/AuthorizationFilter.java
@@ -13,6 +14,7 @@
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Model/Snack.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Repository/CastRepository.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Repository/SeatRepository.java
+/Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Utils/MailUtil.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Repository/UserRepository.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Controller/Web/PromotionController.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Controller/FacebookOAuth2Servlet.java
@@ -35,6 +37,7 @@
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Repository/impl/CastRepositoryImpl.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Repository/impl/DateRepositoryImpl.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Repository/impl/MovieRepositoryImpl.java
+/Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Model/Theatre.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Controller/Admin/HomeController.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/DTO/Request/MovieRequestDto.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Model/Role.java
@@ -42,9 +45,11 @@
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Model/Seat.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Config/GetConnection.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Controller/Web/NewsController.java
+/Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Controller/Web/ForgotPasswordServlet.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Model/Movie.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Repository/SnackRepository.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Repository/TimeRepository.java
+/Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Repository/TheatreRepository.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/DTO/Response/MovieResponse.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Model/Director.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Services/SnackService.java
