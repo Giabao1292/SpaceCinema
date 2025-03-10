@@ -14,11 +14,14 @@
 :root {
     --default-font: "Roboto", system-ui, -apple-system, "Segoe UI", Roboto,
         "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif,
-        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+        "Noto Color Emoji";
     --heading-font: "Cardo", sans-serif;
     --nav-font: "Inter", sans-serif;
 }
-a, .btn, button {
+a,
+.btn,
+button {
     cursor: pointer;
 }
 
@@ -39,7 +42,7 @@ a, .btn, button {
         255,
         255,
         0.5
-        ); /* The default color of the main navmenu links */
+    ); /* The default color of the main navmenu links */
     --nav-hover-color: #ffffff; /* Applied to main navmenu links when they are hovered over or active */
     --nav-mobile-background-color: #1a1a1a; /* Used as the background color for mobile navigation menu */
     --nav-dropdown-background-color: #1a1a1a; /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
@@ -48,7 +51,7 @@ a, .btn, button {
         255,
         255,
         0.5
-        ); /* Used for navigation links of the dropdown items in the navigation menu. */
+    ); /* Used for navigation links of the dropdown items in the navigation menu. */
     --nav-dropdown-hover-color: #ffffff; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
 }
 
@@ -401,7 +404,11 @@ h6 {
         justify-content: center;
         border-radius: 50%;
         transition: 0.3s;
-        background-color: color-mix(in srgb, var(--accent-color), transparent 90%);
+        background-color: color-mix(
+            in srgb,
+            var(--accent-color),
+            transparent 90%
+        );
     }
 
     .navmenu a i:hover,
@@ -430,7 +437,8 @@ h6 {
         padding: 10px 0;
         margin: 10px 20px;
         background-color: var(--nav-dropdown-background-color);
-        border: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+        border: 1px solid
+            color-mix(in srgb, var(--default-color), transparent 90%);
         box-shadow: none;
         transition: all 0.5s ease-in-out;
     }
@@ -475,7 +483,11 @@ h6 {
 # Global Footer
 --------------------------------------------------------------*/
 .footer {
-    --background-color: color-mix(in srgb, var(--default-color), transparent 95%);
+    --background-color: color-mix(
+        in srgb,
+        var(--default-color),
+        transparent 95%
+    );
     border-top: 1px solid
         color-mix(in srgb, var(--default-color), transparent 90%);
     color: var(--default-color);
@@ -851,10 +863,8 @@ section,
     font-size: 18px;
 }
 
-
-.btn-transparent
-{
-    width:80%;
+.btn-transparent {
+    width: 80%;
     background-color: transparent;
     color: #ffffff;
     transition: background-color 0.3s, color 0.3s;
@@ -1440,4 +1450,52 @@ section,
 --------------------------------------------------------------*/
 .starter-section {
     /* Add your styles here */
+}
+
+/*--------------------------------------------------------------
+# Starter Footer
+--------------------------------------------------------------*/
+.footer__row {
+    display: grid;
+    grid-template-columns: 1fr 2.5fr;
+    padding-bottom: 10px;
+    position: relative;
+}
+
+.footer__row::after {
+    content: "";
+    width: 100%;
+    height: 2px;
+    background-color: #6c757d;
+    position: absolute;
+    bottom: 0;
+}
+
+.footer__row ul li {
+    text-decoration: none;
+}
+
+.footer__content {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+}
+
+.footer__content ul {
+    list-style-type: none;
+}
+
+.footer__item {
+    margin-top: 10px;
+}
+
+.footer__link {
+    font-size: 1rem;
+    transition: all 0.15s ease;
+    -webkit-background-clip: text;
+}
+
+.footer__link:hover {
+    background: linear-gradient(90deg, #4facfe, #00f2fe);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }

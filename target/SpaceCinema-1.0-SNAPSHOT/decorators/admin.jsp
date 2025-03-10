@@ -3,13 +3,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-
         <title><dec:title default="Home" /></title>
         <link href="/static/web/assets/img/logo.png" rel="icon" />
         <link
             href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css"
             rel="stylesheet"
-            />
+        />
         <link href="/static/admin/css/styles.css" rel="stylesheet" />
         <script
             src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
@@ -30,7 +29,7 @@
             <%@ include file="/common/admin/menu.jsp" %>
             <!-- menu -->
             <div id="layoutSidenav_content">
-                <dec:body/>
+                <dec:body />
 
                 <!-- footer -->
                 <%@ include file="/common/admin/footer.jsp" %>
