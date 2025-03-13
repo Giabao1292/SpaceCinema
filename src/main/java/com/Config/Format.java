@@ -21,6 +21,6 @@ public class Format {
     }
     public static void main(String[] args) throws ParseException{
         String date = "Tuesday, 25/02/2025";
-        System.out.println(Format.Date(Format.fm.parse(date)));
+        System.out.println(fm2.format(fm.parse(date)));
     }
 }

@@ -25,13 +25,6 @@ import java.util.List;
 public class PopcornController extends HttpServlet {
     private SnackRepository snackRepository = new SnackRepositoryImpl();
 
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
-        return super.clone(); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
-    }
-
-    public PopcornController() {
-    }
    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {  

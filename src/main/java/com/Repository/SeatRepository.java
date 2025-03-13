@@ -4,10 +4,14 @@
  */
 package com.Repository;
 
+import com.Model.Seat;
+import java.util.List;
+
 /**
  *
  * @author lebao
  */
 public interface SeatRepository {
-    
+    public List<Seat> getSeatType(String theatreId);
+     public Seat getSeatById(String seatId) ;
 }

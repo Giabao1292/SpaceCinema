@@ -18,7 +18,7 @@ public class Snack {
 
     public Snack() {
     }
-
+    
     public Snack(String id, String snack_type, String snack_name, double price, String poster_image) {
         this.id = id;
         this.snack_type = snack_type;

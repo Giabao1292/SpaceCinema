@@ -1,4 +1,5 @@
 com/Model/Role.class
+com/Model/SnackItem.class
 com/Repository/impl/DateRepositoryImpl.class
 com/Model/Theatre.class
 com/Services/impl/UserServiceImpl.class
@@ -27,10 +28,13 @@ com/Repository/UserRepository.class
 com/Repository/TheatreRepository.class
 com/Config/GetConnection.class
 com/Repository/impl/CinemaRepositoryImpl.class
+com/Model/Cart.class
+com/Repository/impl/SeatRepositoryImpl.class
 com/Repository/impl/MovieRepositoryImpl.class
 com/Services/impl/MovieServiceImpl.class
 com/Controller/FacebookOAuth2Servlet.class
 com/Model/Genre.class
+com/Services/CartService.class
 com/Repository/impl/StatusRepositoryImpl.class
 com/Repository/TimeRepository.class
 com/Controller/Web/HomeController.class
@@ -39,6 +43,7 @@ com/Model/Time.class
 com/Controller/GoogleOAuth2Servlet.class
 com/Model/ShowingTime.class
 com/Repository/impl/DirectorRepositoryImpl.class
+com/Controller/Web/CartController.class
 com/Utils/MailUtil.class
 com/Repository/SnackRepository.class
 com/Controller/Web/PromotionController.class
@@ -48,6 +53,7 @@ com/Services/UserService.class
 com/Model/User.class
 com/Controller/Admin/PopcornController.class
 com/Repository/impl/TimeRepositoryImpl.class
+com/Services/impl/CartServiceImpl.class
 com/Repository/impl/CastRepositoryImpl.class
 com/Model/Cinema.class
 com/Services/SeatService.class
@@ -61,8 +67,8 @@ com/Utils/MailUtil$1.class
 com/Model/Cast.class
 com/Services/impl/SeatServiceImpl.class
 com/DTO/Request/MovieRequestDto.class
+com/Model/SeatItem.class
 com/Config/Format.class
-com/Repository/impl/SeatRepositoryImp.class
 com/Repository/SeatRepository.class
 com/Model/Director.class
 com/Services/SnackService.class

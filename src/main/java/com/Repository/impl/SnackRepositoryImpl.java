@@ -46,4 +46,28 @@ public class SnackRepositoryImpl implements SnackRepository {
         }
         return snackList;
     }
+    
+    @Override
+    public Snack getSnackById(String snackId) {
+        String sql = "SELECT s.*, st.type_name FROM snack s "
+                + "JOIN snack_type st ON st.type_id = s.snack_type_id "
+                + "WHERE s.snack_id = ?";
+        Snack snack = null;
+        try (Connection con = GetConnection.getConnection(); PreparedStatement st = con.prepareStatement(sql)) {
+            st.setString(1, snackId);
+            try (ResultSet rs = st.executeQuery()) {
+                if (rs.next()) {
+                    snack = new Snack();
+                    snack.setId(rs.getString("s.snack_id"));
+                    snack.setPrice(rs.getDouble("s.price"));
+                    snack.setSnack_name(rs.getString("s.snack_name"));
+                    snack.setSnack_type(rs.getString("s.snack_type_id"));
+                    snack.setPoster_image(rs.getString("s.poster_image"));
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SnackRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return snack;
+    }
 }

@@ -15,4 +15,5 @@ import java.util.Map;
  */
 public interface SnackRepository {
     public LinkedHashMap<String, List<Snack>> findAllSnack();
+    public Snack getSnackById(String snackId) ;
 }

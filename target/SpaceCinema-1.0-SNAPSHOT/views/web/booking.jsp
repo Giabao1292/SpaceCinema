@@ -7,21 +7,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@include file="/common/taglib.jsp" %>
 <!DOCTYPE html>
-<style>
-    .image-container {
-        position: relative;
-        display: inline-block;
-        cursor: pointer;
-    }
-    .image-container img {
-        width: 100%;
-        display: block;
-    }
-    .active img {
-        filter: brightness(0) saturate(100%) invert(78%) sepia(61%)
-            saturate(345%) hue-rotate(1deg) brightness(102%) contrast(101%);
-    }
-</style>
 <main class="main">
     <section id="gallery" class="gallery section">
         <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -132,111 +117,98 @@
                         </div>
                         <div id="content" class="hidden text-start">
                             <c:forEach var="timeBtn" items="${movie.times[date]}">
-                                <a class="btn text-black btn-warning border border-warning ${timeBtn eq time ? "active" : ""}">${timeBtn}</a>
+                                <a data-cinema ="${cinema}" data-movie ="${movie.title}" data-date="${date}" data-time ="${timeBtn}" class="timeBtn btn text-black gap-2 btn-warning border border-warning ${timeBtn eq time ? "active" : ""}">${timeBtn}</a>
                             </c:forEach>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class = "text-white text-center">
+            <div class="row gy-4 justify-content-between d-flex text-center mt-3 theatre">
+                <c:if test = "${not empty theatre}">
+                    <h1><i class="fa-solid fa-film"></i>Theatre ${theatre.theatre_num}</h1>
+                </c:if>
+            </div>
+            <form action = "/cart?action=add" method = "POST">
                 <div class="container mt-4">
-                    <h2 class="position-relative">CHỌN GHẾ - RẠP 01</h2>
-
-                    <!-- Hình ảnh nền -->
-                    <div class="position-relative mt-3">
-                        <img
-                            src="https://cinestar.com.vn/assets/images/img-screen.png"
-                            class="img-fluid opacity-50"
-                            alt="Màn hình rạp"
-                            />
-
-                        <!-- Chữ trên hình ảnh -->
-                        <div class="position-absolute top-50 start-50 translate-middle">
-                            <h3 class="fw-bold text-white bg-dark px-3 py-1 rounded">MÀN HÌNH</h3>
+                    <c:if test = "${not empty seatList}">
+                        <h3 class="text-center mb-4">CHOOSE TICKET</h3>
+                    </c:if>
+                    <div class="row ticket">
+                        <c:forEach var="seatType" items="${seatList}">
+                            <div class="col-md-6 fs-5">
+                                <div class="card p-3 mb-3">
+                                    <h5 class="text-black">ADULT</h5>
+                                    <p><strong>${seatType.type}</strong></p>
+                                    <p class="text-danger">${seatType.price} $</p>
+                                    <p class="text-success">Available slots: <strong>${seatType.quantity}</strong></p>
+                                    <input type="hidden" name="seatId" value="${seatType.id}" />
+                                    <input type="number" name ="seatQuantity" class="form-control border-warning" max ="${seatType.quantity}" min="0" value="0">
+                                </div>
+                            </div>
+                        </c:forEach>
+                        <input type="hidden" name="movie" value="${movie.title}" />
+                        <input type="hidden" name="cinema" value="${cinema}" />
+                        <input type="hidden" name="date" value="${date}" />
+                        <input type="hidden" name="time" value="${time}" />
+                        <input type="hidden" name="theatre" value="${theatre.theatre_num}" />
+                    </div>
+                </div>
+                <c:forEach var = "snackType" items = "${snackList.keySet()}">
+                    <div class="container mt-5">
+                        <h2 class="text-center mb-4">${snackType}</h2>
+                        <div class="row">
+                            <c:forEach var = "snack" items = "${snackList.get(snackType)}">
+                                <div class="col-md-4">
+                                    <div class="card snack-card shadow">
+                                        <input type="hidden" name="snackId" value="${snack.id}" />
+                                        <img
+                                            src="${snack.poster_image}"
+                                            class="card-img-top snack-img"
+                                            alt="Potato Chips"
+                                            />
+                                        <div class="card-body">
+                                            <h5 class="card-title">${snack.snack_name}</h5>
+                                            <h6 class="text-primary fw-bold">${snack.price}</h6>
+                                            <div class="input-group mt-3">
+                                                <button
+                                                    class="btn btn-outline-danger"
+                                                    type="button"
+                                                    onclick="this.nextElementSibling.stepDown()"
+                                                    >
+                                                    −
+                                                </button>
+                                                <input
+                                                    type="number"
+                                                    class="form-control text-center"
+                                                    name ="snackQuantity"
+                                                    value="0"
+                                                    min="0"
+                                                    />
+                                                <button
+                                                    class="btn btn-outline-success"
+                                                    type="button"
+                                                    onclick="this.previousElementSibling.stepUp()"
+                                                    >
+                                                    +
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </c:forEach>
                         </div>
                     </div>
-                    <div class="d-flex flex-column align-items-center">
-                        <div class="d-flex gap-2 mt-2">
-                            <button class="btn btn-outline-light">A1</button>
-                            <button class="btn btn-outline-light">A2</button>
-                            <button class="btn btn-outline-light">A3</button>
-                            <button class="btn btn-outline-light">A4</button>
-                            <button class="btn btn-outline-light">A5</button>
-                            <button class="btn btn-outline-light">A6</button>
-                            <button class="btn btn-outline-light">A7</button>
-                            <button class="btn btn-outline-light">A8</button>
-                            <button class="btn btn-outline-light">A9</button>
-                            <button class="btn btn-outline-light">A10</button>
-                            <button class="btn btn-outline-light">A11</button>
-                            <button class="btn btn-outline-light">A12</button>
-                            <button class="btn btn-outline-light">A13</button>
-                            <button class="btn btn-outline-light">A14</button>
-                            <button class="btn btn-outline-light">A15</button> 
-                        </div>      
-                    </div>
-
-                    <!-- Chú thích -->
-                    <div class="mt-3 d-flex justify-content-evenly">
-                        <span class="position-relative mt-3">
-                            <img
-                                src="https://cinestar.com.vn/assets/images/seat.svg"
-                                class="img-fluid"
-                                alt=""
-                                />
-                            <span
-                                class="fw-bold text-white fs-6 rounded justify-content-center align-content-center"
-                                >
-                                Single Seat
-                            </span>
-                        </span>
-                        <span class="position-relative mt-3">
-                            <img
-                                src="https://cinestar.com.vn/assets/images/seat-couple-w.svg"
-                                class="img-fluid"
-                                alt=""
-                                />
-                            <span
-                                class="fw-bold text-white fs-6 rounded justify-content-center align-content-center"
-                                >
-                                Double seat
-                            </span>
-                        </span>
-
-                        <span class="position-relative mt-3">
-                            <img
-                                src="https://cinestar.com.vn/assets/images/seat.svg"
-                                class="img-fluid opacity-50"
-                                alt=""
-                                />
-                            <span
-                                class="fw-bold text-white fs-6 rounded justify-content-center align-content-center"
-                                >
-                                Reserved Seat
-                            </span>
-                        </span>
-                        <span class="position-relative mt-3 active">
-                            <img
-                                src="https://cinestar.com.vn/assets/images/seat.svg"
-                                class="img-fluid"
-                                alt=""
-                                />
-                            <span
-                                class="fw-bold text-white fs-6 rounded justify-content-center align-content-center"
-                                >
-                                Reserved Seat
-                            </span>
-                        </span>
-                    </div>
-                </div>              
-            </div>
+                </c:forEach>
+                <div class="text-end mt-3">
+                    <button class="btn btn-warning p-3"><i class="fa-solid fa-cart-plus"></i> Adding to Cart</button>
+                    <a href="/cart" class="btn btn-primary p-3"><i class="fa-solid fa-basket-shopping"></i> View Cart</a>
+                </div>
+            </form>
         </div>
     </section>
 </main>
 <script>
     $(document).ready(function () {
-        $(".image-container").click(function () {
-            $(this).toggleClass("active");
-        });
         $("#toggleButton").click(function () {
             $("#content").slideToggle();
         });
@@ -264,6 +236,8 @@
                     $(".dateBtn").removeClass("active");
                     self.addClass("active");
                     $("#content").html(response.showTime);
+                    $(".ticket").html("");
+                    $(".theatre").html("");
                 },
                 error: function (xhr) {
                     console.error("Error:", xhr);
@@ -288,10 +262,40 @@
                     $("#displayCinema").html(cinema);
                     $("#content").html(response.showTime);
                     $("#dateBtn").html(response.dateBtn);
+                    $(".ticket").html("");
+                    $(".theatre").html("");
                 },
                 error: function (xhr) {
-                    console.error("Error:", xhr);
+                    alert("This cinema doesn't have a showing time for these criteria.");
+                }
+            });
+        });
+        $(document).on("click", ".timeBtn", function (event) {
+            var cinema = $(this).data("cinema");
+            var movie = $(this).data("movie");
+            var date = $(this).data("date");
+            var time = $(this).data("time");
+            console.log(cinema + " " + movie + " " + date + " " + time);
+            $.ajax({
+                url: "/book-ticket",
+                type: "POST",
+                dataType: "json",
+                data: {
+                    action: "timeBtn",
+                    cinema: cinema,
+                    movie: movie,
+                    date: date,
+                    time: time,
                 },
+                success: function (response) {
+                    console.log("Success!");
+                    console.log(response.seatHtml + " " + response.theatreHtml);
+                    $(".ticket").html(response.seatHtml);
+                    $(".theatre").html(response.theatreHtml);
+                },
+                error: function (xhr) {
+                    alert("This cinema doesn't have a showing time for these criteria.");
+                }
             });
         });
     });
