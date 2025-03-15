@@ -477,6 +477,21 @@ public class MovieRepositoryImpl implements MovieRepository {
     }
     
     @Override
+    public String getMovieId(String name){
+        String sql = "SELECT * FROM movie where title = ?";
+        try (Connection con = GetConnection.getConnection(); PreparedStatement st = con.prepareStatement(sql)) {
+            st.setString(1, name);
+            try(ResultSet rs = st.executeQuery()){
+                if(rs.next()){
+                    return rs.getString("movie_id");
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MovieRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    @Override
     public boolean updateMovie(MovieRequestDto movie, String movieId) {
         String sql = "UPDATE movie SET title = ?, trailer_link = ?, age_rating = ?, header_image = ?, "
                 + "description = ?, synopsis = ?, runtime_min = ?, release_date = ?, "

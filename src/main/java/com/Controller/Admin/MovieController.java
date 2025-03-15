@@ -145,7 +145,7 @@ public class MovieController extends HttpServlet {
         List<Integer> genres = new ArrayList<>();
         List<String> casts = new ArrayList<>();
         if (genreList != null && genreList.length != 0) {
-            genres = Arrays.stream(genreList).map(Integer::parseInt).collect(Collectors.toList());;
+            genres = Arrays.stream(genreList).map(Integer::parseInt).collect(Collectors.toList());
         }
         String[] castList = request.getParameterValues("casts");
         if (castList != null && castList.length != 0) {

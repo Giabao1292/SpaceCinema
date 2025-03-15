@@ -21,4 +21,5 @@ public interface MovieRepository {
     public boolean addMovie(MovieRequestDto movie);
     public boolean deleteMovieById(String id);
     public boolean updateMovie(MovieRequestDto movie, String movieId);
+    public String getMovieId(String name);
 }
