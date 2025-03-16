@@ -4,6 +4,7 @@
  */
 package com.Config;
 
+import com.Model.Cart;
 import com.Model.User;
 import com.Utils.SessionUtils;
 import jakarta.servlet.*;
@@ -53,7 +54,24 @@ public class AuthorizationFilter implements Filter {
                 }
             }
             chain.doFilter(requestServlet, responseServlet);
-        } else {
+        } else if (URL.startsWith("/cart")) {
+            User user = (User) SessionUtils.getInstance().getValue(request, "USER");
+            if (user != null) {
+                chain.doFilter(requestServlet, responseServlet);
+                return;
+            }
+            response.sendRedirect("/login?action=login&status=login_first");
+            return;
+        }
+        else if(URL.startsWith("/checkout")){
+            Cart cart = (Cart)SessionUtils.getInstance().getValue(request, "cart");
+            if(cart == null){
+                response.sendRedirect("/home");
+            }
+            else{
+                chain.doFilter(requestServlet, responseServlet);
+            }
+        }else {
             chain.doFilter(requestServlet, responseServlet);
         }
     }

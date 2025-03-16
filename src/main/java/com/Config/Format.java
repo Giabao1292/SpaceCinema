@@ -4,6 +4,7 @@
  */
 package com.Config;
 
+import com.google.protobuf.Api;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -22,5 +23,10 @@ public class Format {
     public static void main(String[] args) throws ParseException{
         String date = "Tuesday, 25/02/2025";
         System.out.println(fm2.format(fm.parse(date)));
+        String a = "Hi";
+        String b = "/asdf/bcds/cdad";
+        System.out.println(b.lastIndexOf("/"));
+                
+                
     }
 }

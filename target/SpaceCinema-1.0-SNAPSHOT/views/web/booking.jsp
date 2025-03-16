@@ -167,7 +167,7 @@
                                             alt="Potato Chips"
                                             />
                                         <div class="card-body">
-                                            <h5 class="card-title">${snack.snack_name}</h5>
+                                            <h5 class="card-title">${snack.name}</h5>
                                             <h6 class="text-primary fw-bold">${snack.price}</h6>
                                             <div class="input-group mt-3">
                                                 <button
