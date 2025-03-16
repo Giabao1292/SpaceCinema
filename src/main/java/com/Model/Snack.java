@@ -11,27 +11,19 @@ package com.Model;
 public class Snack {
 
     private String id;
-    private String snack_type;
-    private String snack_name;
+    private String name;
+    private String type;
     private double price;
     private String poster_image;
 
     public Snack() {
     }
-    
-    public Snack(String id, String snack_type, String snack_name, double price, String poster_image) {
+
+    public Snack(String id, String name, String type, double price, String poster_image) {
         this.id = id;
-        this.snack_type = snack_type;
-        this.snack_name = snack_name;
+        this.name = name;
+        this.type = type;
         this.price = price;
-        this.poster_image = poster_image;
-    }
-
-    public String getPoster_image() {
-        return poster_image;
-    }
-
-    public void setPoster_image(String poster_image) {
         this.poster_image = poster_image;
     }
 
@@ -43,20 +35,20 @@ public class Snack {
         this.id = id;
     }
 
-    public String getSnack_type() {
-        return snack_type;
+    public String getName() {
+        return name;
     }
 
-    public void setSnack_type(String snack_type) {
-        this.snack_type = snack_type;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getSnack_name() {
-        return snack_name;
+    public String getType() {
+        return type;
     }
 
-    public void setSnack_name(String snack_name) {
-        this.snack_name = snack_name;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public double getPrice() {
@@ -65,6 +57,14 @@ public class Snack {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public String getPoster_image() {
+        return poster_image;
+    }
+
+    public void setPoster_image(String poster_image) {
+        this.poster_image = poster_image;
     }
 
 }
