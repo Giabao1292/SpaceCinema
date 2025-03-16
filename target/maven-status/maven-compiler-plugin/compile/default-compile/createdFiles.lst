@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 com/Model/SnackItem.class
 com/Model/Theatre.class
 com/Services/impl/UserServiceImpl.class
@@ -33,6 +32,3 @@ com/Services/impl/SeatServiceImpl.class
 com/DTO/Request/MovieRequestDto.class
 com/Model/SeatItem.class
 com/Services/SnackService.class
-=======
-com\Utils\CinemaContextListener.class
->>>>>>> feature/news
