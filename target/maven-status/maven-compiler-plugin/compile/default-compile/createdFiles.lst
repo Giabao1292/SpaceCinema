@@ -5,6 +5,7 @@ com/Utils/PasswordUtil.class
 com/Repository/impl/TheatreRepositoryImpl.class
 com/Controller/Web/ZaloPayPayment.class
 com/Repository/CastRepository.class
+com/Controller/Web/CheckOutController.class
 com/Repository/DirectorRepository.class
 com/Controller/Web/ForgotPasswordServlet.class
 com/Repository/TheatreRepository.class

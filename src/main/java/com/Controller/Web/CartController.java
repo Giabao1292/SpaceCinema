@@ -68,23 +68,27 @@ public class CartController extends HttpServlet {
         String action = request.getParameter("action");
         switch (action) {
             case "add":
-                for (int i = 0; i < seatIds.length; i++) {
-                    String seatId = seatIds[i];
-                    int seatQuantity = seatQuantitys.get(i);
-                    if (seatQuantity > 0) {
-                        Seat seat = seatRepository.getSeatById(seatId);
-                        if (seat != null) {
-                            cartService.addSeat(cart, seat, seatQuantity, movie, cinema, date + " at " + time, theatre);
+                if (seatIds != null && seatIds.length > 0) {
+                    for (int i = 0; i < seatIds.length; i++) {
+                        String seatId = seatIds[i];
+                        int seatQuantity = seatQuantitys.get(i);
+                        if (seatQuantity > 0) {
+                            Seat seat = seatRepository.getSeatById(seatId);
+                            if (seat != null) {
+                                cartService.addSeat(cart, seat, seatQuantity, movie, cinema, date + " at " + time, theatre);
+                            }
                         }
                     }
                 }
-                for (int i = 0; i < snackIds.length; i++) {
-                    String snackId = snackIds[i];
-                    int snackQuantity = snackQuantitys.get(i);
-                    if (snackQuantity > 0) {
-                        Snack snack = snackRepository.getSnackById(snackId);
-                        if (snack != null) {
-                            cartService.addSnack(cart, snack, snackQuantity, cinema);
+                if (snackIds != null && snackIds.length > 0) {
+                    for (int i = 0; i < snackIds.length; i++) {
+                        String snackId = snackIds[i];
+                        int snackQuantity = snackQuantitys.get(i);
+                        if (snackQuantity > 0) {
+                            Snack snack = snackRepository.getSnackById(snackId);
+                            if (snack != null) {
+                                cartService.addSnack(cart, snack, snackQuantity, cinema);
+                            }
                         }
                     }
                 }
@@ -118,7 +122,8 @@ public class CartController extends HttpServlet {
 
             case "remove":
                 String itemId = request.getParameter("itemId");
-                String itemType = request.getParameter("itemType");;
+                String itemType = request.getParameter("itemType");
+                ;
                 if (itemType.equalsIgnoreCase("seat")) {
                     cartService.deleteSeat(cart, itemId);
                 } else if (itemType.equalsIgnoreCase("snack")) {

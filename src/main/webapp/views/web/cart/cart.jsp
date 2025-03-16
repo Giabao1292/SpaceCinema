@@ -87,7 +87,7 @@
                             <fmt:formatNumber var ="fmtSubTotalSnack" value = "${subTotalSnack}" groupingUsed="true" pattern = "0.00" />
                             <c:set var = "total" value = "${total + subTotalSnack}" />
                             <tr>
-                                <td>${snack.snack_name}</td>
+                                <td>${snack.name}</td>
                                 <td>${snackItem.cinema}</td>
                                 <td>
                                     <form action="/cart" method="post" class="d-flex">
