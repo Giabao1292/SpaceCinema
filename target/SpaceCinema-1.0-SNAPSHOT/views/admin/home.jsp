@@ -95,8 +95,8 @@
             <div class="col-xl-6 col-md-12">
                 <div class="card orders-card shadow-lg border-0 rounded-4 d-flex flex-row justify-content-between align-items-center p-3">
                     <div class="card-body text-start">
-                        <h5 class="text-uppercase fw-bold text-white mb-2">Orders</h5>
-                        <h2 class="fw-bold display-4">686</h2>
+                        <h5 class="text-uppercase fw-bold text-white mb-2">User visited</h5>
+                        <h2 class="fw-bold display-4">${totalLoggedUsers}</h2>
                     </div>
                     <div class="d-flex justify-content-center">
                         <i class="fa-solid fa-bag-shopping text-warning fs-1 cursor-pointer icon-hover"></i>
@@ -108,8 +108,8 @@
             <div class="col-xl-6 col-md-12">
                 <div class="card users-card shadow-lg border-0 rounded-4 d-flex flex-row justify-content-between align-items-center p-3">
                     <div class="card-body text-start">
-                        <h5 class="text-uppercase fw-bold text-white mb-2">Users</h5>
-                        <h2 class="fw-bold display-4"></h2>
+                        <h5 class="text-uppercase fw-bold text-white mb-2">Online</h5>
+                        <h2 class="fw-bold display-4">${activeUser}</h2>
                     </div>
                     <div class="d-flex justify-content-center">
                         <i class="fa-solid fa-users text-warning fs-1 cursor-pointer icon-hover"></i>
