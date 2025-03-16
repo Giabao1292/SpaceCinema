@@ -22,10 +22,10 @@
                         <p class="fw-bold fs-6">Download Application</p>
                         <div class="d-flex gap-3">
                             <a href="#!">
-                                <img src="/static/web/assets/img/androi-download.png" alt="Android Download" class="img-fluid rounded-3" width="120"/>
+                                <img src="https://raw.githubusercontent.com/Giabao1292/SpaceCinema/refs/heads/footer/src/main/webapp/static/web/assets/img/androi-download.png" alt="Android Download" class="img-fluid rounded-3" width="120"/>
                             </a>
                             <a href="#!">
-                                <img src="/static/web/assets/img/appstore-download.png" alt="App Store Download" class="img-fluid rounded-3" width="130"/>
+                                <img src="https://raw.githubusercontent.com/Giabao1292/SpaceCinema/refs/heads/footer/src/main/webapp/static/web/assets/img/appstore-download.png" alt="App Store Download" class="img-fluid rounded-3" width="130"/>
                             </a>
                         </div>
                     </div>
