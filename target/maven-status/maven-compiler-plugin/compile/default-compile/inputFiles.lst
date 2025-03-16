@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Utils\MailUtil.java
 E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Model\SnackItem.java
+=======
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Server\impl\MovieServiceImpl.java
+>>>>>>> feature/news
 E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\impl\CinemaRepositoryImpl.java
 E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\impl\GenreRepositoryImpl.java
 E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\impl\SnackRepositoryImpl.java
@@ -11,12 +15,18 @@ E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Controller\Web\PopcornContr
 E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\impl\DirectorRepositoryImpl.java
 E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\DTO\Response\MovieResponse.java
 E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\impl\DateRepositoryImpl.java
+<<<<<<< HEAD
 E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\StatusRepository.java
 E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Utils\CinemaContextListener.java
 E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Model\SeatItem.java
 E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Model\Theatre.java
 E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Services\impl\MovieServiceImpl.java
 E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Services\CartService.java
+=======
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Server\SnackService.java
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Utils\CinemaContextListener.java
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Server\impl\SnackServiceImpl.java
+>>>>>>> feature/news
 E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Controller\Web\BookTicketController.java
 E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\impl\MovieRepositoryImpl.java
 E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Controller\Web\PromotionController.java
