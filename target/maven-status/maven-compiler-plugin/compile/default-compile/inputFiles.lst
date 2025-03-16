@@ -63,6 +63,7 @@
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Controller/Web/CartController.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Utils/SessionUtils.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Repository/MovieRepository.java
+/Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Controller/Web/CheckOutController.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Model/Cinema.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Controller/Web/ZaloPayPayment.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Services/impl/SnackServiceImpl.java
