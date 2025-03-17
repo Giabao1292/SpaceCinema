@@ -39,6 +39,12 @@
                         User
                     </a>
                 </c:if>
+                <a class="nav-link" href="/admin-home/voucher">
+                    <div class="sb-nav-link-icon">
+                        <i class="fa-solid fa-pizza-slice"></i>
+                    </div>
+                    Voucher
+                </a>
             </div>
         </div>
     </nav>
