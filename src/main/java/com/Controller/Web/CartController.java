@@ -7,10 +7,14 @@ package com.Controller.Web;
 import com.Model.Cart;
 import com.Model.Seat;
 import com.Model.Snack;
+import com.Model.User;
+import com.Model.Voucher;
 import com.Repository.SeatRepository;
 import com.Repository.SnackRepository;
+import com.Repository.VoucherRepository;
 import com.Repository.impl.SeatRepositoryImpl;
 import com.Repository.impl.SnackRepositoryImpl;
+import com.Repository.impl.VoucherRepositoryImpl;
 import com.Services.CartService;
 import com.Services.impl.CartServiceImpl;
 import com.Utils.SessionUtils;
@@ -33,16 +37,32 @@ public class CartController extends HttpServlet {
     private SnackRepository snackRepository = new SnackRepositoryImpl();
     private SeatRepository seatRepository = new SeatRepositoryImpl();
     private CartService cartService = new CartServiceImpl();
+    private VoucherRepository voucherRepository = new VoucherRepositoryImpl();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        User user = (User) SessionUtils.getInstance().getValue(request, "USER");
+        int discount;
+        try {
+            discount = Integer.parseInt(request.getParameter("discount"));
+        } catch (Exception e) {
+            discount = 0;
+        }
+        List<Voucher> listVoucher = voucherRepository.getAllVoucherByUserId(user.getId());
+        if (discount != 0) {
+            request.setAttribute("discount", discount);
+        }
+        request.setAttribute("voucherList", listVoucher);
         request.getRequestDispatcher("views/web/cart/cart.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        User user = (User) SessionUtils.getInstance().getValue(request, "USER");
+        List<Voucher> listVoucher = voucherRepository.getAllVoucherByUserId(user.getId());
+        request.setAttribute("voucherList", listVoucher);
         String cinema = request.getParameter("cinema");
         String movie = request.getParameter("movie");
         String date = request.getParameter("date");
