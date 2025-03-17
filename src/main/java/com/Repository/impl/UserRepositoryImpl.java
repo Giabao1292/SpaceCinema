@@ -90,9 +90,12 @@ public class UserRepositoryImpl implements UserRepository {
                 if (!PasswordUtil.checkPassword(password, rs.getString("password"))) {
                     return null;
                 }
+                user.setId(rs.getInt("user_id"));
                 user.setFullName(rs.getString("fullname"));
                 user.setUserName(rs.getString("username"));
                 user.setPassWord(rs.getString("password"));
+                user.setPhone(rs.getString("phone"));
+                user.setEmail(rs.getString("email"));
                 String sqlRole = "Select * from role r JOIN user_role ur ON ur.role_id = r.role_id WHERE ur.user_id = " + rs.getInt("user_id");
                 Statement stRole = connection.createStatement();
                 List<Role> roles = new ArrayList<>();
