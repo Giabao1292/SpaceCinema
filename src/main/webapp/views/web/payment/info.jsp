@@ -18,6 +18,8 @@
                         <input
                             type="text"
                             class="form-control"
+                            name="name"
+                            value = "${USER.fullName != null ? USER.fullName : ""}"
                             placeholder="Enter full name"
                             />
                     </div>
@@ -26,6 +28,8 @@
                         <input
                             type="text"
                             class="form-control"
+                            name="phone"
+                            value = "${USER.phone != null ? USER.phone : ""}"
                             placeholder="Enter phone number"
                             />
                     </div>
@@ -34,7 +38,9 @@
                         <input
                             type="email"
                             class="form-control"
+                            name ="email"
                             placeholder="Enter email"
+                            value = "${USER.email != null ? USER.email : ""}"
                             />
                     </div>
                     <button type="submit" class="btn btn-warning w-100 fw-bold">
