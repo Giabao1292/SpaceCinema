@@ -111,15 +111,48 @@
                     </tbody>
                 </table>
             </div>
-            <fmt:formatNumber var = "fmtTotal" value = "${total}" groupingUsed = "true" pattern = "0.00" />
+            <div class="text-end mt-3">
+                <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#voucherModal">
+                    🎟 Select Voucher
+                </button>
+            </div>
+            <c:if test = "${not empty discount}">
+                <fmt:formatNumber var = "fmtTotal" value = "${total * (100 - discount) / 100}" groupingUsed = "true" pattern = "0.00" />
+            </c:if>
+            <c:if test = "${empty discount}">
+                <fmt:formatNumber var = "fmtTotal" value = "${total}" groupingUsed = "true" pattern = "0.00" />
+            </c:if>
             <h3 class="text-end text-warning mt-3">
-                Total: ${total} VND
+                Total: ${fmtTotal} VND
             </h3>
             <div class="text-end mt-3">
                 <a class="btn btn-success px-3" href="/checkout">Pay Now</a>
             </div>
         </div>
     </c:if>
+</div>
+
+<!-- Modal hiển thị danh sách voucher -->
+<div class="modal fade" id="voucherModal" tabindex="-1" aria-labelledby="voucherModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content bg-dark text-light">
+            <div class="modal-header">
+                <h5 class="modal-title text-warning" id="voucherModalLabel">🎟 Available Vouchers</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <ul class="list-group">
+                    <c:forEach var="voucher" items="${voucherList}">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>${voucher.discount}% Off</div>
+                            <div>${voucher.description}</div>
+                            <a class="btn btn-success btn-sm" href="/cart?discount=${voucher.discount}" >Apply</a>
+                        </li>
+                    </c:forEach>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Modal Xác Nhận Xóa -->

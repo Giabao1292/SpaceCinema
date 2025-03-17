@@ -21,12 +21,7 @@ public class Format {
         return fm.format(date);
     }
     public static void main(String[] args) throws ParseException{
-        String date = "Tuesday, 25/02/2025";
-        System.out.println(fm2.format(fm.parse(date)));
-        String a = "Hi";
-        String b = "/asdf/bcds/cdad";
-        System.out.println(b.lastIndexOf("/"));
-                
-                
+        Date a = new Date("2025-03-15");
+        System.out.println(new java.sql.Date(a.getTime()));
     }
 }
