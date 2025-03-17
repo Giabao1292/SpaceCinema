@@ -82,8 +82,8 @@
             <div class="col-xl-6 col-md-12">
                 <div class="card revenue-card shadow-lg border-0 rounded-4 d-flex flex-row justify-content-between align-items-center p-3">
                     <div class="card-body text-start">
-                        <h5 class="text-uppercase fw-bold text-white mb-2">Revenue</h5>
-                        <h2 class="fw-bold display-4">$9,253/month</h2>
+                        <h5 class="text-uppercase fw-bold text-white mb-2">Total Revenue</h5>
+                        <h2 class="fw-bold display-4">$${revenue}</h2>
                     </div>
                     <div class="d-flex justify-content-center">
                         <i class="fa-solid fa-dollar-sign text-warning fs-1 cursor-pointer icon-hover"></i>
@@ -145,45 +145,25 @@
         <div class="card mb-4">
             <div class="card-header">
                 <i class="fas fa-table me-1"></i>
-                Danh sách người dùng
+                List Top User Booking
             </div>
             <div class="card-body">
                 <table id="datatablesSimple">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Office</th>
-                            <th>Age</th>
-                            <th>Start date</th>
-                            <th>Salary</th>
+                            <th>User Name</th>
+                            <th>Email</th>
+                            <th>Total Price Booking</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Shad Decker</td>
-                            <td>Regional Director</td>
-                            <td>Edinburgh</td>
-                            <td>51</td>
-                            <td>2008/11/13</td>
-                            <td>$183,000</td>
-                        </tr>
-                        <tr>
-                            <td>Michael Bruce</td>
-                            <td>Javascript Developer</td>
-                            <td>Singapore</td>
-                            <td>29</td>
-                            <td>2011/06/27</td>
-                            <td>$183,000</td>
-                        </tr>
-                        <tr>
-                            <td>Donna Snider</td>
-                            <td>Customer Support</td>
-                            <td>New York</td>
-                            <td>27</td>
-                            <td>2011/01/25</td>
-                            <td>$112,000</td>
-                        </tr>
+                        <c:forEach var="b" items="${booking}">
+                            <tr>
+                                <td>${b.user_name}</td>
+                                <td>${b.email}</td>
+                                <td>${b.price}</td>
+                            </tr>
+                        </c:forEach>
                     </tbody>
                 </table>
             </div>
