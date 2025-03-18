@@ -14,6 +14,7 @@ public class Booking {
     private String user_name;
     private String email;
     private int price;
+    private int numBooking;
 
     public Booking() {
     }
@@ -24,6 +25,17 @@ public class Booking {
         this.email = email;
         this.price = price;
     }
+
+    public Booking(int id, int user_id, String user_name, String email, int price, int numBooking) {
+        this.id = id;
+        this.user_id = user_id;
+        this.user_name = user_name;
+        this.email = email;
+        this.price = price;
+        this.numBooking = numBooking;
+    }
+    
+    
 
     public int getId() {
         return id;
@@ -63,6 +75,14 @@ public class Booking {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public int getNumBooking() {
+        return numBooking;
+    }
+
+    public void setNumBooking(int numBooking) {
+        this.numBooking = numBooking;
     }
     
     

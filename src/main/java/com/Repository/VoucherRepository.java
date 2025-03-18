@@ -13,4 +13,9 @@ import java.util.List;
  */
 public interface VoucherRepository {
     public List<Voucher> getAllVoucherByUserId(int userid);
+    List<Voucher> getListVoucher();
+    int addVoucher(Voucher voucher);
+    void addUserVoucher(int userId, int voucherId);
+    void deleteVoucherById(int id);
+    Voucher getVoucherById(int id);
 } 

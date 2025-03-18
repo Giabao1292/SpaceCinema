@@ -36,7 +36,7 @@ public class BookingRepositoryImpl implements BookingRepository {
     @Override
     public List<Booking> listUserBooking() {
         List<Booking> bookings = new ArrayList<>();
-        String sql = "SELECT u.username, u.email, SUM(b.total_price) AS total_booking_fee\n"
+        String sql = "SELECT u.username, u.email, SUM(b.total_price) AS total_booking_fee, COUNT(b.booking_id) AS total_bookings\n"
                 + "FROM booking b\n"
                 + "JOIN user u ON b.user_id = u.user_id\n"
                 + "GROUP BY u.user_id\n"
@@ -47,6 +47,7 @@ public class BookingRepositoryImpl implements BookingRepository {
                 booking.setUser_name(rs.getString("username"));
                 booking.setEmail(rs.getString("email"));
                 booking.setPrice(rs.getInt("total_booking_fee"));
+                booking.setNumBooking(rs.getInt("total_bookings"));
                 bookings.add(booking);
             }
         } catch (SQLException e) {
