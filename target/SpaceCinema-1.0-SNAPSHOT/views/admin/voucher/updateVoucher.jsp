@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@include file = "/common/taglib.jsp"%>
+
 <!DOCTYPE html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -13,14 +15,10 @@
 <main>
     <div class="container-fluid px-4">
         <div class="container mt-4">
-            <h2 class="font-monospace">Add Voucher</h2>
-            <c:if test="${not empty message}">
-                <div class="alert alert-danger" role="alert">
-                    ${message}
-                </div>
-            </c:if>
+            <h2 class="font-monospace">Update Voucher</h2>
             <form id="voucherForm" action="/admin-home/voucher" method="POST">
-                <input type="hidden" name="action" value="create">
+                <input type="hidden" name="action" value="update">
+                <input type="hidden" name="id" value="${id}">
                 <div class="row g-3">
                     <div class="col-md-4">
                         <label for="name" class="form-label">Voucher Name</label>
@@ -30,6 +28,7 @@
                             id="name"
                             name="voucherName"
                             placeholder="Enter name"
+                            value="${voucher.name}"
                             required
                             />
                     </div>
@@ -42,6 +41,7 @@
                             id="street"
                             name="description"
                             placeholder="Enter description"
+                            value="${voucher.description}"
                             required
                             />
                     </div>
@@ -55,6 +55,7 @@
                             name="discount"
                             placeholder="Enter discount"
                             min="1"
+                            value="${voucher.discount}"
                             required
                             />
                     </div>
@@ -70,6 +71,9 @@
                                         type="checkbox" 
                                         id="user-${status.index}" 
                                         name="userId" 
+                                        <c:forEach var="user" items="${voucher.users}">
+                                            <c:if test="${user.id == u.id}" > checked</c:if>
+                                        </c:forEach>
                                         />
                                     <label class="form-check-label" for="user-${status.index}">
                                         ${u.userName}
@@ -85,10 +89,7 @@
                             type="submit"
                             class="btn btn-success"
                             >
-                            Adding
-                        </button>
-                        <button type="reset" class="btn btn-danger">
-                            Cancel
+                            Update
                         </button>
                     </div>
                 </div>

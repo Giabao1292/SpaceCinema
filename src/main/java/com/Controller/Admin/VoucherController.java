@@ -15,7 +15,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -63,6 +66,9 @@ public class VoucherController extends HttpServlet {
             case "create":
                 createVoucher(request, response);
                 break;
+            case "update":
+                updateVoucher(request, response);
+                break;
             default:
                 throw new AssertionError();
         }
@@ -74,9 +80,14 @@ public class VoucherController extends HttpServlet {
         request.getRequestDispatcher("/views/admin/voucher/listVoucher.jsp").forward(request, response);
     }
 
-    private void goUpdateVoucher(HttpServletRequest request, HttpServletResponse response) {
+    private void goUpdateVoucher(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        request.getRequestDispatcher("/views/admin/voucher/updateVoucher.jsp");
+        Voucher voucher = daoVoucher.getVoucherById(id);
+        List<User> users = daoUser.showInfoUsers();
+        request.setAttribute("id", id);
+        request.setAttribute("voucher", voucher);
+        request.setAttribute("users", users);
+        request.getRequestDispatcher("/views/admin/voucher/updateVoucher.jsp").forward(request, response);
     }
 
     private void deleteVoucher(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -95,17 +106,34 @@ public class VoucherController extends HttpServlet {
         voucher.setDescription(description);
         int voucherId = daoVoucher.addVoucher(voucher);
         if (voucherId > 0) {
-            String[] userIds = request.getParameterValues("userId");
-            for (String idStr : userIds) {
-                int id = Integer.parseInt(idStr);
-                daoVoucher.addUserVoucher(id, voucherId);
+            String[] userIdList = request.getParameterValues("userId");
+            List<Integer> userIds = new ArrayList<>();
+            if (userIdList != null && userIdList.length != 0) {
+                userIds = Arrays.stream(userIdList).map(Integer::parseInt).collect(Collectors.toList());
             }
+            daoVoucher.addUserVoucher(userIds, voucherId);
             response.sendRedirect("/admin-home/voucher");
-        }
-        else {
+        } else {
             String message = "Add voucher failed";
             request.setAttribute("message", message);
             request.getRequestDispatcher("/views/admin/voucher/createVoucher.jsp");
         }
+    }
+
+    private void updateVoucher(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String voucherName = request.getParameter("voucherName");
+        String description = request.getParameter("description");
+        int discount = Integer.parseInt(request.getParameter("discount"));
+        Voucher voucher = new Voucher();
+        voucher.setName(voucherName);
+        voucher.setDiscount(discount);
+        voucher.setDescription(description);
+        String[] userIdList = request.getParameterValues("userId");
+        List<Integer> userIds = new ArrayList<>();
+        if (userIdList != null && userIdList.length != 0) {
+            userIds = Arrays.stream(userIdList).map(Integer::parseInt).collect(Collectors.toList());
+        }
+        daoVoucher.updateVoucher(voucher, Integer.parseInt(request.getParameter("id")), userIds);
+        response.sendRedirect("/admin-home/voucher");
     }
 }
