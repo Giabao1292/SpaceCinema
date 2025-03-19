@@ -1,5 +1,6 @@
 com\Model\SnackItem.class
 com\Repository\StatusRepository.class
+com\Controller\Web\ProfileController.class
 com\Model\Cart.class
 com\DTO\Request\MovieRequestDto.class
 com\Controller\Web\ForgotPasswordServlet.class
