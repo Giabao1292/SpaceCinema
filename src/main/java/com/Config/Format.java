@@ -4,7 +4,6 @@
  */
 package com.Config;
 
-import com.google.protobuf.Api;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,7 +20,8 @@ public class Format {
         return fm.format(date);
     }
     public static void main(String[] args) throws ParseException{
-        Date a = new Date("2025-03-15");
-        System.out.println(new java.sql.Date(a.getTime()));
+        Date a = new Date();
+        String b = fm.format(a);
+        System.out.println(fm2.format(fm.parse(b)));
     }
 }

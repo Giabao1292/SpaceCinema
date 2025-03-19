@@ -117,17 +117,19 @@
                 </button>
             </div>
             <c:if test = "${not empty discount}">
-                <fmt:formatNumber var = "fmtTotal" value = "${total * (100 - discount) / 100}" groupingUsed = "true" pattern = "0.00" />
+                <c:set var ="total" value = "${total * (100 - discount) / 100}"/>
             </c:if>
-            <c:if test = "${empty discount}">
-                <fmt:formatNumber var = "fmtTotal" value = "${total}" groupingUsed = "true" pattern = "0.00" />
-            </c:if>
+            <fmt:formatNumber var = "fmtTotal" value = "${total}" groupingUsed = "true" pattern = "0.00" />
             <h3 class="text-end text-warning mt-3">
                 Total: ${fmtTotal} VND
             </h3>
             <div class="text-end mt-3">
-                <a class="btn btn-success px-3" href="/checkout">Pay Now</a>
+                <form action="/checkout" method="POST">
+                    <input type ="hidden" value="${total}" name ="total"/>
+                    <button type="submit" class="btn btn-success px-3">Pay Now</button>
+                </form>
             </div>
+
         </div>
     </c:if>
 </div>
@@ -146,7 +148,11 @@
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             <div>${voucher.discount}% Off</div>
                             <div>${voucher.description}</div>
-                            <a class="btn btn-success btn-sm apply-voucher" data-discount="${voucher.discount}" >Apply</a>
+                            <form action="/cart?action=discount" method="POST">
+                                <input type="hidden" name="discountId" value="${voucher.id}">
+                                <input type="hidden" name="discount" value="${voucher.discount}">
+                                <button type="submit" class="btn btn-success btn-sm">Apply</button>
+                            </form>
                         </li>
                     </c:forEach>
                 </ul>

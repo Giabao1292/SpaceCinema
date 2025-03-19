@@ -163,7 +163,7 @@ public class BookTicketController extends HttpServlet {
                     .append("<div class='card p-3 mb-3'>")
                     .append("<h5 class='text-black'>ADULT</h5>")
                     .append("<p><strong>").append(escapeJson(seat.getType())).append("</strong></p>")
-                    .append("<p class='text-danger'>").append(seat.getPrice()).append(" $</p>")
+                    .append("<p class='text-danger'>").append(seat.getPrice()).append(" VND</p>")
                     .append("<p class='text-success'>Available slots: <strong>").append(seat.getQuantity()).append("</strong></p>")
                     .append("<input type='hidden' name='seatId' value ='").append(seat.getId()).append("' />")
                     .append("<input type='number' name='seatQuantity' class='form-control border-warning' min='0' max = '" + seat.getQuantity() + "' value='0'>")

@@ -14,4 +14,5 @@ import java.util.List;
 public interface SeatRepository {
     public List<Seat> getSeatType(String theatreId);
      public Seat getSeatById(String seatId) ;
+     public int decreaseSeat(String seatId, int quantity);
 }

@@ -18,9 +18,10 @@ import java.util.List;
  *
  * @author lebao
  */
-public class SeatRepositoryImpl implements SeatRepository{
+public class SeatRepositoryImpl implements SeatRepository {
+
     @Override
-    public List<Seat> getSeatType(String theatreId){
+    public List<Seat> getSeatType(String theatreId) {
         String sql = "SELECT s.*, st.type_name FROM seat s "
                 + "join seat_type st on st.type_id = s.seat_type_id "
                 + "join theatre t on t.theatre_id = s.theatre_id "
@@ -28,9 +29,9 @@ public class SeatRepositoryImpl implements SeatRepository{
         List<Seat> seatList = new ArrayList<>();
         try (Connection conn = GetConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, theatreId);
-            try(ResultSet rs = stmt.executeQuery()){
-                while(rs.next()){
-                    Seat seat= new Seat();
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Seat seat = new Seat();
                     seat.setId(rs.getString("s.seat_id"));
                     seat.setPrice(rs.getDouble("s.price"));
                     seat.setQuantity(rs.getInt("s.quantity"));
@@ -43,6 +44,7 @@ public class SeatRepositoryImpl implements SeatRepository{
         }
         return seatList;
     }
+
     @Override
     public Seat getSeatById(String seatId) {
         String sql = "SELECT s.*, st.type_name FROM seat s "
@@ -64,5 +66,18 @@ public class SeatRepositoryImpl implements SeatRepository{
             e.printStackTrace();
         }
         return seat;
+    }
+
+    @Override
+    public int decreaseSeat(String seatId, int quantity) {
+        String sql = "UPDATE seat SET quantity = quantity - ? WHERE seat_id = ? AND quantity > 0";
+        try (Connection conn = GetConnection.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, quantity);
+            pstmt.setString(2, seatId);
+            return pstmt.executeUpdate(); 
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1; 
+        }
     }
 }

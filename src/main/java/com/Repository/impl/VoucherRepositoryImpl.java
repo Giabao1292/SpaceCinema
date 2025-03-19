@@ -220,4 +220,17 @@ public class VoucherRepositoryImpl implements VoucherRepository {
         return users;
     }
 
+    public boolean removeVoucher(int userId, int voucherId) {
+        String sql = "DELETE FROM user_voucher WHERE user_id = ? AND voucher_id = ?";
+        try (Connection con = GetConnection.getConnection(); PreparedStatement st = con.prepareStatement(sql)) {
+            st.setInt(1, userId);
+            st.setInt(2, voucherId);
+            int rowsAffected = st.executeUpdate();
+            return rowsAffected > 0; 
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }

@@ -42,32 +42,17 @@ public class CartController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        User user = (User) SessionUtils.getInstance().getValue(request, "USER");
-        int discount;
-        try {
-            discount = Integer.parseInt(request.getParameter("discount"));
-        } catch (Exception e) {
-            discount = 0;
-        }
-        List<Voucher> listVoucher = voucherRepository.getAllVoucherByUserId(user.getId());
-        if (discount != 0) {
-            request.setAttribute("discount", discount);
-        }
-        request.setAttribute("voucherList", listVoucher);
         request.getRequestDispatcher("views/web/cart/cart.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        User user = (User) SessionUtils.getInstance().getValue(request, "USER");
-        List<Voucher> listVoucher = voucherRepository.getAllVoucherByUserId(user.getId());
-        request.setAttribute("voucherList", listVoucher);
-        String cinema = request.getParameter("cinema");
-        String movie = request.getParameter("movie");
-        String date = request.getParameter("date");
-        String time = request.getParameter("time");
-        String theatre = request.getParameter("theatre");
+        String cinema = request.getParameter("cinema") != null ? request.getParameter("cinema").trim() : "";
+        String movie = request.getParameter("movie") != null ? request.getParameter("movie").trim() : "";
+        String date = request.getParameter("date") != null ? request.getParameter("date").trim() : "";
+        String time = request.getParameter("time") != null ? request.getParameter("time").trim() : "";
+        String theatre = request.getParameter("theatre") != null ? request.getParameter("theatre").trim() : "";
         String[] seatIds = request.getParameterValues("seatId");
         String[] snackIds = request.getParameterValues("snackId");
         String[] seatQuantityList = request.getParameterValues("seatQuantity");
@@ -141,12 +126,17 @@ public class CartController extends HttpServlet {
             case "remove":
                 String itemId = request.getParameter("itemId");
                 String itemType = request.getParameter("itemType");
-                ;
                 if (itemType.equalsIgnoreCase("seat")) {
                     cartService.deleteSeat(cart, itemId);
                 } else if (itemType.equalsIgnoreCase("snack")) {
                     cartService.deleteSnack(cart, itemId);
                 }
+                break;
+            case "discount":
+                int discountId = Integer.parseInt(request.getParameter("discountId"));
+                int discount = Integer.parseInt(request.getParameter("discount"));
+                request.setAttribute("discount", discount);
+                SessionUtils.getInstance().remainValue(request, "voucherId", discountId);
                 break;
         }
         session.remainValue(request, "cart", cart);

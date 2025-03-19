@@ -139,7 +139,7 @@
                                 <div class="card p-3 mb-3">
                                     <h5 class="text-black">ADULT</h5>
                                     <p><strong>${seatType.type}</strong></p>
-                                    <p class="text-danger">${seatType.price} $</p>
+                                    <p class="text-danger">${seatType.price} VND</p>
                                     <p class="text-success">Available slots: <strong>${seatType.quantity}</strong></p>
                                     <input type="hidden" name="seatId" value="${seatType.id}" />
                                     <input type="number" name ="seatQuantity" class="form-control border-warning" max ="${seatType.quantity}" min="0" value="0">
@@ -168,7 +168,7 @@
                                             />
                                         <div class="card-body">
                                             <h5 class="card-title">${snack.name}</h5>
-                                            <h6 class="text-primary fw-bold">${snack.price}</h6>
+                                            <h6 class="text-primary fw-bold">${snack.price} VND</h6>
                                             <div class="input-group mt-3">
                                                 <button
                                                     class="btn btn-outline-danger"
