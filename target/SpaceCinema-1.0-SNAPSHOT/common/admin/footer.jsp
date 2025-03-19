@@ -12,12 +12,7 @@
         <div
             class="d-flex align-items-center justify-content-between small"
             >
-            <div class="text-muted">Copyright &copy; Your Website 2023</div>
-            <div>
-                <a href="#">Privacy Policy</a>
-                &middot;
-                <a href="#">Terms &amp; Conditions</a>
-            </div>
+            <div class="text-muted">SE18D07 Group 6 PROJECT PRJ301</div>
         </div>
     </div>
 </footer>

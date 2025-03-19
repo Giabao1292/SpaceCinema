@@ -69,8 +69,8 @@
             <div class="col-xl-6 col-md-12">
                 <div class="card daily-visits-card shadow-lg border-0 rounded-4 d-flex flex-row justify-content-between align-items-center p-3">
                     <div class="card-body text-start">
-                        <h5 class="text-uppercase fw-bold text-white mb-2">Daily Visits</h5>
-                        <h2 class="fw-bold display-4">8,386</h2>
+                        <h5 class="text-uppercase fw-bold text-white mb-2">Nums Of Cinema</h5>
+                        <h2 class="fw-bold display-4">6</h2>
                     </div>
                     <div class="d-flex justify-content-center">
                         <i class="fa-solid fa-eye text-warning fs-1 cursor-pointer icon-hover"></i>
@@ -83,7 +83,7 @@
                 <div class="card revenue-card shadow-lg border-0 rounded-4 d-flex flex-row justify-content-between align-items-center p-3">
                     <div class="card-body text-start">
                         <h5 class="text-uppercase fw-bold text-white mb-2">Total Income</h5>
-                        <h2 class="fw-bold display-4">$${revenue}</h2>
+                        <h2 class="fw-bold display-4">${revenue} VND</h2>
                     </div>
                     <div class="d-flex justify-content-center">
                         <i class="fa-solid fa-dollar-sign text-warning fs-1 cursor-pointer icon-hover"></i>
@@ -117,32 +117,7 @@
                 </div>
             </div>
         </div>
-
-        <div class="row mt-3">
-            <div class="col-xl-6">
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <i class="fas fa-chart-area me-1"></i>
-                        Daily Sales Report
-                    </div>
-                    <div class="card-body">
-                        <canvas id="myAreaChart" width="100%" height="40"></canvas>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-6">
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <i class="fas fa-chart-bar me-1"></i>
-                        Monthly Sales Report
-                    </div>
-                    <div class="card-body">
-                        <canvas id="myBarChart" width="100%" height="40"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="card mb-4">
+        <div class="card mb-4 mt-4">
             <div class="card-header">
                 <i class="fas fa-table me-1"></i>
                 List Top User Booking

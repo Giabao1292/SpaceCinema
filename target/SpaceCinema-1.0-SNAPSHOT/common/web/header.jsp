@@ -61,7 +61,14 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="userDropdown">
                             <li><a class="dropdown-item" href="/profile">Profile</a></li>
-                            <li><a class="dropdown-item" href="/logout?action=logout">Đăng xuất</a></li>
+                                <c:set var="printed" value="false" />
+                                <c:forEach var="u" items="${USER.role}">
+                                    <c:if test="${(u.code eq 'ADMIN' or u.code eq 'MANAGER') and not printed}">
+                                    <li><a class="dropdown-item" href="/admin-home">Admin home</a></li>
+                                        <c:set var="printed" value="true" />
+                                    </c:if>
+                                </c:forEach>
+                            <li><a class="dropdown-item" href="/logout?action=logout">Log out</a></li>
                         </ul>
                     </c:if>
 

@@ -90,7 +90,7 @@
                             Adding
                         </button>
                         <button type="reset" class="btn btn-danger">
-                            Cancel
+                            Reset
                         </button>
                     </div>
                 </div>
