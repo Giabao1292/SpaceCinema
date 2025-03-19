@@ -112,9 +112,7 @@ public class CartController extends HttpServlet {
                         }
                     }
                 }
-
                 break;
-
             case "update":
                 if (seatIds != null && seatIds.length > 0) {
                     for (int i = 0; i < seatIds.length; i++) {

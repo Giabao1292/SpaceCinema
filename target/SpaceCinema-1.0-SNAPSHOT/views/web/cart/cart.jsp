@@ -146,7 +146,7 @@
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             <div>${voucher.discount}% Off</div>
                             <div>${voucher.description}</div>
-                            <a class="btn btn-success btn-sm" href="/cart?discount=${voucher.discount}" >Apply</a>
+                            <a class="btn btn-success btn-sm apply-voucher" data-discount="${voucher.discount}" >Apply</a>
                         </li>
                     </c:forEach>
                 </ul>

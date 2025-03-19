@@ -63,7 +63,7 @@
 
 <main>
     <div class="container-fluid px-4">
-        <h1 class="mt-4">Welcome</h1>
+        <h1 class="mt-4">Welcome ${USER.userName}</h1>
         <div class="row g-3">
             <!-- Daily Visits -->
             <div class="col-xl-6 col-md-12">
@@ -82,7 +82,7 @@
             <div class="col-xl-6 col-md-12">
                 <div class="card revenue-card shadow-lg border-0 rounded-4 d-flex flex-row justify-content-between align-items-center p-3">
                     <div class="card-body text-start">
-                        <h5 class="text-uppercase fw-bold text-white mb-2">Total Revenue</h5>
+                        <h5 class="text-uppercase fw-bold text-white mb-2">Total Income</h5>
                         <h2 class="fw-bold display-4">$${revenue}</h2>
                     </div>
                     <div class="d-flex justify-content-center">
@@ -154,6 +154,7 @@
                             <th>User Name</th>
                             <th>Email</th>
                             <th>Total Price Booking</th>
+                            <th>Total Number Booking</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -162,6 +163,7 @@
                                 <td>${b.user_name}</td>
                                 <td>${b.email}</td>
                                 <td>${b.price}</td>
+                                <td>${b.numBooking}</td>
                             </tr>
                         </c:forEach>
                     </tbody>

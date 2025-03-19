@@ -67,10 +67,10 @@ public class UserRepositoryImpl implements UserRepository {
         User user = findUserByEmail(email);
         String sql = "UPDATE user SET password = ? WHERE email = ?";
         try (Connection conn = GetConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, password); 
-            stmt.setString(2, email); 
+            stmt.setString(1, password);
+            stmt.setString(2, email);
             int rowsUpdated = stmt.executeUpdate();
-            return rowsUpdated > 0; 
+            return rowsUpdated > 0;
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -264,6 +264,42 @@ public class UserRepositoryImpl implements UserRepository {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void updateUserInfo(User user, int user_id) {
+        String sql = "UPDATE user SET fullName = ?, phone = ?, email = ? WHERE user_id = ?";
+        try (Connection con = GetConnection.getConnection(); PreparedStatement st = con.prepareStatement(sql)) {
+            st.setString(1, user.getFullName());
+            st.setString(2, user.getPhone());
+            st.setString(3, user.getEmail());
+            st.setInt(4, user_id);
+            st.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public User findUserById(int user_id) {
+        String sql = "SELECT * FROM user WHERE user_id = ?";
+        try (Connection con = GetConnection.getConnection(); PreparedStatement st = con.prepareStatement(sql)) {
+            st.setInt(1, user_id); 
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                User user = new User();
+                user.setId(user_id);
+                user.setUserName(rs.getString("username"));
+                user.setFullName(rs.getString("fullname"));
+                user.setPassWord(rs.getString("password"));
+                user.setPhone(rs.getString("phone"));
+                user.setEmail(rs.getString("email"));
+                return user;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public static void main(String[] args) {

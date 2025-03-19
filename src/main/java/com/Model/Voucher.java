@@ -4,6 +4,8 @@
  */
 package com.Model;
 
+import java.util.List;
+
 /**
  *
  * @author lebao
@@ -14,7 +16,9 @@ public class Voucher {
     private String name;
     private String description;
     private int discount;
-
+    private List<User> users;
+    private int numUsers;
+    
     public Voucher() {
     }
 
@@ -24,6 +28,17 @@ public class Voucher {
         this.description = description;
         this.discount = discount;
     }
+
+    public Voucher(int id, String name, String description, int discount, List<User> users, int numUsers) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.discount = discount;
+        this.users = users;
+        this.numUsers = numUsers;
+    }
+
+    
 
     public int getId() {
         return id;
@@ -57,4 +72,19 @@ public class Voucher {
         this.discount = discount;
     }
 
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
+    public int getNumUsers() {
+        return numUsers;
+    }
+
+    public void setNumUsers(int numUsers) {
+        this.numUsers = numUsers;
+    }
 }
