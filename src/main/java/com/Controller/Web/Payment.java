@@ -119,5 +119,4 @@ public class Payment extends HttpServlet {
         Gson gson = new Gson();
         resp.sendRedirect(paymentUrl);
     }
-
 }
