@@ -22,4 +22,5 @@ public interface VoucherRepository {
     void deleteUserIdByVoucherId(int voucher_id);
     void updateVoucher(Voucher voucher, int voucher_id, List<Integer> userIds);
     List<User> findAllUser();
+    public boolean removeVoucher(int userId, int voucherId);
 } 

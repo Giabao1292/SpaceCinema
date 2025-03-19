@@ -11,11 +11,13 @@ import com.Repository.DateRepository;
 import com.Repository.MovieRepository;
 import com.Repository.TimeRepository;
 import com.Repository.UserRepository;
+import com.Repository.VoucherRepository;
 import com.Repository.impl.CinemaRepositoryImpl;
 import com.Repository.impl.DateRepositoryImpl;
 import com.Repository.impl.MovieRepositoryImpl;
 import com.Repository.impl.TimeRepositoryImpl;
 import com.Repository.impl.UserRepositoryImpl;
+import com.Repository.impl.VoucherRepositoryImpl;
 import com.Utils.SessionUtils;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -38,6 +40,8 @@ public class HomeController extends HttpServlet {
     private UserRepository userRepository = new UserRepositoryImpl();
     private DateRepository dateRepository = new DateRepositoryImpl();
     private TimeRepository timeRepository = new TimeRepositoryImpl();
+
+    private VoucherRepository voucherRepository = new VoucherRepositoryImpl();
     private static final int COOKIE_MAX_AGE = 60 * 60 * 24 * 30;
 
     @Override
@@ -51,13 +55,12 @@ public class HomeController extends HttpServlet {
             switch (action) {
                 case "login":
                     Cookie[] cookies = request.getCookies();
-                    if(cookies != null){
-                        for(Cookie cookie : cookies){
-                            if("username".equals(cookie.getName())){
+                    if (cookies != null) {
+                        for (Cookie cookie : cookies) {
+                            if ("username".equals(cookie.getName())) {
                                 request.setAttribute("username", cookie.getValue());
-                            }
-                            else if("password".equals(cookie.getName())){
-                               request.setAttribute("password", cookie.getValue());
+                            } else if ("password".equals(cookie.getName())) {
+                                request.setAttribute("password", cookie.getValue());
                             }
                         }
                     }
@@ -128,7 +131,7 @@ public class HomeController extends HttpServlet {
         User user = userRepository.findUserByNameAndPassword(username, password);
         if (user != null && user.getFullName() != null) {
             SessionUtils.getInstance().remainValue(request, "USER", user);
-            if(rememberMe != null && rememberMe.equalsIgnoreCase("on")){
+            if (rememberMe != null && rememberMe.equalsIgnoreCase("on")) {
                 Cookie uCookie = new Cookie("username", username);
                 Cookie pCookie = new Cookie("password", password);
                 uCookie.setMaxAge(COOKIE_MAX_AGE);
@@ -141,6 +144,7 @@ public class HomeController extends HttpServlet {
                 response.sendRedirect("/admin-home");
                 return;
             } else if (User.isUser(user.getRole())) {
+                SessionUtils.getInstance().remainValue(request, "voucherList", voucherRepository.getAllVoucherByUserId(user.getId()));
                 response.sendRedirect("/home");
                 return;
             } else {

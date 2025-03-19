@@ -6,13 +6,13 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="/common/taglib.jsp" %>
-<div class="container py-5">
+<div class="container py-5 fs-5">
     <h2 class="text-center fw-bold">PAYMENT PAGE</h2>
     <div class="row mt-4">
-        <div class="col-md-6">
-            <div class="bg-danger opacity-75 p-4 rounded">
+        <div class="col-lg-6">
+            <div class="bg-danger p-4 rounded">
                 <h5 class="text-warning fw-bold">CUSTOMER INFORMATION</h5>
-                <form>
+                <form action = "/payment" method = "POST">
                     <div class="mb-3">
                         <label class="form-label">Full Name *</label>
                         <input
@@ -44,6 +44,7 @@
                             />
                     </div>
                     <button type="submit" class="btn btn-warning w-100 fw-bold">
+                        <input type = "hidden" value = "${total}" name = "amount"/>
                         CONTINUE
                     </button>
                 </form>
@@ -51,30 +52,27 @@
         </div>
 
         <!-- Ticket Information -->
-        <div class="col-md-6">
-            <div class="bg-primary p-4 rounded text-white">
-                <h5 class="fw-bold">QUỶ NHẬP TRĂNG (T18)</h5>
-                <p class="text-warning">
-                    Phim dành cho khán giả từ đủ 18 tuổi trở lên (18+)
-                </p>
-                <p><strong>Cinestar Quốc Thanh (TP.HCM)</strong></p>
-                <p>
-                    271 Nguyễn Trãi, Phường Nguyễn Cư Trinh, Quận 1, TP Hồ Chí Minh
-                </p>
-                <p><strong>Thời gian:</strong> 10:00 Thứ Sáu 14/03/2025</p>
-                <p>
-                    <strong>Phòng chiếu:</strong> 04 &nbsp;&nbsp;
-                    <strong>Số vé:</strong> 1 &nbsp;&nbsp;
-                    <strong>Loại vé:</strong> Người Lớn
-                </p>
-                <p>
-                    <strong>Loại ghế:</strong> Ghế Thường &nbsp;&nbsp;
-                    <strong>Số ghế:</strong> H05
-                </p>
-                <p><strong>Bắp nước:</strong> 1 Combo Có Gấu</p>
+        <div class="col-lg-6">
+            <div class="p-4 rounded text-white" style="background: #2659BF">
+                <c:forEach var = "entrySeat" items = "${cart.seats}">
+                    <c:set var = "value" value = "${entrySeat.value}"/>
+                    <h2 class="fw-bold text-warning">${value.movie}</h2>
+                    <p class = "text-warning"><strong>${value.cinema}</strong></p>
+                    <p><strong>${value.time}</strong></p>
+                    <p>
+                        <strong class = "text-warning">Theatre :</strong> ${value.theatre} &nbsp;&nbsp;|
+                        <strong class = "text-warning">Number of tickets:</strong> ${value.quantity} &nbsp;&nbsp;
+                    </p>
+                    <p>
+                        <strong class = "text-warning">Seat type:</strong> ${value.seat.type} &nbsp;&nbsp;
+                    </p>
+                </c:forEach>
+                <c:forEach var = "entryPopcorn" items = "${cart.snacks}" >
+                    <p><strong>${entryPopcorn.value.snack.name}:</strong> ${entryPopcorn.value.quantity}</p>
+                </c:forEach>
                 <hr />
                 <p class="text-warning text-end fw-bold">
-                    SỐ TIỀN CẦN THANH TOÁN: 199,000 VND
+                    Total : ${total} VND
                 </p>
             </div>
         </div>

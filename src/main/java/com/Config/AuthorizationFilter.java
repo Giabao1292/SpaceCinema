@@ -62,16 +62,14 @@ public class AuthorizationFilter implements Filter {
             }
             response.sendRedirect("/login?action=login&status=login_first");
             return;
-        }
-        else if(URL.startsWith("/checkout")){
-            Cart cart = (Cart)SessionUtils.getInstance().getValue(request, "cart");
-            if(cart == null){
+        } else if (URL.startsWith("/checkout") || URL.startsWith("/order")) {
+            Cart cart = (Cart) SessionUtils.getInstance().getValue(request, "cart");
+            if (cart == null) {
                 response.sendRedirect("/home");
-            }
-            else{
+            } else {
                 chain.doFilter(requestServlet, responseServlet);
             }
-        }else {
+        } else {
             chain.doFilter(requestServlet, responseServlet);
         }
     }

@@ -2,9 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package com.Controller.Web;
 
+import com.Utils.SessionUtils;
+import jakarta.mail.Session;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -17,17 +18,20 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author lebao
  */
-@WebServlet(name="CheckOutController", urlPatterns={"/checkout"})
+@WebServlet(name = "CheckOutController", urlPatterns = {"/checkout"})
 public class CheckOutController extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        
+            throws ServletException, IOException {
         request.getRequestDispatcher("/views/web/payment/info.jsp").forward(request, response);
-    } 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
     }
 
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        Double total = Double.parseDouble(request.getParameter("total"));
+        SessionUtils.getInstance().remainValue(request, "total", total);
+        response.sendRedirect("/checkout");
+    }
 }

@@ -61,7 +61,7 @@ public class ForgotPasswordServlet extends HttpServlet {
                 String subject = "OTP Verification Code";
                 String content = "Your OTP code is: " + resetCode + ".The code is valid for 5 minutes.";
                 try {
-                    MailUtil.sendEmail(email, subject, content);
+                    MailUtil.sendEmail(email, subject, content, false);
                     request.setAttribute("message", "A confirmation email has been sent. Please check your inbox!");
                 } catch (MessagingException e) {
                     request.setAttribute("status", "Unable to send email. Please try again later.");

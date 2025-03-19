@@ -19,7 +19,8 @@ import java.util.List;
  *
  * @author lebao
  */
-public class TimeRepositoryImpl implements TimeRepository{
+public class TimeRepositoryImpl implements TimeRepository {
+
     @Override
     public List<String> findAll(String cinema, String movie, String date) {
         List<String> times = new ArrayList<>();
@@ -31,17 +32,15 @@ public class TimeRepositoryImpl implements TimeRepository{
                 + "WHERE c.cinema_name = '" + cinema
                 + "' AND m.title = '" + movie
                 + "' AND st.showing_datetime = '" + date + "'";
-        try(Connection connection = GetConnection.getConnection()){
+        try (Connection connection = GetConnection.getConnection()) {
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(sql);
-            while(rs.next()){
+            while (rs.next()) {
                 times.add(rs.getString("timedetail"));
             }
-        }
-        catch(SQLException e){
-           e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return times;
     }
-    
 }

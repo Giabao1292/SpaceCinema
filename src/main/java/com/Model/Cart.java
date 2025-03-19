@@ -63,10 +63,6 @@ public class Cart {
         return total;
     }
 
-    public Map<String, SeatItem> getSeat() {
-        return seats;
-    }
-
     public void addSnack(Snack snack, int quantity, String cinema) {
         String snackId = snack.getId();
         if (snacks.containsKey(snackId)) {
@@ -98,7 +94,4 @@ public class Cart {
         return total;
     }
 
-    public Map<String, SnackItem> getSnack() {
-        return snacks;
-    }
 }
