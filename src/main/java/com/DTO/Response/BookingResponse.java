@@ -9,5 +9,4 @@ package com.DTO.Response;
  * @author LAPTOP ASUS
  */
 public class BookingResponse {
-    
 }

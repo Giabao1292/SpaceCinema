@@ -43,6 +43,26 @@
                 </ul>
             </div>
         </div>
+        <!-- Cột chi tiết thông tin -->        
+        <div class="col-md-4">
+            <div class="card p-4 shadow-lg">
+                <h4 class="mb-3 text-success"><i class="bi bi-gift"></i> Voucher có thể sử dụng</h4>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span><strong>Giảm 10%</strong> cho đơn hàng trên 200K</span>
+                        <span class="badge bg-success">Còn hạn</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span><strong>Freeship</strong> cho đơn từ 100K</span>
+                        <span class="badge bg-warning text-dark">Sắp hết hạn</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span><strong>Giảm 50K</strong> cho đơn từ 500K</span>
+                        <span class="badge bg-danger">Hết hạn</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
 
