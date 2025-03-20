@@ -117,7 +117,7 @@
                         </div>
                         <div id="content" class="hidden text-start">
                             <c:forEach var="timeBtn" items="${movie.times[date]}">
-                                <a data-cinema ="${cinema}" data-movie ="${movie.title}" data-date="${date}" data-time ="${timeBtn}" class="timeBtn btn text-black gap-2 btn-warning border border-warning ${timeBtn eq time ? "active" : ""}">${timeBtn}</a>
+                                <a data-cinema ="${cinema}" data-movie ="${movie.title}" data-date="${date}" data-time ="${timeBtn}" class="timeBtn btn text-black mt-2 me-2 btn-warning border border-warning ${timeBtn eq time ? "active" : ""}">${timeBtn}</a>
                             </c:forEach>
                         </div>
                     </div>

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Services/impl/CartServiceImpl.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Model/ShowingTime.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Repository/impl/TheatreRepositoryImpl.java
@@ -53,6 +52,7 @@
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Model/BookingSeat.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Model/Seat.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Config/GetConnection.java
+/Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Controller/Web/CompletedOrder.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Controller/Web/NewsController.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Controller/Web/ForgotPasswordServlet.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Model/BookingSnack.java
@@ -75,6 +75,8 @@
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Controller/Web/CheckOutController.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Model/Cinema.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Repository/impl/BookingRepositoryImpl.java
+/Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/DTO/Response/BookingResponse.java
+/Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Controller/Web/ProfileController.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Controller/Admin/VoucherController.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Services/impl/SnackServiceImpl.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Services/SeatService.java
@@ -85,88 +87,3 @@
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Repository/impl/VoucherRepositoryImpl.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Controller/Web/VnpayReturn.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Model/Cart.java
-=======
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Utils\MailUtil.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Model\SnackItem.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\impl\CinemaRepositoryImpl.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\impl\GenreRepositoryImpl.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\impl\SnackRepositoryImpl.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\TimeRepository.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\DirectorRepository.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Controller\Web\ZaloPayPayment.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\DateRepository.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Controller\Web\ForgotPasswordServlet.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Controller\Web\PopcornController.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\impl\DirectorRepositoryImpl.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\DTO\Response\MovieResponse.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\impl\DateRepositoryImpl.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\StatusRepository.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Utils\CinemaContextListener.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Model\SeatItem.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Model\Theatre.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Controller\Web\CheckOutController.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Services\impl\MovieServiceImpl.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Services\CartService.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Controller\Web\BookTicketController.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\impl\MovieRepositoryImpl.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Controller\Web\PromotionController.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\impl\CastRepositoryImpl.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\impl\TheatreRepositoryImpl.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Services\impl\SeatServiceImpl.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Model\Booking.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Model\Cart.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Controller\Admin\PopcornController.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Model\Time.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Model\Voucher.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Utils\SessionUtils.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\CinemaRepository.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Services\impl\CartServiceImpl.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Controller\Web\NewsController.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Model\Genre.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\impl\SeatRepositoryImpl.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Controller\Web\HomeController.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\VoucherRepository.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\impl\UserRepositoryImpl.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Model\Cast.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Model\Snack.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Controller\Admin\UserController.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\impl\VoucherRepositoryImpl.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Controller\FacebookOAuth2Servlet.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Controller\Admin\HomeController.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Controller\Web\RegisterController.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Controller\Web\CartController.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\impl\BookingRepositoryImpl.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Config\Format.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Services\SnackService.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Model\Cinema.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\MovieRepository.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Model\MovieStatus.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Services\UserService.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Controller\GoogleOAuth2Servlet.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Model\Director.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Controller\Web\ProfileController.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\UserRepository.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Config\GetConnection.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Model\ShowingTime.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\TheatreRepository.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\BookingRepository.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\SeatRepository.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\CastRepository.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\SnackRepository.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\GenreRepository.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Services\SeatService.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Utils\PasswordUtil.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Model\User.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\impl\StatusRepositoryImpl.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Controller\Admin\MovieController.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\impl\TimeRepositoryImpl.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Controller\Admin\VoucherController.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Model\Movie.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Services\impl\SnackServiceImpl.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Services\MovieService.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Model\Role.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Config\AuthorizationFilter.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\DTO\Request\MovieRequestDto.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Services\impl\UserServiceImpl.java
-E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Model\Seat.java
->>>>>>> admin

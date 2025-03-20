@@ -51,7 +51,6 @@ public class ProfileController extends HttpServlet {
                     response.sendRedirect("/profile");
                     break;
                 case "pass":
-                    
                     break;
                 default:
                     throw new AssertionError();

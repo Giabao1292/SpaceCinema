@@ -5,14 +5,16 @@
 package com.Repository;
 
 import com.Model.Seat;
+import com.Model.SeatItem;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
  * @author lebao
  */
 public interface SeatRepository {
-    public List<Seat> getSeatType(String theatreId);
-     public Seat getSeatById(String seatId) ;
-     public int decreaseSeat(String seatId, int quantity);
+    public List<Seat> getSeatType(String theatreId, String timedetail, String datetime);
+    public Seat getSeatById(String seatId) ;
+    public int decreaseSeat(Map<String, SeatItem> seats);
 }

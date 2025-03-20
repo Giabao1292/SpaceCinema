@@ -4,22 +4,30 @@
  */
 package com.Repository.impl;
 
+import com.Config.Format;
 import com.Config.GetConnection;
+import com.Model.Theatre;
+import com.Repository.TheatreRepository;
 import com.Repository.TimeRepository;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author lebao
  */
 public class TimeRepositoryImpl implements TimeRepository {
+
+    private TheatreRepository theatreRepository = new TheatreRepositoryImpl();
 
     @Override
     public List<String> findAll(String cinema, String movie, String date) {
@@ -42,5 +50,53 @@ public class TimeRepositoryImpl implements TimeRepository {
             e.printStackTrace();
         }
         return times;
+    }
+
+    @Override
+    public void addListTime(String[] cinema, HashMap<String, List<String>> times, String[] dates, String movieId) {
+        String sqlShowingTime = "INSERT INTO showing_time (theatre_id, movie_id, showing_datetime) values(?,?,?)";
+        String sqlTimeDetail = "INSERT INTO time_detail (showing_time_id, timedetail) values(?,?)";
+        try (Connection con = GetConnection.getConnection(); PreparedStatement stmtTimeDetail = con.prepareStatement(sqlTimeDetail); PreparedStatement stmt = con.prepareStatement(sqlShowingTime, Statement.RETURN_GENERATED_KEYS)) {
+            for (String key : times.keySet()) {
+                List<Theatre> theatres = theatreRepository.getListTheatreByType(key, cinema);
+                for (Theatre theatre : theatres) {
+                    for (String date : dates) {
+                        stmt.setString(1, theatre.getId());
+                        stmt.setString(2, movieId);
+                        stmt.setString(3, Format.fm2.format(Format.fm.parse(date)));
+                        stmt.addBatch();
+                    }
+                }
+            }
+            stmt.executeBatch();
+
+            try (ResultSet rs = stmt.getGeneratedKeys()) {
+                int index = 0;
+                for (String key : times.keySet()) {
+                    List<Theatre> theatres = theatreRepository.getListTheatreByType(key, cinema);
+                    for (Theatre theatre : theatres) {
+                        for (String date : dates) {
+                            if (rs.next()) {
+                                int showingTimeId = rs.getInt(1); // Lấy ID tự động tăng
+                                for (String time : times.get(key)) {
+                                    stmtTimeDetail.setInt(1, showingTimeId);
+                                    stmtTimeDetail.setString(2, time);
+                                    stmtTimeDetail.addBatch();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            stmtTimeDetail.executeBatch();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(TimeRepositoryImpl.class
+                    .getName()).log(Level.SEVERE, null, ex);
+
+        } catch (ParseException ex) {
+            Logger.getLogger(TimeRepositoryImpl.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

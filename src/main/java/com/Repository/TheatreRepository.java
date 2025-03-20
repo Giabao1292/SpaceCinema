@@ -14,4 +14,5 @@ import java.util.List;
 public interface TheatreRepository {
     public List<Theatre> getTheatreType();
     public Theatre getTheatre(String cinemaString, String movieId, String dateTime, String time);
+    public List<Theatre> getListTheatreByType(String type, String[] cinema);
 }
