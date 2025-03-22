@@ -21,6 +21,7 @@ E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Services\CartService.java
 E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Controller\Web\BookTicketController.java
 E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\impl\MovieRepositoryImpl.java
 E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Controller\Web\PromotionController.java
+E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\DTO\Response\BookingResponse.java
 E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\impl\CastRepositoryImpl.java
 E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Repository\impl\TheatreRepositoryImpl.java
 E:\FPTU\SEMESTER 4\PRJ\SpaceCinema\src\main\java\com\Services\impl\SeatServiceImpl.java

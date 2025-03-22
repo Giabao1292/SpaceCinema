@@ -16,12 +16,12 @@
 
 <div class="container mt-5">
     <div class="row justify-content-center">
+        
         <!-- Cột thông tin người dùng -->
         <div class="col-md-4 text-center">
             <div class="card p-4 shadow-lg">
                 <h3 class="mt-2 text-primary">${USER.fullName}</h3>
                 <p class="text-muted">@${USER.userName}</p>
-
                 <button class="btn btn-outline-primary mt-2" data-bs-toggle="modal" data-bs-target="#editProfileModal">
                     <i class="bi bi-pencil-square"></i> Cập nhật thông tin
                 </button>
@@ -30,9 +30,9 @@
                 </button>
             </div>
         </div>
- 
+
         <!-- Cột chi tiết thông tin -->
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="card p-4 shadow-lg">
                 <h4 class="mb-3 text-info"><i class="bi bi-person-circle"></i> Thông tin cá nhân</h4>
                 <ul class="list-group list-group-flush">
@@ -43,28 +43,36 @@
                 </ul>
             </div>
         </div>
-        <!-- Cột chi tiết thông tin -->        
+
+        <!-- Cột danh sách voucher -->
         <div class="col-md-4">
             <div class="card p-4 shadow-lg">
                 <h4 class="mb-3 text-success"><i class="bi bi-gift"></i> Voucher có thể sử dụng</h4>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <span><strong>Giảm 10%</strong> cho đơn hàng trên 200K</span>
-                        <span class="badge bg-success">Còn hạn</span>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <span><strong>Freeship</strong> cho đơn từ 100K</span>
-                        <span class="badge bg-warning text-dark">Sắp hết hạn</span>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <span><strong>Giảm 50K</strong> cho đơn từ 500K</span>
-                        <span class="badge bg-danger">Hết hạn</span>
-                    </li>
-                </ul>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead class="table-success">
+                            <tr>
+                                <th>Tên Voucher</th>
+                                <th>Mô tả</th>
+                                <th>Giảm giá</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach var="voucher" items="${voucherList}">
+                                <tr>
+                                    <td><strong>${voucher.name}</strong></td>
+                                    <td>${voucher.description}</td>
+                                    <td class="text-center text-danger"><strong>${voucher.discount}</strong></td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
 
 <!-- Modal chỉnh sửa thông tin -->
 <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileLabel" aria-hidden="true">
@@ -149,7 +157,7 @@
         });
     });
     // Xác nhận mật khẩu mới và mật khẩu xác nhận
-    document.querySelector("form[action='/change-password']").addEventListener("submit", function(event) {
+    document.querySelector("form[action='/change-password']").addEventListener("submit", function (event) {
         const newPassword = document.querySelector("input[name='newPassword']").value;
         const confirmPassword = document.querySelector("input[name='confirmPassword']").value;
 

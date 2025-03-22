@@ -203,7 +203,6 @@
                                             <span>${g}</span>
                                             <c:if test="${!status.last}">, </c:if>
                                         </c:forEach>
-
                                     </li>
                                     <li>
                                         <i class="fa-solid fa-cake-candles text-warning"></i> ${movieitem.age_rating}

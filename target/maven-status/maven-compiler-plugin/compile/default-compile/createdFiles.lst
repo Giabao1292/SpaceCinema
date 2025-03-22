@@ -37,6 +37,7 @@ com\Repository\impl\DateRepositoryImpl.class
 com\Model\Genre.class
 com\Repository\BookingRepository.class
 com\Repository\MovieRepository.class
+com\DTO\Response\BookingResponse.class
 com\Repository\SeatRepository.class
 com\Services\CartService.class
 com\Utils\CinemaContextListener.class
