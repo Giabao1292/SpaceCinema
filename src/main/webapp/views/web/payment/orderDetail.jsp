@@ -4,15 +4,17 @@
 
     <div class="container d-flex justify-content-center align-items-center vh-100">
         <div class="card shadow-lg p-4 text-center" style="max-width: 450px;">
-            <div class="text-success">
-                <i class="bi bi-check-circle-fill" style="font-size: 4rem;"></i>
-            </div>
-
             <c:choose>
                 <c:when test="${transResult eq 'true'}">
+                    <div class="text-success">
+                        <i class="bi bi-check-circle-fill" style="font-size: 4rem;"></i>
+                    </div>
                     <h2 class="mt-3 text-success">Payment Successful!</h2>
                 </c:when>
                 <c:otherwise>
+                    <div class="text-danger">
+                        <i class="bi bi-x-circle-fill" style="font-size: 4rem;"></i>
+                    </div>
                     <h2 class="mt-3 text-danger">Payment Failed!</h2>
                 </c:otherwise>
             </c:choose>
@@ -32,5 +34,6 @@
             </div>
         </div>
     </div>
+
 
 </body>
