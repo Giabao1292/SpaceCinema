@@ -12,9 +12,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -64,5 +66,29 @@ public class TheatreRepositoryImpl implements TheatreRepository {
             Logger.getLogger(TheatreRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return theatre;
+    }
+    @Override
+    public List<Theatre> getListTheatreByType(String type, String[] cinema){
+        StringBuilder sql = new StringBuilder("Select t.* from theatre t JOIN cinema c on t.cinema_id = c.cinema_id where t.theatre_num = ? ");
+        if(cinema.length != 0){
+            sql.append("AND (");
+            String res = Arrays.stream(cinema).map(it->"cinema_name = '" + it + "'").collect(Collectors.joining(" OR "));
+            sql.append(res + ")");
+        }
+        List<Theatre> theatres = new ArrayList<>();
+        try(Connection con = GetConnection.getConnection(); PreparedStatement stmt = con.prepareStatement(sql.toString())){
+            stmt.setString(1, type);
+            try(ResultSet rs = stmt.executeQuery()){
+                while(rs.next()){
+                    Theatre theatre = new Theatre();
+                    theatre.setId(rs.getString("t.theatre_id"));
+                    theatre.setTheatre_num(rs.getString("t.theatre_num"));
+                    theatres.add(theatre);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TheatreRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return theatres;
     }
 }

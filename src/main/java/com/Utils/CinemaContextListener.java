@@ -5,7 +5,9 @@
 package com.Utils;
 
 import com.Model.User;
+import com.Repository.BookingRepository;
 import com.Repository.CinemaRepository;
+import com.Repository.impl.BookingRepositoryImpl;
 import com.Repository.impl.CinemaRepositoryImpl;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletContextEvent;
@@ -25,7 +27,7 @@ import java.util.List;
  */
 @WebListener
 public class CinemaContextListener implements ServletContextListener, HttpSessionListener, HttpSessionAttributeListener {
-
+    private BookingRepository bookingRepository = new BookingRepositoryImpl();
     private CinemaRepository cinemaRepository = new CinemaRepositoryImpl();
     private static int activeUser = 0;
 //    private static int totalLoggedUsers = 0;

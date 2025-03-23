@@ -1,10 +1,9 @@
-package com.Controller.Web;
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
+package com.Controller.Web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,15 +17,19 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author lebao
  */
-@WebServlet(name="PromotionController",urlPatterns={"/introduce"})
-public class PromotionController extends HttpServlet {
+@WebServlet(name="CompletedOrder", urlPatterns={"/completedorder"})
+public class CompletedOrder extends HttpServlet {
+   
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("views/web/introduce.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/web/completedOrder.jsp").forward(request, response);
     } 
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
     }
+
 }

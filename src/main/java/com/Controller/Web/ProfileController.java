@@ -7,6 +7,7 @@ package com.Controller.Web;
 import com.Model.User;
 import com.Repository.UserRepository;
 import com.Repository.impl.UserRepositoryImpl;
+import com.Utils.PasswordUtil;
 import com.Utils.SessionUtils;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -26,8 +27,10 @@ public class ProfileController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        User user = (User) SessionUtils.getInstance().getValue(request, "USER");
-        request.setAttribute("USER", user);
+        String status = request.getParameter("status");
+        if(status != null){
+            request.setAttribute("status", status);
+        }
         request.getRequestDispatcher("/views/web/profile.jsp").forward(request, response);
     }
 
@@ -35,6 +38,8 @@ public class ProfileController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
+        SessionUtils session = SessionUtils.getInstance();
+        User user = (User)session.getValue(request, "USER");
         if (action != null) {
             switch (action) {
                 case "info":
@@ -42,16 +47,26 @@ public class ProfileController extends HttpServlet {
                     String fullName = request.getParameter("fullName");
                     String email = request.getParameter("email");
                     String phone = request.getParameter("phone");
-                    User user = userRepository.findUserById(id);
-                    user.setFullName(fullName);
-                    user.setEmail(email);
-                    user.setPhone(phone);
-                    userRepository.updateUserInfo(user, id);
-                    SessionUtils.getInstance().remainValue(request, "USER", user);
+                    User userInfo = userRepository.findUserById(id);
+                    userInfo.setFullName(fullName);
+                    userInfo.setEmail(email);
+                    userInfo.setPhone(phone);
+                    userRepository.updateUserInfo(userInfo, id);
+                    SessionUtils.getInstance().remainValue(request, "USER", userInfo);
                     response.sendRedirect("/profile");
                     break;
                 case "pass":
-                    
+                    String currentPassword = request.getParameter("currentPassword");
+                    User userPass = userRepository.findUserByNameAndPassword(user.getUserName(), currentPassword);
+                    String newPassword = request.getParameter("newPassword");
+                    if(userPass != null && userPass.getFullName() != null){
+                        userRepository.changePassWord(user.getEmail(), PasswordUtil.hashPassword(newPassword));
+                    }
+                    else{
+                        response.sendRedirect("/profile?status=failed");
+                        return;
+                    }
+                    response.sendRedirect("/profile?status=success");
                     break;
                 default:
                     throw new AssertionError();

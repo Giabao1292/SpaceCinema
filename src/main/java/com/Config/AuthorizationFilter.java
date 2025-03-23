@@ -64,7 +64,7 @@ public class AuthorizationFilter implements Filter {
             return;
         } else if (URL.startsWith("/checkout") || URL.startsWith("/order")) {
             Cart cart = (Cart) SessionUtils.getInstance().getValue(request, "cart");
-            if (cart == null) {
+            if (cart == null || (cart != null && cart.getSeats().size() == 0 && cart.getSnacks().size() == 0)) {
                 response.sendRedirect("/home");
             } else {
                 chain.doFilter(requestServlet, responseServlet);

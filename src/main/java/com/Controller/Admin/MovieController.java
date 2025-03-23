@@ -11,10 +11,12 @@ import com.Model.Theatre;
 import com.Repository.GenreRepository;
 import com.Repository.StatusRepository;
 import com.Repository.TheatreRepository;
+import com.Repository.TimeRepository;
 import com.Repository.impl.GenreRepositoryImpl;
 import com.Repository.impl.MovieRepositoryImpl;
 import com.Repository.impl.StatusRepositoryImpl;
 import com.Repository.impl.TheatreRepositoryImpl;
+import com.Repository.impl.TimeRepositoryImpl;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -25,6 +27,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,11 +37,12 @@ import java.util.stream.Collectors;
  */
 @WebServlet(name = "ManageMovie", urlPatterns = {"/admin-home/movie"})
 public class MovieController extends HttpServlet {
-
+    private TimeRepository timeRepository = new TimeRepositoryImpl();
     private final MovieRepositoryImpl movieRes = new MovieRepositoryImpl();
     private StatusRepository statusRepository = new StatusRepositoryImpl();
     private GenreRepository genreRepository = new GenreRepositoryImpl();
     private TheatreRepository theareRepository = new TheatreRepositoryImpl();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -68,6 +72,11 @@ public class MovieController extends HttpServlet {
                 break;
             case "settime":
                 List<Theatre> theatreList = theareRepository.getTheatreType();
+                List<String> listDate = new ArrayList<>();
+                getListDate(listDate);
+                id = request.getParameter("movie_id");
+                request.setAttribute("movieId", id);
+                request.setAttribute("listDate", listDate);
                 request.setAttribute("theatreList", theatreList);
                 request.getRequestDispatcher("/views/admin/movie/addShowTime.jsp").forward(request, response);
                 break;
@@ -88,11 +97,27 @@ public class MovieController extends HttpServlet {
             case "update":
                 updateMovie(request, response);
                 break;
+            case "settime":
+                String movieId = request.getParameter("movieId");
+                String[] date = request.getParameterValues("date");
+                String[] cinema = request.getParameterValues("cinema");
+                String[] theatre = request.getParameterValues("theatre");
+                HashMap<String, List<String>> times = new HashMap<>();
+                for(String key : theatre){
+                    String[] timeTheatre = request.getParameterValues("time" + key);
+                    if(timeTheatre != null && timeTheatre.length > 0){
+                        times.put(key, Arrays.stream(timeTheatre).toList());
+                    }
+                }
+                timeRepository.addListTime(cinema, times, date, movieId);
+                response.sendRedirect("/admin-home/movie");
+                break;
             default:
-                throw new AssertionError();
+                break;
         }
     }
-
+    
+    
     private void showListMovie(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<MovieResponse> movies = movieRes.findAllMovie("now showing");
         movies.addAll(movieRes.findAllMovie("coming soon"));
@@ -156,7 +181,7 @@ public class MovieController extends HttpServlet {
         response.sendRedirect("/admin-home/movie");
     }
 
-    private List<String> getListDate(List<String> listDate) {
+    private void getListDate(List<String> listDate) {
         Calendar calendar = Calendar.getInstance();
         Date today = calendar.getTime();
         calendar.add(Calendar.DAY_OF_YEAR, 1);
@@ -166,7 +191,6 @@ public class MovieController extends HttpServlet {
         listDate.add(Format.Date(today));
         listDate.add(Format.Date(tomorrow));
         listDate.add(Format.Date(dayAfterTomorrow));
-        return listDate;
     }
 
 }

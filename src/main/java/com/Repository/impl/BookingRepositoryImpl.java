@@ -4,7 +4,9 @@
  */
 package com.Repository.impl;
 
+import com.Config.Format;
 import com.Config.GetConnection;
+import com.DTO.Response.BookingResponse;
 import com.Model.Booking;
 import com.Model.Cart;
 import com.Model.SeatItem;
@@ -16,10 +18,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -152,5 +157,116 @@ public class BookingRepositoryImpl implements BookingRepository {
             e.printStackTrace();
         }
         return false;
+    }
+
+    @Override
+    public void addBookingShowtime(int booking_id, Map<String, SeatItem> seats) {
+        if (seats == null || seats.isEmpty()) {
+            System.out.println("Error: No seat data provided.");
+            return;
+        }
+
+        String getMovieIdSql = "SELECT movie_id FROM movie WHERE title = ?";
+        String getTheatreIdSql = "SELECT theatre_id FROM theatre t JOIN cinema c ON t.cinema_id = c.cinema_id WHERE c.cinema_name = ? AND t.theatre_num = ?";
+        String getShowingTimeIdSql = "SELECT time_id FROM showing_time WHERE movie_id = ? AND theatre_id = ? AND showing_datetime = ?";
+        String getTimeDetailIdSql = "SELECT time_detail_id FROM time_detail WHERE showing_time_id = ? AND timedetail = ?";
+        String insertBookingShowtimeSql = "INSERT INTO booking_showtime (booking_id, showing_time_id, time_detail_id) VALUES (?, ?, ?)";
+
+        try (Connection conn = GetConnection.getConnection()) {
+            conn.setAutoCommit(false);
+
+            for (SeatItem seatItem : seats.values()) {
+                String cinema = seatItem.getCinema();
+                String theatre = seatItem.getTheatre();
+                String movie = seatItem.getMovie();
+                String fullTime = seatItem.getTime();
+                String[] parts = fullTime.split(" at ");
+                if (parts.length < 2) {
+                    System.out.println("Error: Invalid time format - " + fullTime);
+                    continue;
+                }
+                String date = Format.fm2.format(Format.fm.parse(parts[0]));
+                String time = parts[1]; // Lấy "time"
+                int movieId = getIdFromQuery(conn, getMovieIdSql, movie);
+                int theatreId = getIdFromQuery(conn, getTheatreIdSql, cinema, theatre);
+                int showingTimeId = getIdFromQuery(conn, getShowingTimeIdSql, movieId, theatreId, date);
+                int timeDetailId = getIdFromQuery(conn, getTimeDetailIdSql, showingTimeId, time);
+                if (showingTimeId != -1 && timeDetailId != -1) {
+                    try (PreparedStatement stmt = conn.prepareStatement(insertBookingShowtimeSql)) {
+                        stmt.setInt(1, booking_id);
+                        stmt.setInt(2, showingTimeId);
+                        stmt.setInt(3, timeDetailId);
+                        stmt.executeUpdate();
+                    }
+                } else {
+                    System.out.println("Error: Invalid data for " + movie + " at " + fullTime);
+                }
+            }
+            conn.commit(); // Xác nhận transaction
+            System.out.println("Booking showtimes added successfully!");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ParseException ex) {
+            Logger.getLogger(BookingRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private int getIdFromQuery(Connection conn, String sql, Object... params) throws SQLException {
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            for (int i = 0; i < params.length; i++) {
+                stmt.setObject(i + 1, params[i]);
+            }
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+        }
+        return -1;
+    }
+    @Override
+    public Map<String, List<BookingResponse>> getBookingResponsesByUser(int userId) {
+        String sql = "SELECT b.booking_id, m.title, cin.cinema_name, the.theatre_num, st.showing_datetime,"
+                + " td.timedetail, s.snack_name, bs.snack_qty, sty.type_name, bse.seat_qty from booking b\n"
+                + "JOIN booking_snack bs on bs.booking_id = b.booking_id\n"
+                + "JOIN snack s on s.snack_id = bs.snack_id\n"
+                + "JOIN booking_seat bse on bse.booking_id = b.booking_id\n"
+                + "JOIN seat se on se.seat_id = bse.seat_id\n"
+                + "JOIN booking_showtime bst on bst.booking_id = b.booking_id\n"
+                + "JOIN showing_time st on st.time_id = bst.showing_time_id\n"
+                + "JOIN movie m on m.movie_id = st.movie_id\n"
+                + "JOIN time_detail td on td.time_detail_id = bst.time_detail_id\n"
+                + "JOIN theatre the on the.theatre_id = st.theatre_id\n"
+                + "JOIN cinema cin on cin.cinema_id = the.cinema_id\n"
+                + "JOIN seat_type sty on sty.type_id = se.seat_type_id\n"
+                + "WHERE b.user_id = ?";
+
+        Map<String, List<BookingResponse>> bookingMap = new HashMap<>();
+
+        try (Connection conn = GetConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, userId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    String bookingId = rs.getString("booking_id");
+                    BookingResponse response = new BookingResponse(
+                            rs.getString("title"),
+                            rs.getString("cinema_name"),
+                            rs.getString("theatre_num"),
+                            rs.getString("showing_datetime"),
+                            rs.getString("timedetail"),
+                            rs.getString("snack_name"),
+                            rs.getInt("snack_qty"),
+                            rs.getString("type_name"),
+                            rs.getInt("seat_qty")
+                    );
+
+                    bookingMap.computeIfAbsent(bookingId, k -> new ArrayList<>()).add(response);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return bookingMap;
     }
 }

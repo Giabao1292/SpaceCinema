@@ -6,12 +6,14 @@ package com.Controller.Web;
 
 import com.DTO.Response.MovieResponse;
 import com.Model.User;
+import com.Repository.BookingRepository;
 import com.Repository.CinemaRepository;
 import com.Repository.DateRepository;
 import com.Repository.MovieRepository;
 import com.Repository.TimeRepository;
 import com.Repository.UserRepository;
 import com.Repository.VoucherRepository;
+import com.Repository.impl.BookingRepositoryImpl;
 import com.Repository.impl.CinemaRepositoryImpl;
 import com.Repository.impl.DateRepositoryImpl;
 import com.Repository.impl.MovieRepositoryImpl;
@@ -40,7 +42,7 @@ public class HomeController extends HttpServlet {
     private UserRepository userRepository = new UserRepositoryImpl();
     private DateRepository dateRepository = new DateRepositoryImpl();
     private TimeRepository timeRepository = new TimeRepositoryImpl();
-
+    private BookingRepository bookingRepository = new BookingRepositoryImpl();
     private VoucherRepository voucherRepository = new VoucherRepositoryImpl();
     private static final int COOKIE_MAX_AGE = 60 * 60 * 24 * 30;
 
@@ -131,6 +133,7 @@ public class HomeController extends HttpServlet {
         User user = userRepository.findUserByNameAndPassword(username, password);
         if (user != null && user.getFullName() != null) {
             SessionUtils.getInstance().remainValue(request, "USER", user);
+            SessionUtils.getInstance().remainValue(request, "bookings", bookingRepository.getBookingResponsesByUser(user.getId()));
             if (rememberMe != null && rememberMe.equalsIgnoreCase("on")) {
                 Cookie uCookie = new Cookie("username", username);
                 Cookie pCookie = new Cookie("password", password);

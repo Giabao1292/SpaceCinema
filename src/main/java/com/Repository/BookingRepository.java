@@ -4,10 +4,13 @@
  */
 package com.Repository;
 
+import com.DTO.Response.BookingResponse;
 import com.Model.Booking;
 import com.Model.Cart;
+import com.Model.SeatItem;
 import com.Model.User;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -22,4 +25,8 @@ public interface BookingRepository {
     public int createBooking(User user, Cart cart, double total);
 
     public boolean updateStatus(int bookingId, String status);
+
+    public void addBookingShowtime(int booking_id, Map<String,SeatItem> seats);
+    
+    public Map<String, List<BookingResponse>> getBookingResponsesByUser(int userId);
 }

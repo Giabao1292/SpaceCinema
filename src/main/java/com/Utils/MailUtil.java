@@ -60,8 +60,8 @@ public class MailUtil {
     public static String createMovieTicketEmail(String ticketCode, Map<String, SeatItem> seats, Map<String, SnackItem> snacks, String total) {
         StringBuilder htmlContent = new StringBuilder();
         htmlContent.append("<html><body style='font-family: Arial, sans-serif; margin: 0; padding-left: 200px; padding-right: 200px'>")
-                .append("<div style='background-color: #f8f9fa; padding: 20px; text-align: center;'>")
-                .append("<img src='https://raw.githubusercontent.com/Giabao1292/TestGit/refs/heads/main/unnamed.png' alt='Header Image' style='width: 100%; max-width: 900px; height: auto; display: block; margin: 0 auto;'>")
+                .append("<div style='text-align: center;'>")
+                .append("<img src='https://raw.githubusercontent.com/Giabao1292/TestGit/refs/heads/main/unnamed.png' alt='Header Image' style='width: 100%; height: auto; display: block; margin: 0 auto;'>")
                 .append("<h1 style='color: #dc3545; margin-top: 20px;'>E-TICKET</h1>")
                 .append("<p><strong>Please present this code at the SPACECINEMA ticket counter to receive your ticket.</strong></p>")
                 .append("<p><em>*Note: Please use the ticket type that matches your age as per SPACECINEMA regulations. For details, click here!</em></p>")

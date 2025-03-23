@@ -37,6 +37,7 @@ import java.util.logging.Logger;
  */
 @WebServlet(name = "VnpayReturn", urlPatterns = {"/order"})
 public class VnpayReturn extends HttpServlet {
+
     private SeatRepository seatRepository = new SeatRepositoryImpl();
     private BookingRepository bookingRepository = new BookingRepositoryImpl();
     private VoucherRepository voucherRepository = new VoucherRepositoryImpl();
@@ -80,16 +81,19 @@ public class VnpayReturn extends HttpServlet {
                 String email = (String) session.getValue(request, "email");
                 status = "Success";
                 transSuccess = true;
+                bookingRepository.addBookingShowtime(bookingId, cart.getSeats());
                 String content = MailUtil.createMovieTicketEmail(Integer.toString(bookingId), cart.getSeats(), cart.getSnacks(), Integer.toString(Integer.parseInt(request.getParameter("vnp_Amount")) / 100));
                 try {
                     MailUtil.sendEmail((String) session.getValue(request, "email"), "Space Cinemas: Transaction success", content, true);
                 } catch (MessagingException ex) {
                     Logger.getLogger(VnpayReturn.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                decreaseSeat(cart);
                 session.removeValue(request, "voucherId");
                 session.removeValue(request, "cart");
                 session.removeValue(request, "total");
                 session.removeValue(request, "email");
+                SessionUtils.getInstance().remainValue(request, "bookings", bookingRepository.getBookingResponsesByUser(user.getId()));
             } else {
                 status = "Failed";
             }
@@ -109,10 +113,8 @@ public class VnpayReturn extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     }
-    public void decreaseSeat(Cart cart){
-        Map<String, SeatItem> seats= cart.getSeats();
-        for(String key : seats.keySet()){
-            seatRepository.decreaseSeat(seats.get(key).getSeat().getId(), seats.get(key).getQuantity());
-        }
+
+    public void decreaseSeat(Cart cart) {
+        seatRepository.decreaseSeat(cart.getSeats());
     }
 }
