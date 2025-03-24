@@ -6,6 +6,16 @@
         </session-timeout>
     </session-config>
     <filter>
+        <filter-name>FilterBookTicket</filter-name>
+        <filter-class>com.Config.BookticketFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>FilterBookTicket</filter-name>
+        <url-pattern>/book-ticket</url-pattern>
+    </filter-mapping>
+
+    <filter>
         <filter-name>sitemesh</filter-name>
         <filter-class>com.opensymphony.module.sitemesh.filter.PageFilter</filter-class>
     </filter>
@@ -28,7 +38,10 @@
         <error-code>404</error-code>
         <location>/index.jsp</location>
     </error-page>
-
+    <error-page>
+        <error-code>500</error-code>
+        <location>/index.jsp</location>
+    </error-page>
     <context-param>
         <param-name>google.clientId</param-name>
         <param-value>254823530383-c223k6kn1b925vj0fkiai0rplo4d34sh.apps.googleusercontent.com</param-value>
@@ -40,8 +53,12 @@
     </context-param>
 
     <context-param>
-        <param-name>google.redirectUri</param-name>
+        <param-name>google.redirectUriAdmin</param-name>
         <param-value>http://localhost:8080/googleoAuth2</param-value>
+    </context-param>
+    <context-param>
+        <param-name>google.redirectUriUser</param-name>
+        <param-value>http://spacecinema.ddns.net:8080/googleoAuth2</param-value>
     </context-param>
     <context-param>
         <param-name>facebook.clientId</param-name>
@@ -51,10 +68,13 @@
         <param-name>facebook.clientSecret</param-name>
         <param-value>c4a92ce83aaf9c56c29aaf732044121a</param-value>
     </context-param>
-
     <context-param>
-        <param-name>facebook.redirectUri</param-name>
+        <param-name>facebook.redirectUriAdmin</param-name>
         <param-value>http://localhost:8080/facebookoAuth2</param-value>
+    </context-param>
+    <context-param>
+        <param-name>facebook.redirectUriUser</param-name>
+        <param-value>http://spacecinema.ddns.net:8080/facebookoAuth2</param-value>
     </context-param>
 </web-app>
  

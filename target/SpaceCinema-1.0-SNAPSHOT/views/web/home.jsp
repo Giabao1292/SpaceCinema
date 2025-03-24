@@ -7,6 +7,23 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file = "/common/taglib.jsp" %>
 <!DOCTYPE html>
+<c:if test="${status == 'not_showingtime'}">
+    <div class="container mt-5">
+        <!-- Alert -->
+        <div
+            class="alert show alert-danger alert-dismissible show fade"
+            role="alert"
+            >
+            <strong>Sorry!</strong> Currently this film not have showingtime yet."
+            <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"
+                ></button>
+        </div>
+    </div>
+</c:if>
 <c:if test="${status == 'not_permission'}">
     <div class="container mt-5">
         <!-- Alert -->

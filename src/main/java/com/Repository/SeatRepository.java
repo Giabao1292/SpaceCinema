@@ -14,7 +14,7 @@ import java.util.Map;
  * @author lebao
  */
 public interface SeatRepository {
-    public List<Seat> getSeatType(String theatreId, String timedetail, String datetime);
+    public List<Seat> getSeatType(String theatreId, String timedetail, String datetime, String movie);
     public Seat getSeatById(String seatId) ;
     public int decreaseSeat(Map<String, SeatItem> seats);
 }

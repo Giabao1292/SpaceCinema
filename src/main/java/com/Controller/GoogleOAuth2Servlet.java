@@ -32,6 +32,7 @@ public class GoogleOAuth2Servlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String serverName = request.getServerName();
         String error = request.getParameter("error");
         if ("access_denied".equals(error)) {
             response.sendRedirect("/login?action=login&status=denied");
@@ -44,7 +45,10 @@ public class GoogleOAuth2Servlet extends HttpServlet {
         }
         String clientId = getServletContext().getInitParameter("google.clientId");
         String clientSecret = getServletContext().getInitParameter("google.clientSecret");
-        String redirectUri = getServletContext().getInitParameter("google.redirectUri");
+        String redirectUri = getServletContext().getInitParameter("google.redirectUriAdmin");
+        if (serverName.equalsIgnoreCase("spacecinema.ddns.net")) {
+            redirectUri = getServletContext().getInitParameter("google.redirectUriUser");
+        }
         String tokenUrl = "https://oauth2.googleapis.com/token";
         String params = "code=" + code
                 + "&client_id=" + clientId

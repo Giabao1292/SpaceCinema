@@ -89,14 +89,14 @@
                                 </form>
                                 <div class="col-12 d-flex mt-3 align-items-center">
                                     <div class="d-flex gap-3 flex-column w-100 ">
-                                        <a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20openid&redirect_uri=http://localhost:8080/googleoAuth2&response_type=code&client_id=254823530383-c223k6kn1b925vj0fkiai0rplo4d34sh.apps.googleusercontent.com&prompt=consent"
+                                        <a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20openid&redirect_uri=${redirect_urigoogle}&response_type=code&client_id=254823530383-c223k6kn1b925vj0fkiai0rplo4d34sh.apps.googleusercontent.com&prompt=consent"
                                            class="btn btn-lg btn-danger">
                                             <i class="bi bi-google"></i>
                                             <span class="ms-2 fs-6">Sign in with Google</span>
                                         </a>
 
 
-                                        <a href="https://www.facebook.com/v17.0/dialog/oauth?client_id=1339556850512912&redirect_uri=http://localhost:8080/facebookoAuth2&scope=email&response_type=code&response_mode=query&state=2c7fgrtqw4k&nonce=wbo7ueooc5s" class="btn btn-lg btn-primary">
+                                        <a href="https://www.facebook.com/v17.0/dialog/oauth?client_id=1339556850512912&redirect_uri=${redirect_urifacebook}&scope=email&response_type=code&response_mode=query&state=2c7fgrtqw4k&nonce=wbo7ueooc5s" class="btn btn-lg btn-primary">
                                             <i class="bi bi-facebook"></i>
                                             <span class="ms-2 fs-6">Sign in with Facebook</span>
                                         </a>

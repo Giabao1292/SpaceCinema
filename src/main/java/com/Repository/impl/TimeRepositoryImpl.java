@@ -56,7 +56,8 @@ public class TimeRepositoryImpl implements TimeRepository {
     public void addListTime(String[] cinema, HashMap<String, List<String>> times, String[] dates, String movieId) {
         String sqlShowingTime = "INSERT INTO showing_time (theatre_id, movie_id, showing_datetime) values(?,?,?)";
         String sqlTimeDetail = "INSERT INTO time_detail (showing_time_id, timedetail) values(?,?)";
-        try (Connection con = GetConnection.getConnection(); PreparedStatement stmtTimeDetail = con.prepareStatement(sqlTimeDetail); PreparedStatement stmt = con.prepareStatement(sqlShowingTime, Statement.RETURN_GENERATED_KEYS)) {
+        String sqlTimeSeat = "INSERT INTO time_detail_seat (time_detail_id, seat_id, quantity) values(?,?,?)";
+        try (Connection con = GetConnection.getConnection(); PreparedStatement stmtTimeDetail = con.prepareStatement(sqlTimeDetail, Statement.RETURN_GENERATED_KEYS); PreparedStatement stmt = con.prepareStatement(sqlShowingTime, Statement.RETURN_GENERATED_KEYS); PreparedStatement stTimeSeat = con.prepareStatement(sqlTimeSeat)) {
             for (String key : times.keySet()) {
                 List<Theatre> theatres = theatreRepository.getListTheatreByType(key, cinema);
                 for (Theatre theatre : theatres) {
@@ -89,6 +90,19 @@ public class TimeRepositoryImpl implements TimeRepository {
                 }
             }
             stmtTimeDetail.executeBatch();
+            try (ResultSet rs = stmtTimeDetail.getGeneratedKeys()) {
+                while (rs.next()) {
+                    int timeDetailId = rs.getInt(1);
+                    List<Integer> seatIds = seatId(timeDetailId);
+                    for(Integer seatId : seatIds){
+                        stTimeSeat.setInt(1, timeDetailId);
+                        stTimeSeat.setInt(2, seatId);
+                        stTimeSeat.setInt(3, 45);
+                        stTimeSeat.addBatch();
+                    }
+                }
+                stTimeSeat.executeBatch();
+            }
 
         } catch (SQLException ex) {
             Logger.getLogger(TimeRepositoryImpl.class
@@ -98,5 +112,26 @@ public class TimeRepositoryImpl implements TimeRepository {
             Logger.getLogger(TimeRepositoryImpl.class
                     .getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public List<Integer> seatId(int timeid) {
+        String sql = "SELECT s.* FROM seat s "
+                + "JOIN theatre t on t.theatre_id = s.theatre_id "
+                + "JOIN showing_time st on st.theatre_id = t.theatre_id "
+                + "JOIN time_detail td on td.showing_time_id = st.time_id "
+                + "WHERE td.time_detail_id = ?";
+        List<Integer> seatIds = new ArrayList<>();
+        try (Connection connection = GetConnection.getConnection(); PreparedStatement st = connection.prepareStatement(sql)) {
+            st.setInt(1, timeid);
+            try(ResultSet rs = st.executeQuery()){
+                while(rs.next()){
+                    int seatId = rs.getInt("s.seat_id");
+                    seatIds.add(seatId);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return seatIds;
     }
 }

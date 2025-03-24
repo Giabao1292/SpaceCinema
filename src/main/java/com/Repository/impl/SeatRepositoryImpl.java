@@ -27,19 +27,20 @@ import java.util.logging.Logger;
 public class SeatRepositoryImpl implements SeatRepository {
 
     @Override
-    public List<Seat> getSeatType(String theatreId, String timedetail, String datetime) {
+    public List<Seat> getSeatType(String theatreId, String timedetail, String datetime, String movie) {
         String sql = "SELECT s.* ,tds.quantity, st.type_name FROM seat s "
                 + "join seat_type st on st.type_id = s.seat_type_id "
                 + "join theatre t on t.theatre_id = s.theatre_id "
                 + "join time_detail_seat tds on tds.seat_id = s.seat_id "
                 + "join time_detail td on td.time_detail_id = tds.time_detail_id "
                 + "join showing_time sti on sti.time_id = td.showing_time_id "
-                + "where t.theatre_id = ? AND timedetail = ? AND sti.showing_datetime = ?";
+                + "where t.theatre_id = ? AND timedetail = ? AND sti.showing_datetime = ? AND sti.movie_id = ?";
         List<Seat> seatList = new ArrayList<>();
         try (Connection conn = GetConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, theatreId);
             stmt.setString(2, timedetail);
             stmt.setString(3, datetime);
+            stmt.setString(4, movie);
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     Seat seat = new Seat();

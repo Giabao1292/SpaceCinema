@@ -24,6 +24,7 @@ public class FacebookOAuth2Servlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String serverName = request.getServerName();
         String error = request.getParameter("error");
         if ("access_denied".equals(error)) {
             response.sendRedirect("/login?action=login&status=denied");
@@ -36,7 +37,10 @@ public class FacebookOAuth2Servlet extends HttpServlet {
         }
         String clientId = getServletContext().getInitParameter("facebook.clientId");
         String clientSecret = getServletContext().getInitParameter("facebook.clientSecret");
-        String redirectUri = getServletContext().getInitParameter("facebook.redirectUri");
+        String redirectUri = getServletContext().getInitParameter("facebook.redirectUriAdmin");
+        if(serverName.equalsIgnoreCase("spacecinema.ddns.net")){
+            redirectUri = getServletContext().getInitParameter("facebook.redirectUriUser");
+        }
         String tokenUrl = "https://graph.facebook.com/v12.0/oauth/access_token";
         String params = "client_id=" + clientId
                 + "&redirect_uri=" + redirectUri
