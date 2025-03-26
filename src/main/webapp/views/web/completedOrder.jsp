@@ -66,6 +66,26 @@
     .accordion-button::after {
         transition: transform 0.3s ease-in-out;
     }
+    .hero {
+        background: url('https://i.pinimg.com/736x/ba/91/ab/ba91ab9159a9dc04e431ae45711cc117.jpg') center/cover no-repeat;
+        height: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+    }
+    .thank-you-card {
+        text-align: center;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        background: white;
+    }
+    .thank-you-card img {
+        max-width: 150px;
+        margin-bottom: 15px;
+    }
 </style>
 
 <div class="container mt-4">
@@ -157,5 +177,25 @@
             <div class="alert alert-warning text-center">No bookings found.</div>
         </c:otherwise>
     </c:choose>
+    <div class="hero mt-4 rounded ">
+        <h1 class ="text-white">Thank You for Booking with Us! 🎟️</h1>
+    </div>
+    <div class="container my-5">
+        <div class="row justify-content-center text-black">
+            <div class="col-md-6">
+                <div class="thank-you-card text-center">
+                    <h2 class="mb-3 text-black">Thank You for Your Booking! 🎬</h2>
+                    <p class="lead mb-4">Your ticket reservation has been successfully processed. We're thrilled you've chosen us for your entertainment experience!</p>
+                    <p>🎥 Your movie adventure awaits! Arrive 30 minutes early for the best seats.<br>
+                        🍿 Don't forget to grab your favorite snacks at our concession stand.<br>
+                        ❤️ We appreciate your support of our cinema.</p>
+                    <div class="mt-4">
+                        <a href="/home" class="btn btn-outline-secondary px-4">Return Home</a>
+                    </div>
+                    <p class="mt-4 small text-muted">Need assistance? Contact our customer support at <a href="mailto:support@cinema.com">support@cinema.com</a> or call (123) 456-7890.</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
