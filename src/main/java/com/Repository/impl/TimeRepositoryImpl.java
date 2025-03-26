@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
@@ -32,23 +33,29 @@ public class TimeRepositoryImpl implements TimeRepository {
     @Override
     public List<String> findAll(String cinema, String movie, String date) {
         List<String> times = new ArrayList<>();
-        String sql = "SELECT timedetail FROM time_detail td "
+        StringBuilder sql = new StringBuilder("SELECT timedetail FROM time_detail td "
                 + "JOIN showing_time st ON st.time_id = td.showing_time_id "
                 + "JOIN movie m ON m.movie_id = st.movie_id "
                 + "JOIN theatre t ON t.theatre_id = st.theatre_id "
                 + "JOIN cinema c ON c.cinema_id = t.cinema_id "
                 + "WHERE c.cinema_name = '" + cinema
                 + "' AND m.title = '" + movie
-                + "' AND st.showing_datetime = '" + date + "'";
+                + "' AND st.showing_datetime = '" + date + "'");
+        Date now = new Date();
+        if (date.equals(Format.fm2.format(now))) {
+            sql.append(" AND timedetail > CURTIME()");
+        }
+        sql.append("Order by timedetail ASC");
         try (Connection connection = GetConnection.getConnection()) {
             Statement st = connection.createStatement();
-            ResultSet rs = st.executeQuery(sql);
+            ResultSet rs = st.executeQuery(sql.toString());
             while (rs.next()) {
                 times.add(rs.getString("timedetail"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return times;
     }
 
@@ -94,7 +101,7 @@ public class TimeRepositoryImpl implements TimeRepository {
                 while (rs.next()) {
                     int timeDetailId = rs.getInt(1);
                     List<Integer> seatIds = seatId(timeDetailId);
-                    for(Integer seatId : seatIds){
+                    for (Integer seatId : seatIds) {
                         stTimeSeat.setInt(1, timeDetailId);
                         stTimeSeat.setInt(2, seatId);
                         stTimeSeat.setInt(3, 45);
@@ -123,8 +130,8 @@ public class TimeRepositoryImpl implements TimeRepository {
         List<Integer> seatIds = new ArrayList<>();
         try (Connection connection = GetConnection.getConnection(); PreparedStatement st = connection.prepareStatement(sql)) {
             st.setInt(1, timeid);
-            try(ResultSet rs = st.executeQuery()){
-                while(rs.next()){
+            try (ResultSet rs = st.executeQuery()) {
+                while (rs.next()) {
                     int seatId = rs.getInt("s.seat_id");
                     seatIds.add(seatId);
                 }

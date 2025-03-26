@@ -21,6 +21,7 @@
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Config/BookticketFilter.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Controller/Web/PromotionController.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Controller/Web/Payment.java
+/Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/DTO/Response/BookingSnackDTO.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Controller/FacebookOAuth2Servlet.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Config/Format.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Utils/CinemaContextListener.java
@@ -50,6 +51,7 @@
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/DTO/Request/MovieRequestDto.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Model/Role.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Model/User.java
+/Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/DTO/Response/BookingSeatDTO.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Model/BookingSeat.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Model/Seat.java
 /Users/lebao/NetBeansProjects/SpaceCinema/src/main/java/com/Config/GetConnection.java

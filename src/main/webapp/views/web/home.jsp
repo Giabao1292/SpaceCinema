@@ -259,7 +259,9 @@
         </div>
     </section>
     <!-- /Gallery Section -->
-    <h1 class = "text-center text-warning">Coming Soon Movie</h1>
+    <c:if test = "${not empty comingSoonMovie}">
+        <h1 class = "text-center text-warning">Coming Soon Movie</h1>
+    </c:if>
     <section id="gallery" class="gallery section">
         <div class="container-fluid" data-aos="fade-up" data-aos-delay="100">
             <div class="row gy-4 justify-content-center">

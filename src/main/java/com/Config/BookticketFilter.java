@@ -31,7 +31,7 @@ public class BookticketFilter implements Filter{
                 chain.doFilter(request, response);
             }
             else{
-                res.sendRedirect("/home");
+                res.sendRedirect("/home?status=not_showingtime");
             }
         }
     }

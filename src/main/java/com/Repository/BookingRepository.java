@@ -11,6 +11,7 @@ import com.Model.SeatItem;
 import com.Model.User;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  *
@@ -28,5 +29,5 @@ public interface BookingRepository {
 
     public void addBookingShowtime(int booking_id, Map<String,SeatItem> seats);
     
-    public Map<String, List<BookingResponse>> getBookingResponsesByUser(int userId);
+    public TreeMap<String, BookingResponse> getBookingResponsesByUser(int userId);
 }

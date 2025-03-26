@@ -7,6 +7,8 @@ package com.Repository.impl;
 import com.Config.Format;
 import com.Config.GetConnection;
 import com.DTO.Response.BookingResponse;
+import com.DTO.Response.BookingSeatDTO;
+import com.DTO.Response.BookingSnackDTO;
 import com.Model.Booking;
 import com.Model.Cart;
 import com.Model.SeatItem;
@@ -20,9 +22,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -31,7 +34,7 @@ import java.util.logging.Logger;
  * @author LAPTOP ASUS
  */
 public class BookingRepositoryImpl implements BookingRepository {
-
+    
     @Override
     public int getTotalPriceBooking() {
         String sql = "SELECT SUM(total_price) AS total_booking_fee FROM spacecinema.booking;";
@@ -44,7 +47,7 @@ public class BookingRepositoryImpl implements BookingRepository {
         }
         return 0;
     }
-
+    
     @Override
     public List<Booking> listUserBooking() {
         List<Booking> bookings = new ArrayList<>();
@@ -67,7 +70,7 @@ public class BookingRepositoryImpl implements BookingRepository {
         }
         return bookings;
     }
-
+    
     @Override
     public int createBooking(User user, Cart cart, double total) {
         String sql = "INSERT INTO booking (user_id, total_price, created_datetime, status) VALUES (?, ?, NOW(), ?)";
@@ -97,7 +100,7 @@ public class BookingRepositoryImpl implements BookingRepository {
         }
         return bookingId;
     }
-
+    
     public int createBookingSnack(Map<String, SnackItem> snacks, int booking_id) {
         String sql = "INSERT INTO booking_snack(snack_id, snack_qty, status, booking_id) values (?,?,?,?)";
         try (Connection conn = GetConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -115,7 +118,7 @@ public class BookingRepositoryImpl implements BookingRepository {
         }
         return -1;
     }
-
+    
     public int createBookingSeat(Map<String, SeatItem> seats, int booking_id) {
         String sql = "INSERT INTO booking_seat(seat_id, seat_qty, status, booking_id) values (?,?,?,?)";
         try (Connection conn = GetConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -133,22 +136,22 @@ public class BookingRepositoryImpl implements BookingRepository {
         }
         return -1;
     }
-
+    
     @Override
     public boolean updateStatus(int bookingId, String status) {
         String sqlBooking = "UPDATE booking SET status = ? WHERE booking_id = ?";
         String sqlBookingSeat = "UPDATE booking_seat SET status = ? WHERE booking_id = ?";
         String sqlBookingSnack = "UPDATE booking_snack SET status = ? WHERE booking_id = ?";
-
+        
         try (Connection conn = GetConnection.getConnection(); PreparedStatement stmtBooking = conn.prepareStatement(sqlBooking); PreparedStatement stmtBookingSeat = conn.prepareStatement(sqlBookingSeat); PreparedStatement stmtBookingSnack = conn.prepareStatement(sqlBookingSnack)) {
             stmtBooking.setString(1, status);
             stmtBooking.setInt(2, bookingId);
             stmtBooking.executeUpdate();
-
+            
             stmtBookingSeat.setString(1, status);
             stmtBookingSeat.setInt(2, bookingId);
             stmtBookingSeat.executeUpdate();
-
+            
             stmtBookingSnack.setString(1, status);
             stmtBookingSnack.setInt(2, bookingId);
             stmtBookingSnack.executeUpdate();
@@ -158,23 +161,23 @@ public class BookingRepositoryImpl implements BookingRepository {
         }
         return false;
     }
-
+    
     @Override
     public void addBookingShowtime(int booking_id, Map<String, SeatItem> seats) {
         if (seats == null || seats.isEmpty()) {
             System.out.println("Error: No seat data provided.");
             return;
         }
-
+        
         String getMovieIdSql = "SELECT movie_id FROM movie WHERE title = ?";
         String getTheatreIdSql = "SELECT theatre_id FROM theatre t JOIN cinema c ON t.cinema_id = c.cinema_id WHERE c.cinema_name = ? AND t.theatre_num = ?";
         String getShowingTimeIdSql = "SELECT time_id FROM showing_time WHERE movie_id = ? AND theatre_id = ? AND showing_datetime = ?";
         String getTimeDetailIdSql = "SELECT time_detail_id FROM time_detail WHERE showing_time_id = ? AND timedetail = ?";
         String insertBookingShowtimeSql = "INSERT INTO booking_showtime (booking_id, showing_time_id, time_detail_id) VALUES (?, ?, ?)";
-
+        
         try (Connection conn = GetConnection.getConnection()) {
             conn.setAutoCommit(false);
-
+            
             for (SeatItem seatItem : seats.values()) {
                 String cinema = seatItem.getCinema();
                 String theatre = seatItem.getTheatre();
@@ -204,14 +207,14 @@ public class BookingRepositoryImpl implements BookingRepository {
             }
             conn.commit(); // Xác nhận transaction
             System.out.println("Booking showtimes added successfully!");
-
+            
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ParseException ex) {
             Logger.getLogger(BookingRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
     private int getIdFromQuery(Connection conn, String sql, Object... params) throws SQLException {
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             for (int i = 0; i < params.length; i++) {
@@ -225,12 +228,11 @@ public class BookingRepositoryImpl implements BookingRepository {
         }
         return -1;
     }
+    
     @Override
-    public Map<String, List<BookingResponse>> getBookingResponsesByUser(int userId) {
-        String sql = "SELECT b.booking_id, m.title, cin.cinema_name, the.theatre_num, st.showing_datetime,"
-                + " td.timedetail, s.snack_name, bs.snack_qty, sty.type_name, bse.seat_qty from booking b\n"
-                + "JOIN booking_snack bs on bs.booking_id = b.booking_id\n"
-                + "JOIN snack s on s.snack_id = bs.snack_id\n"
+    public TreeMap<String, BookingResponse> getBookingResponsesByUser(int userId) {
+        String bookingSeat = "SELECT b.booking_id, m.title, cin.cinema_name, the.theatre_num, st.showing_datetime,"
+                + " td.timedetail, sty.type_name, bse.seat_qty, bse.seat_qty * se.price as price from booking b\n"
                 + "JOIN booking_seat bse on bse.booking_id = b.booking_id\n"
                 + "JOIN seat se on se.seat_id = bse.seat_id\n"
                 + "JOIN booking_showtime bst on bst.booking_id = b.booking_id\n"
@@ -240,33 +242,55 @@ public class BookingRepositoryImpl implements BookingRepository {
                 + "JOIN theatre the on the.theatre_id = st.theatre_id\n"
                 + "JOIN cinema cin on cin.cinema_id = the.cinema_id\n"
                 + "JOIN seat_type sty on sty.type_id = se.seat_type_id\n"
-                + "WHERE b.user_id = ?";
-
-        Map<String, List<BookingResponse>> bookingMap = new HashMap<>();
-
-        try (Connection conn = GetConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, userId);
-            try (ResultSet rs = stmt.executeQuery()) {
+                + "WHERE b.user_id = ? group by b.booking_id, m.title, cin.cinema_name, the.theatre_num, st.showing_datetime,\n"
+                + "td.timedetail, sty.type_name, bse.seat_qty, price";
+        String bookingSnack = "SELECT b.booking_id, cin.cinema_name,s.snack_name, bs.snack_qty, s.price * bs.snack_qty as price from booking b\n"
+                + "JOIN booking_snack bs on bs.booking_id = b.booking_id\n"
+                + "JOIN snack s on s.snack_id = bs.snack_id\n"
+                + "JOIN booking_showtime bst on bst.booking_id = b.booking_id\n"
+                + "JOIN showing_time st on st.time_id = bst.showing_time_id\n"
+                + "JOIN theatre the on the.theatre_id = st.theatre_id\n"
+                + "JOIN cinema cin on cin.cinema_id = the.cinema_id\n"
+                + "WHERE b.user_id = ? group by b.booking_id, cin.cinema_name,s.snack_name, bs.snack_qty, price\n"
+                + "";
+        TreeMap<String, BookingResponse> bookingResponses = new TreeMap<>(Comparator.reverseOrder());
+        
+        try (Connection conn = GetConnection.getConnection(); PreparedStatement stmtSeat = conn.prepareStatement(bookingSeat); PreparedStatement stmtSnack = conn.prepareStatement(bookingSnack)) {
+            stmtSeat.setInt(1, userId);
+            try (ResultSet rs = stmtSeat.executeQuery()) {
                 while (rs.next()) {
                     String bookingId = rs.getString("booking_id");
-                    BookingResponse response = new BookingResponse(
+                    BookingSeatDTO bookingSeatDTO = new BookingSeatDTO(
                             rs.getString("title"),
                             rs.getString("cinema_name"),
                             rs.getString("theatre_num"),
                             rs.getString("showing_datetime"),
                             rs.getString("timedetail"),
-                            rs.getString("snack_name"),
-                            rs.getInt("snack_qty"),
                             rs.getString("type_name"),
-                            rs.getInt("seat_qty")
+                            rs.getInt("seat_qty"),
+                            rs.getDouble("price")
                     );
-
-                    bookingMap.computeIfAbsent(bookingId, k -> new ArrayList<>()).add(response);
+                    bookingResponses.computeIfAbsent(bookingId, k -> new BookingResponse()).getBookingSeats().add(bookingSeatDTO);
+                }
+            }
+            stmtSnack.setInt(1, userId);
+            try (ResultSet rs = stmtSnack.executeQuery()) {
+                while (rs.next()) {
+                    String bookingId = rs.getString("booking_id");
+                    BookingSnackDTO bookingSnackDTO = new BookingSnackDTO(
+                            rs.getString("cin.cinema_name"),
+                            rs.getString("s.snack_name"),
+                            rs.getInt("bs.snack_qty"),
+                            rs.getDouble("price")
+                    );
+                    
+                    bookingResponses.computeIfAbsent(bookingId, k -> new BookingResponse()).getBookingSnacks().add(bookingSnackDTO);
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return bookingMap;
+        return bookingResponses;
     }
+    
 }

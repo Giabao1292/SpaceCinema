@@ -18,6 +18,7 @@ com/Model/Movie.class
 com/Repository/CastRepository.class
 com/Controller/Web/BookTicketController.class
 com/Repository/impl/VoucherRepositoryImpl.class
+com/DTO/Response/BookingSeatDTO.class
 com/Repository/CinemaRepository.class
 com/Controller/Web/CheckOutController.class
 com/Model/Seat.class
@@ -44,6 +45,7 @@ com/Controller/FacebookOAuth2Servlet.class
 com/Model/Genre.class
 com/Services/CartService.class
 com/DTO/Response/BookingResponse.class
+com/DTO/Response/BookingSnackDTO.class
 com/Repository/impl/StatusRepositoryImpl.class
 com/Repository/TimeRepository.class
 com/Controller/Web/HomeController.class

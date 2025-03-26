@@ -20,7 +20,9 @@ import java.util.List;
  * @author lebao
  */
 public class DateRepositoryImpl implements DateRepository {
+
     private SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+
     @Override
     public List<String> findAll(String cinema, String movie) {
         List<String> showingTimes = new ArrayList<>();
@@ -30,8 +32,10 @@ public class DateRepositoryImpl implements DateRepository {
                     + "JOIN movie m on m.movie_id = st.movie_id\n"
                     + "JOIN theatre t on t.theatre_id = st.theatre_id\n"
                     + "JOIN cinema c on c.cinema_id = t.cinema_id\n"
-                    + "WHERE c.cinema_name = '" + cinema + "' AND m.title = '" + movie
-                    + "' GROUP BY showing_datetime";
+                    + "WHERE c.cinema_name = '" + cinema + "' AND m.title = '" + movie + "'\n"
+                    + "AND showing_datetime >= CURDATE()\n"
+                    + "GROUP BY showing_datetime\n"
+                    + "ORDER BY showing_datetime ASC";
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 ShowingTime stime = new ShowingTime(rs.getDate("showing_datetime"));

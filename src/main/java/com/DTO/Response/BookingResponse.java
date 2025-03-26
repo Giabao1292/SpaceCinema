@@ -4,69 +4,42 @@
  */
 package com.DTO.Response;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author lebao
  */
 public class BookingResponse {
+    private List<BookingSeatDTO> bookingSeats;
+    private List<BookingSnackDTO> bookingSnacks;
 
-    private String movieTitle;
-    private String cinemaName;
-    private String theatreNum;
-    private String showingDatetime;
-    private String timeDetail;
-    private String snackName;
-    private int snackQty;
-    private String seatType;
-    private int seatQty;
-
-    public BookingResponse(String movieTitle, String cinemaName, String theatreNum, String showingDatetime,
-            String timeDetail, String snackName, int snackQty, String seatType, int seatQty) {
-        this.movieTitle = movieTitle;
-        this.cinemaName = cinemaName;
-        this.theatreNum = theatreNum;
-        this.showingDatetime = showingDatetime;
-        this.timeDetail = timeDetail;
-        this.snackName = snackName;
-        this.snackQty = snackQty;
-        this.seatType = seatType;
-        this.seatQty = seatQty;
+    public BookingResponse() {
+        bookingSeats = new ArrayList<>();
+        bookingSnacks = new ArrayList<>();
     }
 
-    // Getter & Setter
-    public String getMovieTitle() {
-        return movieTitle;
+    public BookingResponse(List<BookingSeatDTO> bookingSeats, List<BookingSnackDTO> bookingSnacks) {
+        this.bookingSeats = bookingSeats;
+        this.bookingSnacks = bookingSnacks;
     }
 
-    public String getCinemaName() {
-        return cinemaName;
+    public List<BookingSeatDTO> getBookingSeats() {
+        return bookingSeats;
     }
 
-    public String getTheatreNum() {
-        return theatreNum;
+    public void setBookingSeats(List<BookingSeatDTO> bookingSeats) {
+        this.bookingSeats = bookingSeats;
     }
 
-    public String getShowingDatetime() {
-        return showingDatetime;
+    public List<BookingSnackDTO> getBookingSnacks() {
+        return bookingSnacks;
     }
 
-    public String getTimeDetail() {
-        return timeDetail;
+    public void setBookingSnacks(List<BookingSnackDTO> bookingSnacks) {
+        this.bookingSnacks = bookingSnacks;
     }
 
-    public String getSnackName() {
-        return snackName;
-    }
-
-    public int getSnackQty() {
-        return snackQty;
-    }
-
-    public String getSeatType() {
-        return seatType;
-    }
-
-    public int getSeatQty() {
-        return seatQty;
-    }
+    
 }
