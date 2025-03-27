@@ -34,7 +34,7 @@ public class ForgotPasswordServlet extends HttpServlet {
         action = action == null ? "" : action;
         switch (action) {
             case "forgotPassword":
-                request.getRequestDispatcher("/views/web/changePassword.jsp").forward(request, response);
+                request.getRequestDispatcher("/views/web/changepassword.jsp").forward(request, response);
                 return;
         }
         response.sendRedirect("/login?action=login");
@@ -50,7 +50,7 @@ public class ForgotPasswordServlet extends HttpServlet {
                 User user = userRepository.findUserByEmail(email);
                 if (email == null || user.getFullName() == null) {
                     request.setAttribute("status", "invalid-email");
-                    request.getRequestDispatcher("/views/web/changePassword.jsp").forward(request, response);
+                    request.getRequestDispatcher("/views/web/changepassword.jsp").forward(request, response);
                     return;
                 }
                 String resetCode = generateResetCode();
@@ -89,7 +89,7 @@ public class ForgotPasswordServlet extends HttpServlet {
                 }
                 else{
                     request.setAttribute("status", "code-expired");
-                    request.getRequestDispatcher("/views/web/changePassword.jsp").forward(request, response);
+                    request.getRequestDispatcher("/views/web/changepassword.jsp").forward(request, response);
                 }
                 return;
         }

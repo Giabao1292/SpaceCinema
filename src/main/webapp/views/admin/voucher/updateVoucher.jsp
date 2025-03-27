@@ -91,7 +91,7 @@
                             >
                             Update
                         </button>
-                        <a type="reset" href ="/admin-home/movie?action=update&movie_id=${movie_id}" class="btn btn-secondary">Reset</a>
+                        <a type="reset" href ="/admin-home/voucher?action=update&id=${id}" class="btn btn-secondary">Reset</a>
                     </div>
                 </div>
             </form>
