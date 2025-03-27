@@ -26,7 +26,7 @@
     </welcome-file-list>
     <error-page>
         <error-code>404</error-code>
-        <location>/views/login.jsp</location>
+        <location>/index.jsp</location>
     </error-page>
 
     <context-param>

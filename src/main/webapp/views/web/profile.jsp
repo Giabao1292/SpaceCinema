@@ -13,7 +13,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>JSP Page</title>
 </head>
-
 <div class="container mt-5">
     <div class="row justify-content-center">
         <!-- Cột thông tin người dùng -->
@@ -30,7 +29,7 @@
                 </button>
             </div>
         </div>
- 
+
         <!-- Cột chi tiết thông tin -->
         <div class="col-md-6">
             <div class="card p-4 shadow-lg">
@@ -42,6 +41,20 @@
                     <li class="list-group-item"><strong>Số điện thoại:</strong> ${USER.phone}</li>
                 </ul>
             </div>
+        </div>
+        <div class="col-md-10 mt-2">
+            <c:if test = "${status == 'success'}">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Change password successfully!
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </c:if>
+            <c:if test = "${status == 'failed'}">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Change password failed!
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </c:if>
         </div>
     </div>
 </div>
@@ -86,7 +99,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="/change-password" method="POST">
+                <form action="/profile?action=pass" method="POST">
                     <div class="mb-3">
                         <label class="form-label text-danger">Current Password</label>
                         <input type="password" class="form-control password-input" name="currentPassword" required>
@@ -129,7 +142,7 @@
         });
     });
     // Xác nhận mật khẩu mới và mật khẩu xác nhận
-    document.querySelector("form[action='/change-password']").addEventListener("submit", function(event) {
+    document.querySelector("form[action='/change-password']").addEventListener("submit", function (event) {
         const newPassword = document.querySelector("input[name='newPassword']").value;
         const confirmPassword = document.querySelector("input[name='confirmPassword']").value;
 
