@@ -61,28 +61,56 @@
                                 <i class="fa-solid fa-bullhorn text-warning"></i> ${movieitem.director}
                             </div>
                         </div>
-                        <div class = "text-white">
-                            <c:forEach var = "date" items = "${movieitem.times.keySet()}" varStatus="statusDate">
-                                <div class="btn btn-transparent border border-warning text-white w-75 mt-1" data-idmain = "${status.index}" data-id="${statusDate.index}">
-                                    <div class = "toggleButton d-flex justify-content-between">
+                        <div class="text-white">
+                            <c:forEach var="date" items="${movieitem.times.keySet()}" varStatus="statusDate">
+                                <div class="btn btn-transparent border border-warning text-white w-75 mt-1" 
+                                     data-idmain="${status.index}" data-id="${statusDate.index}">
+                                    <div class="toggleButton d-flex justify-content-between">
                                         <span>${date}</span>
                                         <span><i class="bi bi-arrow-down"></i></span>
                                     </div>
                                     <div id="content-${status.index}-${statusDate.index}" class="hidden text-start">
-                                        <c:forEach var = "time" items = "${movieitem.times[date]}">
-                                            <a class = "btn btn-warning text-black mt-1" href = "book-ticket?cinema=${cinema}&movie=${movieitem.title}&date=${date}&time=${time}">${time}</a>
+                                        <c:forEach var="time" items="${movieitem.times[date]}" varStatus="statusTime">
+                                            <a class="timeBtn btn btn-warning text-black mt-1 movie-time"
+                                               href="book-ticket?cinema=${cinema}&movie=${movieitem.title}&date=${date}&time=${time}"
+                                               data-date="${date}" data-time="${time}" id="time-${status.index}-${statusDate.index}-${statusTime.index}">
+                                                ${time}
+                                            </a>
                                         </c:forEach>
                                     </div>
                                 </div>
                             </c:forEach>
                         </div>
+
                     </div>
                 </c:forEach>
             </div>
         </div>
     </section>
     <script>
+
         $(document).ready(function () {
+            $(".timeBtn").each(function () {
+                let dateStr = $(this).attr("data-date"); 
+                let timeStr = $(this).attr("data-time"); 
+
+                let showDateTime = null;
+
+                if (dateStr.includes(",")) {
+                    let parts = dateStr.split(", ")[1].split("/"); 
+                    showDateTime = new Date(parts[2], parts[1] - 1, parts[0], ...timeStr.split(":"));
+                } else {
+                    let parts = dateStr.split("-");
+                    showDateTime = new Date(parts[0], parts[1] - 1, parts[2], ...timeStr.split(":"));
+                }
+
+                const currentDateTime = new Date(); 
+                if (showDateTime < currentDateTime) {
+                    $(this).addClass("disabled")
+                            .attr("aria-disabled", "true")
+                            .css({"pointer-events": "none", "opacity": "0.5"});
+                }
+            });
             $(document).ready(function () {
                 $(".toggleButton").click(function () {
                     let parent = $(this).closest(".btn-transparent");

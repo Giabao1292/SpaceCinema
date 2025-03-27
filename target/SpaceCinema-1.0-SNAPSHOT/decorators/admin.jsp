@@ -30,11 +30,7 @@
             <%@ include file="/common/admin/menu.jsp" %>
             <!-- menu -->
             <div id="layoutSidenav_content">
-                <dec:body/>
-
-                <!-- footer -->
-                <%@ include file="/common/admin/footer.jsp" %>
-                <!-- footer -->
+                <dec:body/>   
             </div>
         </div>
 

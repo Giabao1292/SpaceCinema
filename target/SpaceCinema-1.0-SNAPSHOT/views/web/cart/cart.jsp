@@ -35,7 +35,7 @@
                             <c:set var="seatItem" value="${entry.value}" />
                             <c:set var="seat" value="${seatItem.seat}" />
                             <c:set var="subTotalSeat" value = "${seatItem.quantity * seat.price}"/>
-                            <fmt:formatNumber var ="fmtSubTotalSeat" value = "${subTotalSeat}" groupingUsed="true" pattern = "0.00" />
+                            <fmt:formatNumber var ="fmtSubTotalSeat" value = "${subTotalSeat}" type="currency" currencySymbol="VND" maxFractionDigits="0"/>
                             <c:set var = "total" value = "${total + subTotalSeat}" />
                             <tr>
                                 <td>${seat.type}</td>
@@ -51,7 +51,7 @@
                                         <button type="submit" class="btn btn-primary">Update</button>
                                     </form>
                                 </td>
-                                <td>${fmtSubTotalSeat} VND</td>
+                                <td>${fmtSubTotalSeat} </td>
                                 <td>
                                     <button type="button" class="btn btn-danger" 
                                             data-bs-toggle="modal" 
@@ -84,7 +84,7 @@
                             <c:set var="snackItem" value="${entry.value}" />
                             <c:set var="snack" value="${snackItem.snack}" />
                             <c:set var="subTotalSnack" value = "${snack.price * snackItem.quantity}"/>
-                            <fmt:formatNumber var ="fmtSubTotalSnack" value = "${subTotalSnack}" groupingUsed="true" pattern = "0.00" />
+                            <fmt:formatNumber var ="fmtSubTotalSnack" value = "${subTotalSnack}" type="currency" currencySymbol="VND" maxFractionDigits="0"/>
                             <c:set var = "total" value = "${total + subTotalSnack}" />
                             <tr>
                                 <td>${snack.name}</td>
@@ -97,7 +97,7 @@
                                         <button type="submit" class="btn btn-primary">Update</button>
                                     </form>
                                 </td>
-                                <td>${fmtSubTotalSnack} VND</td>
+                                <td>${fmtSubTotalSnack} </td>
                                 <td>
                                     <button type="button" class="btn btn-danger" 
                                             data-bs-toggle="modal" 
@@ -119,9 +119,9 @@
             <c:if test = "${not empty discount}">
                 <c:set var ="total" value = "${total * (100 - discount) / 100}"/>
             </c:if>
-            <fmt:formatNumber var = "fmtTotal" value = "${total}" groupingUsed = "true" pattern = "0.00" />
+            <fmt:formatNumber var = "fmtTotal" value = "${total}" type="currency" currencySymbol="VND" maxFractionDigits="0"/>
             <h3 class="text-end text-warning mt-3">
-                Total: ${fmtTotal} VND
+                Total: ${fmtTotal} 
             </h3>
             <div class="text-end mt-3">
                 <form action="/checkout" method="POST">

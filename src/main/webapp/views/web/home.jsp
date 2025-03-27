@@ -7,6 +7,23 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file = "/common/taglib.jsp" %>
 <!DOCTYPE html>
+<c:if test="${status == 'not_showingtime'}">
+    <div class="container mt-5">
+        <!-- Alert -->
+        <div
+            class="alert show alert-danger alert-dismissible show fade"
+            role="alert"
+            >
+            <strong>Sorry!</strong> Currently this film not have showingtime yet."
+            <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"
+                ></button>
+        </div>
+    </div>
+</c:if>
 <c:if test="${status == 'not_permission'}">
     <div class="container mt-5">
         <!-- Alert -->
@@ -242,7 +259,9 @@
         </div>
     </section>
     <!-- /Gallery Section -->
-    <h1 class = "text-center text-warning">Coming Soon Movie</h1>
+    <c:if test = "${not empty comingSoonMovie}">
+        <h1 class = "text-center text-warning">Coming Soon Movie</h1>
+    </c:if>
     <section id="gallery" class="gallery section">
         <div class="container-fluid" data-aos="fade-up" data-aos-delay="100">
             <div class="row gy-4 justify-content-center">

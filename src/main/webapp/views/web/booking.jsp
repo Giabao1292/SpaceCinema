@@ -117,7 +117,7 @@
                         </div>
                         <div id="content" class="hidden text-start">
                             <c:forEach var="timeBtn" items="${movie.times[date]}">
-                                <a data-cinema ="${cinema}" data-movie ="${movie.title}" data-date="${date}" data-time ="${timeBtn}" class="timeBtn btn text-black gap-2 btn-warning border border-warning ${timeBtn eq time ? "active" : ""}">${timeBtn}</a>
+                                <a data-cinema ="${cinema}" data-movie ="${movie.title}" data-date="${date}" data-time ="${timeBtn}" class="timeBtn btn text-black mt-2 me-2 btn-warning border border-warning ${timeBtn eq time ? "active" : ""}">${timeBtn}</a>
                             </c:forEach>
                         </div>
                     </div>
@@ -153,52 +153,30 @@
                         <input type="hidden" name="theatre" value="${theatre.theatre_num}" />
                     </div>
                 </div>
-                <c:forEach var = "snackType" items = "${snackList.keySet()}">
-                    <div class="container mt-5">
-                        <h2 class="text-center mb-4">${snackType}</h2>
-                        <div class="row">
-                            <c:forEach var = "snack" items = "${snackList.get(snackType)}">
-                                <div class="col-md-4">
-                                    <div class="card snack-card shadow">
+                <div class="container mt-5">
+                    <c:forEach var="snackType" items="${snackList.keySet()}">
+                        <h2 class="text-center mb-4 text-warning fw-bold">${snackType}</h2>
+                        <div class="row g-4">
+                            <c:forEach var="snack" items="${snackList.get(snackType)}">
+                                <div class="col-lg-3 col-md-4 col-sm-6">
+                                    <div class="card snack-card shadow border-0">
                                         <input type="hidden" name="snackId" value="${snack.id}" />
-                                        <img
-                                            src="${snack.poster_image}"
-                                            class="card-img-top snack-img"
-                                            alt="Potato Chips"
-                                            />
-                                        <div class="card-body">
+                                        <img src="${snack.poster_image}" class="card-img-top snack-img rounded" alt="${snack.name}" />
+                                        <div class="card-body text-center">
                                             <h5 class="card-title">${snack.name}</h5>
                                             <h6 class="text-primary fw-bold">${snack.price} VND</h6>
                                             <div class="input-group mt-3">
-                                                <button
-                                                    class="btn btn-outline-danger"
-                                                    type="button"
-                                                    onclick="this.nextElementSibling.stepDown()"
-                                                    >
-                                                    −
-                                                </button>
-                                                <input
-                                                    type="number"
-                                                    class="form-control text-center"
-                                                    name ="snackQuantity"
-                                                    value="0"
-                                                    min="0"
-                                                    />
-                                                <button
-                                                    class="btn btn-outline-success"
-                                                    type="button"
-                                                    onclick="this.previousElementSibling.stepUp()"
-                                                    >
-                                                    +
-                                                </button>
+                                                <button class="btn btn-outline-danger" type="button" onclick="this.nextElementSibling.stepDown()">−</button>
+                                                <input type="number" class="form-control text-center snack-quantity" name ="snackQuantity" value="0" min="0" />
+                                                <button class="btn btn-outline-success" type="button" onclick="this.previousElementSibling.stepUp()">+</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </c:forEach>
                         </div>
-                    </div>
-                </c:forEach>
+                    </c:forEach>
+                </div>
                 <div class="text-end mt-3">
                     <button class="btn btn-warning p-3"><i class="fa-solid fa-cart-plus"></i> Adding to Cart</button>
                     <a href="/cart" class="btn btn-primary p-3"><i class="fa-solid fa-basket-shopping"></i> View Cart</a>
@@ -207,8 +185,44 @@
         </div>
     </section>
 </main>
+
 <script>
+
     $(document).ready(function () {
+        function disablePastTimes() {
+            $(".timeBtn").each(function () {
+                let btn = $(this);
+                let dateStr = btn.attr("data-date");
+                let timeStr = btn.attr("data-time");
+
+                let showDateTime = null;
+
+                if (dateStr.includes(",")) {
+                    let parts = dateStr.split(", ")[1].split("/");
+                    showDateTime = new Date(parts[2], parts[1] - 1, parts[0], ...timeStr.split(":"));
+                } else {
+                    let parts = dateStr.split("-");
+                    showDateTime = new Date(parts[0], parts[1] - 1, parts[2], ...timeStr.split(":"));
+                }
+
+                const currentDateTime = new Date();
+                if (showDateTime < currentDateTime) {
+                    btn.addClass("disabled")
+                            .attr("aria-disabled", "true")
+                            .css({"pointer-events": "none", "opacity": "0.5"});
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            disablePastTimes();
+        });
+
+        $(document).on("click", ".dateBtn, .cinemaBtn", function () {
+            setTimeout(disablePastTimes, 100); // Đợi một chút nếu button thay đổi từ AJAX
+        });
+
+
         $("#toggleButton").click(function () {
             $("#content").slideToggle();
         });
@@ -266,8 +280,10 @@
                     $(".theatre").html("");
                 },
                 error: function (xhr) {
-                    alert("This cinema doesn't have a showing time for these criteria.");
-                }
+                    alert(
+                            "This cinema doesn't have a showing time for these criteria."
+                            );
+                },
             });
         });
         $(document).on("click", ".timeBtn", function (event) {
@@ -294,8 +310,10 @@
                     $(".theatre").html(response.theatreHtml);
                 },
                 error: function (xhr) {
-                    alert("This cinema doesn't have a showing time for these criteria.");
-                }
+                    alert(
+                            "This cinema doesn't have a showing time for these criteria."
+                            );
+                },
             });
         });
     });

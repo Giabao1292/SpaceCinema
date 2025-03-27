@@ -53,15 +53,22 @@
                     </ul>
                 </li>
                 <li><a href="/news">News</a></li>
-                <li><a href="/promotion">Promotion</a></li>
+                <li><a href="/introduce">Introduce</a></li>
+                <li>
+                    <a href="/cart" class="btn btn-outline-info m-lg-2">
+                        <i class="bi bi-cart-fill"></i> Cart
+                    </a>
+                </li>
                 <li class="nav-item dropdown">
                     <c:if test="${not empty USER}">
                         <a class="btn btn-success p-3 dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fa-regular fa-user"></i> ${USER.fullName}
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item" href="/completedorder">Completed Order</a></li>
                             <li><a class="dropdown-item" href="/profile">Profile</a></li>
-                            <li><a class="dropdown-item" href="/logout?action=logout">Đăng xuất</a></li>
+                            <c:if test = "${role eq 'admin' or role eq 'manager'}"><li><a class="dropdown-item" href="/admin-home">Admin Home</a></li></c:if>
+                            <li><a class="dropdown-item" href="/logout?action=logout">Log out</a></li>
                         </ul>
                     </c:if>
 

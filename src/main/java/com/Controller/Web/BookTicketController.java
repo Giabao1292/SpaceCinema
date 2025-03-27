@@ -82,7 +82,7 @@ public class BookTicketController extends HttpServlet {
                 }
                 if (time != null) {
                     Theatre theatre = theatreRepository.getTheatre(cinema, movieRepository.getMovieId(movie), date, time);
-                    List<Seat> seatList = seatRepository.getSeatType(theatre.getId());
+                    List<Seat> seatList = seatRepository.getSeatType(theatre.getId(), time, date, movieRepository.getMovieId(movie));
                     request.setAttribute("theatre", theatre);
                     request.setAttribute("seatList", seatList);
                 }
@@ -130,7 +130,7 @@ public class BookTicketController extends HttpServlet {
                 }
             }
             for (String timeRes : movieResponse.getTimes().get(date)) {
-                sbTime.append("<a class='timeBtn btn text-black me-2 btn-warning border border-warning' ")
+                sbTime.append("<a class='timeBtn btn text-black mt-2 me-2 btn-warning border border-warning' ")
                         .append("data-time='").append(timeRes).append("' ")
                         .append("data-cinema='").append(cinema).append("' ")
                         .append("data-movie='").append(movie).append("' ")
@@ -156,7 +156,7 @@ public class BookTicketController extends HttpServlet {
     }
     public String GetTheatreAndTicket(HttpServletRequest request, String cinema, String movieId, String datetime, String timedetail) {
         Theatre theatre = theatreRepository.getTheatre(cinema, movieId, datetime, timedetail);
-        List<Seat> seatList = seatRepository.getSeatType(theatre.getId());
+        List<Seat> seatList = seatRepository.getSeatType(theatre.getId(), timedetail, datetime, movieId);
         StringBuilder seatHtml = new StringBuilder();
         for (Seat seat : seatList) {
             seatHtml.append("<div class='col-md-6 fs-5'>")

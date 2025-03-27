@@ -40,6 +40,8 @@ public class UserRepositoryImpl implements UserRepository {
             st.setString(1, email);
             try (ResultSet rs = st.executeQuery()) {
                 if (rs.next()) {
+                    user.setId(rs.getInt("user_id"));
+                    user.setEmail(rs.getString("email"));
                     user.setFullName(rs.getString("fullname"));
                     user.setUserName(rs.getString("username"));
                     user.setPassWord(rs.getString("password"));

@@ -8,6 +8,7 @@ import com.Model.Cart;
 import com.Model.User;
 import com.Utils.SessionUtils;
 import jakarta.servlet.*;
+import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -29,6 +30,14 @@ public class AuthorizationFilter implements Filter {
     public void doFilter(ServletRequest requestServlet, ServletResponse responseServlet, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) requestServlet;
         HttpServletResponse response = (HttpServletResponse) responseServlet;
+        String serverName = request.getServerName();
+        SessionUtils session = SessionUtils.getInstance();
+        session.remainValue(request, "redirect_urigoogle", "http://localhost:8080/googleoAuth2");
+        session.remainValue(request, "redirect_urifacebook", "http://localhost:8080/facebookoAuth2");
+        if (serverName.equalsIgnoreCase("spacecinema.ddns.net")) {
+            session.remainValue(request, "redirect_urigoogle", "http://spacecinema.ddns.net:8080/googleoAuth2");
+            session.remainValue(request, "redirect_urifacebook", "http://spacecinema.ddns.net:8080/facebookoAuth2");
+        }
         String URL = request.getRequestURI();
         if (URL.startsWith("/admin")) {
             User user = (User) SessionUtils.getInstance().getValue(request, "USER");
@@ -64,7 +73,7 @@ public class AuthorizationFilter implements Filter {
             return;
         } else if (URL.startsWith("/checkout") || URL.startsWith("/order")) {
             Cart cart = (Cart) SessionUtils.getInstance().getValue(request, "cart");
-            if (cart == null) {
+            if (cart == null || (cart != null && cart.getSeats().size() == 0 && cart.getSnacks().size() == 0)) {
                 response.sendRedirect("/home");
             } else {
                 chain.doFilter(requestServlet, responseServlet);

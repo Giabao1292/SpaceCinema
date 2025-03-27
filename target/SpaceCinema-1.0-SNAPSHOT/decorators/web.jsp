@@ -69,5 +69,12 @@
         <script src="/static/web/assets/vendor/glightbox/js/glightbox.min.js"></script>
         <script src="/static/web/assets/vendor/swiper/swiper-bundle.min.js"></script>
         <script src="/static/web/assets/js/main.js"></script>
-    </body>
+        <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+    <df-messenger
+        intent="WELCOME"
+        chat-title="SpaceCinema"
+        agent-id="9bbb2a25-b9c7-42d9-8f17-e9aa42b806d2"
+        language-code="en"
+        ></df-messenger>
+</body>
 </html>

@@ -4,6 +4,10 @@
  */
 package com.Config;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,8 +24,5 @@ public class Format {
         return fm.format(date);
     }
     public static void main(String[] args) throws ParseException{
-        Date a = new Date();
-        String b = fm.format(a);
-        System.out.println(fm2.format(fm.parse(b)));
     }
 }

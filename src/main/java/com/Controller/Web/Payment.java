@@ -12,6 +12,7 @@ import com.Repository.impl.BookingRepositoryImpl;
 import com.Utils.SessionUtils;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import jakarta.servlet.DispatcherType;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -30,7 +31,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
 
-
 /**
  *
  * @author lebao
@@ -39,6 +39,7 @@ import java.util.TimeZone;
 public class Payment extends HttpServlet {
 
     private BookingRepository bookingRepository = new BookingRepositoryImpl();
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String email = req.getParameter("email");
@@ -73,7 +74,12 @@ public class Payment extends HttpServlet {
         } else {
             vnp_Params.put("vnp_Locale", "vn");
         }
-        vnp_Params.put("vnp_ReturnUrl", Config.vnp_ReturnUrl);
+        if (!req.getServerName().equals("spacecinema.ddns.net")) {
+            vnp_Params.put("vnp_ReturnUrl", Config.vnp_ReturnUrl);
+        }
+        else{
+            vnp_Params.put("vnp_ReturnUrl","http://spacecinema.ddns.net:8080/order");
+        }
         vnp_Params.put("vnp_IpAddr", vnp_IpAddr);
 
         Calendar cld = Calendar.getInstance(TimeZone.getTimeZone("Etc/GMT+7"));
