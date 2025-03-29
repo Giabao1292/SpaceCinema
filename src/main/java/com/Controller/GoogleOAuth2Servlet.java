@@ -111,7 +111,7 @@ public class GoogleOAuth2Servlet extends HttpServlet {
     private String extractJsonValue(String json, String key) {
         try {
             JSONObject jsonObject = new JSONObject(json);
-            return jsonObject.optString(key, null); // Trả về null nếu không tìm thấy key
+            return jsonObject.optString(key, null); 
         } catch (Exception e) {
             System.out.println("Error parsing JSON: " + e.getMessage());
             return null;

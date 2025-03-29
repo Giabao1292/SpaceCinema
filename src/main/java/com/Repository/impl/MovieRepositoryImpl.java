@@ -346,10 +346,6 @@ public class MovieRepositoryImpl implements MovieRepository {
     @Override
     public MovieRequestDto findMovieById(String id) {
         String sql = "select * from movie m "
-                + "JOIN movie_cast mc on m.movie_id = mc.movie_id "
-                + "JOIN cast_member c on c.cast_id = mc.cast_id "
-                + "JOIN movie_genre mg on mg.movie_id = m.movie_id "
-                + "JOIN genre g on g.genre_id = mg.genre_id "
                 + "JOIN movie_status ms on ms.status_id = m.status_id "
                 + "JOIN director d on d.director_id = m.director_id where m.movie_id = ?";
         try (Connection connection = GetConnection.getConnection()) {
